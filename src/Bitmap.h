@@ -25,6 +25,12 @@ class Bitmap {
 
         ~Bitmap();
 
+    private:
+
+        void Read();
+
+        void reset() noexcept;
+
 };
 
 }
