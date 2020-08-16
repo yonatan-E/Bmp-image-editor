@@ -1,6 +1,7 @@
 #include "Matrix.h"
 #include "Matrix.hpp"
 #include "ErrorCode.hpp"
+#include <utility>
 
 namespace matrix {
     
@@ -27,4 +28,17 @@ namespace matrix {
 	    *this = Matrix(other); 
 	    return *this;
     }
+
+    Matrix::Matrix(Matrix&& other) noexcept {
+        this->_decorated = std::exchange(other._decorated, nullptr);
+    }
+
+    Matrix& Matrix::operator=(Matrix&& other) noexcept {
+        if (this == &other) {
+            return *this;
+        }
+
+	    this->_decorated = std::exchange(other._decorated, nullptr);
+	    return *this;
+    }   
 }
