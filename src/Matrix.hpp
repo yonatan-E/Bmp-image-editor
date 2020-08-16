@@ -50,6 +50,9 @@ namespace matrix {
              */
             Matrix& operator=(Matrix&& other) noexcept;   
 
+            /**
+             * @brief The destructor
+             */
             ~Matrix();  
     };
 }
