@@ -23,12 +23,14 @@ void initMatrix(matrix::Matrix& matrix) {
 int main() {
     // creating two matrices
     matrix::Matrix matrix1(4, 4), matrix2(4, 4);
-    printMatrix(matrix1);
 
     // initializing the matrices
     initMatrix(matrix1);
     initMatrix(matrix2);
+
+
     printMatrix(matrix1);
+    printMatrix(matrix2);
 
     // printing the sum
     printMatrix(matrix1 + matrix2);
@@ -38,4 +40,5 @@ int main() {
 
     // printing the multiplication by scalar
     printMatrix(matrix1 * 2);
+    
 }
