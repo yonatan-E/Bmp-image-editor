@@ -12,7 +12,7 @@ void printMatrix(matrix::Matrix matrix) {
     std::cout << '\n';
 }
 
-void initMatrix(matrix::Matrix matrix) {
+void initMatrix(matrix::Matrix& matrix) {
     for (uint32_t i = 0; i < matrix.getHeight(); i++) {
         for (uint32_t j = 0; j < matrix.getWidth(); j++) {
             matrix.setAt(i*j, i, j);

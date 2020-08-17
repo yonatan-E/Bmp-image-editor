@@ -6,7 +6,7 @@ include(CTest)
 enable_testing()
 
 add_executable(matrix_tester tester.cpp)
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(ErrorCode.h ErrorCode.hpp Matrix.h Matrix.hpp)
 link_directories(${CMAKE_SOURCE_DIR})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
