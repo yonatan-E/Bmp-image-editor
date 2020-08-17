@@ -3,11 +3,13 @@ namespace bitmap {
 
     class BitAdjuster{
 
-    public: 
+    protected: 
 
          virtual void read() = 0;
 
          virtual void write() = 0;
+
+    public: 
 
          virtual void turn() = 0;
 
