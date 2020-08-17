@@ -11,6 +11,8 @@ class Bitmap {
     BitmapDIBHeader _dibHeader;
     // the bitmap array
     BitmapArray _bitmapArray;
+    //
+    ColorPallete _colorPallete;
     // the path to the bitmap file
     std::string _path;
 
@@ -25,9 +27,15 @@ class Bitmap {
 
         ~Bitmap();
 
+        void turn();
+
+        void gray();
+
     private:
 
-        void Read();
+        void read();
+
+        void write();
 
         void reset() noexcept;
 
