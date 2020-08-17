@@ -61,9 +61,34 @@ namespace bitmap {
 	    }
     }
 
+<<<<<<< HEAD
     void Read() {
         const std::string &rfpath = this->_path; 
         std::ifstream inp{rfpath, std::ios_base::binary };
+=======
+    /**
+     * @brief This method reads the .bmp file and cuts it to sections
+     * according to the 4 parts, and builds the 4 parts.
+     * 
+     */
+    void Bitmap::read(){
+        const std::string &rfpath = _path; 
+        std::ifstream in{rfpath, std::ios_base::binary };
+
+        if(!in){
+            throw "Error: can't read file";
+        }
+
+        std::string header;
+        in.read((char*)&header, 14);
+        this->_header = new BitmapHeader(header);
+
+         std::string dibheader;
+        in.read((char*)&dibheader, 40);
+        this->_header = new BitmapHeaderdib(header);
+
+
+>>>>>>> origin/bitmap_main
 
         //NEED TO IMPLEMENT
     }
@@ -75,7 +100,7 @@ namespace bitmap {
      */
     void Bitmap::write(){
         const std::string &rfpath = _path; 
-        std::ifstream inp{rfpath, std::ios_base::binary };
+        std::ifstream in{rfpath, std::ios_base::binary };
 
         //NEED TO IMPLEMENT
     }
