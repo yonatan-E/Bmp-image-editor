@@ -2,24 +2,15 @@
 
 #include "ErrorCode.h"
 #include <string>
+#include <stdexcept>
 
 namespace matrix {
     
     /**
-     * @brief This class defines a null pointer exception
+     * @brief This class defines an exception which is defined by an error code
      */
-    class NullPointerException : public std::exception {
-        virtual const char* what() const throw() override {
-            return error_getErrorMessage(ERROR_NULL_POINTER);
-        }
-    };
-
-    /**
-     * @brief This class defines a null pointer exception
-     */
-    class MatrixInvalidOperationException : public std::exception {
-        virtual const char* what() const throw() override {
-            return error_getErrorMessage(ERROR_MATRIX_INVALID_OPERATION);
-        }
+    class Exception : public std::runtime_error {
+        public:
+            Exception(ErrorCode error) : std::runtime_error(error_getErrorMessage(error)) {}
     };
 }
