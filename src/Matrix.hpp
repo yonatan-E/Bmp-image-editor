@@ -103,5 +103,12 @@ namespace matrix {
              * @return const Matrix& the multiplication of the current matrix and the other matrix
              */
             const Matrix& operator*(const Matrix& other);
+
+            /**
+             * @brief The multiplying by scalar operator
+             * 
+             * @param scalar the scalar we multiply the matrix with
+             */
+            void operator*(double scalar);
     };
 }
