@@ -4,7 +4,8 @@
 
 namespace bitmap {
 
-class Bitmap {
+class Bitmap: public BitAdjuster{
+    
     // the header of the bitmap file
     BitmapHeader _header;
     // the DIB header of the bitmap file
@@ -31,11 +32,13 @@ class Bitmap {
 
         void gray();
 
-    private:
+    protected:
 
         void read();
 
         void write();
+
+    private:
 
         void reset() noexcept;
 
