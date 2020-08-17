@@ -54,5 +54,19 @@ namespace matrix {
              * @brief The destructor
              */
             ~Matrix();  
+
+            /**
+             * @brief Getter to the matrix height
+             * 
+             * @return uint32_t the height of the matrix
+             */
+            uint32_t getHeight();
+
+            /**
+             * @brief Getter to the matrix width
+             * 
+             * @return uint32_t the width of the matrix
+             */
+            uint32_t getWidth();
     };
 }

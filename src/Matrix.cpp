@@ -7,14 +7,14 @@ namespace matrix {
     
     Matrix::Matrix(uint32_t height, uint32_t width) {
         ErrorCode error = matrix_create(&this->_decorated, height, width);
-        if (!error_getErrorMessage(error)) {
+        if (!error_isSuccess(error)) {
             throw Exception(error);
         }
     }
 
     Matrix::Matrix(const Matrix& other) {
         ErrorCode error = matrix_copy(&this->_decorated, other._decorated);
-        if (!error_getErrorMessage(error)) {
+        if (!error_isSuccess(error)) {
             throw Exception(error);
         }
     }
@@ -44,5 +44,23 @@ namespace matrix {
 
     Matrix::~Matrix() {
         matrix_destroy(this->_decorated);
+    }
+
+    uint32_t Matrix::getHeight() {
+        uint32_t height;
+        ErrorCode error = matrix_getHeight(this->_decorated, &height);
+        if (!error_isSuccess(error)) {
+            throw Exception(error);
+        }
+        return height;
+    }
+
+    uint32_t Matrix::getWidth() {
+        uint32_t width;
+        ErrorCode error = matrix_getHeight(this->_decorated, &width);
+        if (!error_isSuccess(error)) {
+            throw Exception(error);
+        }
+        return width;
     }
 }
