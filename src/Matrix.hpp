@@ -108,7 +108,8 @@ namespace matrix {
              * @brief The multiplying by scalar operator
              * 
              * @param scalar the scalar we multiply the matrix with
+             * @return const Matrix& the matrix after multiplying by scalar
              */
-            void operator*(double scalar);
+            const Matrix& operator*(double scalar);
     };
 }
