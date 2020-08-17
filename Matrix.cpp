@@ -83,7 +83,7 @@ namespace matrix {
     }
 
     const Matrix& Matrix::operator+(const Matrix& other) {
-        Matrix* sum;
+        Matrix* sum = new Matrix(this->getHeight(), this->getWidth());
         ErrorCode error = matrix_add(&sum->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
             throw Exception(error);
@@ -92,7 +92,7 @@ namespace matrix {
     }
 
     const Matrix& Matrix::operator*(const Matrix& other) {
-        Matrix* mult;
+        Matrix* mult = new Matrix(this->getHeight(), this->getWidth());;
         ErrorCode error = matrix_multiplyMatrices(&mult->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
             throw Exception(error);
