@@ -80,4 +80,22 @@ namespace matrix {
         }
         return width;
     }
+
+    const Matrix& Matrix::operator+(const Matrix& other) {
+        Matrix* sum;
+        ErrorCode error = matrix_add(&sum->_decorated, this->_decorated, other._decorated);
+         if (!error_isSuccess(error)) {
+            throw Exception(error);
+        }
+        return *sum;
+    }
+
+    const Matrix& Matrix::operator*(const Matrix& other) {
+        Matrix* mult;
+        ErrorCode error = matrix_multiplyMatrices(&mult->_decorated, this->_decorated, other._decorated);
+         if (!error_isSuccess(error)) {
+            throw Exception(error);
+        }
+        return *mult;
+    }
 }
