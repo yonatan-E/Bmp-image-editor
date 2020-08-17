@@ -1,0 +1,1 @@
+cd "/home/ilan/aphw/ass2/APass2/" && g++ tester.cpp Matrix.hpp Matrix.cpp ErrorCode.hpp ErrorCode.cpp Matrix.h Matrix.c ErrorCode.h ErrorCode.c -o tester && "/home/ilan/aphw/ass2/APass2/"tester
