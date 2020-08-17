@@ -69,6 +69,8 @@ namespace bitmap {
     void Bitmap::read(){
         const std::string &rfpath = _path; 
         std::ifstream inp{rfpath, std::ios_base::binary };
+
+        //NEED TO IMPLEMENT
     }
 
     /**
@@ -79,8 +81,14 @@ namespace bitmap {
     void Bitmap::write(){
         const std::string &rfpath = _path; 
         std::ifstream inp{rfpath, std::ios_base::binary };
+
+        //NEED TO IMPLEMENT
     }
 
+    /**
+     * @brief This method turns the bitmap 90 degrees.
+     * 
+     */
     void Bitmap::turn(){
         _header->turn();
         _dibHeader->turn();
@@ -91,6 +99,11 @@ namespace bitmap {
         write();
     }
 
+    /**
+     * @brief This method changes the .bmp image to 
+     * gray shade colors.
+     * 
+     */
     void Bitmap::gray(){
         _header->gray();
         _dibHeader->gray();
