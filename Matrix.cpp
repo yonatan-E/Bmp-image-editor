@@ -100,10 +100,11 @@ namespace matrix {
         return *mult;
     }
 
-    void Matrix::operator*(double scalar) {
+    const Matrix& Matrix::operator*(double scalar) {
         ErrorCode error = matrix_multiplyWithScalar(this->_decorated, scalar);
          if (!error_isSuccess(error)) {
             throw Exception(error);
         }
+        return *this;
     }
 }
