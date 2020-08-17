@@ -1,12 +1,13 @@
 #include "Bitmap.h"
 #include <fstream>
 #include <iterator>
+#include <utility>
 
 namespace bitmap {
 
     Bitmap::Bitmap(std::string path){
         this->_path = path;
-        read();
+        Read();
     }
 
     Bitmap::Bitmap(const Bitmap& other){
@@ -57,8 +58,8 @@ namespace bitmap {
 	    }
     }
 
-    void Read(){
-        const std::string &rfpath = this->_path; 
+    void Bitmap::Read(){
+        const std::string &rfpath = _path; 
         std::ifstream inp{rfpath, std::ios_base::binary };
     }
 
