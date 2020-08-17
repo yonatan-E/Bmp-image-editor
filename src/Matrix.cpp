@@ -2,6 +2,7 @@
 #include "Matrix.hpp"
 #include "ErrorCode.hpp"
 #include <utility>
+#include <cstdint>
 
 namespace matrix {
     
@@ -44,6 +45,22 @@ namespace matrix {
 
     Matrix::~Matrix() {
         matrix_destroy(this->_decorated);
+    }
+
+    double Matrix::operator()(uint32_t rowIndex, uint32_t colIndex) {
+        double val;
+        ErrorCode error = matrix_getValue(this->_decorated, rowIndex, colIndex, &val);
+        if (!error_isSuccess(error)) {
+            throw Exception(error);
+        }
+        return val;
+    }
+
+    void Matrix::setAt(double val, uint32_t rowIndex, uint32_t colIndex) {
+        ErrorCode error = matrix_setValue(this->_decorated, rowIndex, colIndex, val);
+        if (!error_isSuccess(error)) {
+            throw Exception(error);
+        }
     }
 
     uint32_t Matrix::getHeight() {
