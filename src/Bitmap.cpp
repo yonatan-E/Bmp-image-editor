@@ -70,7 +70,17 @@ namespace bitmap {
         const std::string &rfpath = _path; 
         std::ifstream in{rfpath, std::ios_base::binary };
 
-        if()
+        if(!in){
+            throw "Error: can't read file";
+        }
+
+        std::string header;
+        in.read((char*)&header, 14);
+        this->_header = new BitmapHeader(header);
+
+         std::string dibheader;
+        in.read((char*)&dibheader, 40);
+        this->_header = new BitmapHeaderdib(header);
 
 
 
@@ -85,20 +95,6 @@ namespace bitmap {
     void Bitmap::write(){
         const std::string &rfpath = _path; 
         std::ifstream in{rfpath, std::ios_base::binary };
-
-        if(!in){
-            throw "Error: can't read file";
-        }
-
-        std::string header;
-        in.read((char*)&header, 14);
-        this->_header = new BitmapHeader(header);
-
-         std::string dibheader;
-        in.read((char*)&dibheader, 40);
-        this->_header = new BitmapHeaderdib(header);
-
-
 
         //NEED TO IMPLEMENT
     }
