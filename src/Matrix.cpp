@@ -39,6 +39,7 @@ namespace matrix {
             return *this;
         }
 
+        matrix_destroy(this->_decorated);
 	    this->_decorated = std::exchange(other._decorated, nullptr);
 	    return *this;
     }   
