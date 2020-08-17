@@ -87,5 +87,21 @@ namespace matrix {
              * @return uint32_t the width of the matrix
              */
             uint32_t getWidth();
+
+            /**
+             * @brief The adding operator for matrices
+             * 
+             * @param other the matrix we add to the current marix
+             * @return const Matrix& the sum of the current matrix and the other matrix
+             */
+            const Matrix& operator+(const Matrix& other);
+
+            /**
+             * @brief The multiplying operator for matrices
+             * 
+             * @param other the matrix we multiply the current matrix with
+             * @return const Matrix& the multiplication of the current matrix and the other matrix
+             */
+            const Matrix& operator*(const Matrix& other);
     };
 }
