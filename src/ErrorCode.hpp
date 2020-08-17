@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ErrorCode.h"
-#include <string>
 #include <stdexcept>
 
 namespace matrix {
@@ -11,6 +10,11 @@ namespace matrix {
      */
     class Exception : public std::runtime_error {
         public:
-            Exception(ErrorCode error) : std::runtime_error(error_getErrorMessage(error)) {}
+            /**
+             * @brief The constructor, that creates a new exception by an error code
+             * 
+             * @param error the given error code
+             */
+            Exception(ErrorCode error);
     };
 }
