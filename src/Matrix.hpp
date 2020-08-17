@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Matrix.h"
+#include "Matrix.h" 
+#include <cstdint>
 
 namespace matrix {
     
@@ -53,7 +54,25 @@ namespace matrix {
             /**
              * @brief The destructor
              */
-            ~Matrix();  
+            ~Matrix(); 
+
+            /**
+             * @brief The getter operator
+             * 
+             * @param rowIndex the row of the item we want to get
+             * @param colIndex the column of the item we want to get
+             * @return double the value of the item placed in (rowIndex, colIndex)
+             */
+            double operator()(uint32_t rowIndex, uint32_t colIndex);
+
+            /**
+             * @brief The setter method
+             * 
+             * @param val the val we want to set
+             * @param rowIndex the row of the item we want to set
+             * @param colIndex the column of the item we want to set
+             */
+            void setAt(double val, uint32_t rowIndex, uint32_t colIndex);
 
             /**
              * @brief Getter to the matrix height
