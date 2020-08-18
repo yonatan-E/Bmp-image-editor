@@ -31,11 +31,11 @@ class BitmapHeader : public BitAdjuster {
 
         ~BitmapHeader() = default;
 
-        virtual void read() = 0;
-        virtual void write() = 0;
+        virtual void read();
+        virtual void write();
 
-        virtual void turn() = 0;
-        virtual void gray() = 0;
+        virtual void turn();
+        virtual void gray();
 };
 
 }
