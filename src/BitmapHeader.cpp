@@ -1,27 +1,21 @@
-#pragma once
-
-#include "BitAdjuster.hpp"
+#include "BitmapHeader.hpp"
 #include <string>
-
 
 namespace bitmap {
 
 class BitmapHeader : public BitAdjuster {
     // the file type, which is always 0x4D42
-    uint16_t _fileType = 0x4D42; 
+    uint16_t fileType = 0x4D42; 
     // file size in bytes
-    uint32_t _fileSize = 0;
+    uint32_t fileSize = 0;
     // reserved 
-    uint16_t _reserved1 = 0;
-    uint16_t _reserved2 = 0;
+    uint16_t reserved1 = 0;
+    uint16_t reserved2 = 0;
     // offset
-    uint32_t _offset = 0;
-
-    // the data string
-    std::string _data;
+    uint32_t offset = 0;
 
     public:
-        explicit BitmapHeader(const std::string& data);
+        explicit BitmapHeader(std::string data);
 
         BitmapHeader(const BitmapHeader& other);
         BitmapHeader& operator=(const BitmapHeader& other);
@@ -36,6 +30,8 @@ class BitmapHeader : public BitAdjuster {
 
         virtual void turn() = 0;
         virtual void gray() = 0;
+
+
 };
 
 }
