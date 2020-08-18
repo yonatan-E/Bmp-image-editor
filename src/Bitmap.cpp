@@ -70,21 +70,19 @@ namespace bitmap {
         const std::string &rfpath = _path; 
         std::ifstream in{rfpath, std::ios_base::binary };
 
-        if(!in){
-            throw "Error: can't read file";
+        if (!in) {
+            return; 
+            //ADD EXCEPTION
         }
 
-        std::string header;
-        in.read((char*)&header, 14);
-        this->_header = new BitmapHeader(header);
+        std::string content = std::string{std::istreambuf_iterator<char>{in},
+                                    std::istreambuf_iterator<char>{}};
 
-         std::string dibheader;
-        in.read((char*)&dibheader, 40);
-        this->_header = new BitmapHeaderdib(header);
-
-
-
-        //NEED TO IMPLEMENT
+        this->_header = new BitmapHeader(content.substr(0,14));
+        this->_dibHeader = new BitmapDIBHeader(content.substr(14,40));
+        this->_bitmapArray = new BitmapArray(content.substr(this->_header.getOffset()));
+        this->_colorPallete = new ColorPallete(content.substr(54 , this->_header.getOffset() - 54)); 
+        //return nullptr in color pallete if the substr size is 0 or less.
     }
 
     /**
