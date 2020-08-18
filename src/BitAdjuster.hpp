@@ -43,7 +43,7 @@ namespace bitmap {
           * 
           * @return std::string the string of the object
           */
-         virtual std::string getString();
+         virtual std::string getString() = 0;
     };
 
 }
