@@ -23,13 +23,13 @@ class BitmapHeader : public BitAdjuster {
     public:
         explicit BitmapHeader(const std::string& data);
 
-        BitmapHeader(const BitmapHeader& other);
-        BitmapHeader& operator=(const BitmapHeader& other);
+        BitmapHeader(const BitmapHeader& other) = default;
+        BitmapHeader& operator=(const BitmapHeader& other) = default;
 
-        BitmapHeader(BitmapHeader&& other) noexcept;
-        BitmapHeader& operator=(BitmapHeader&& other) noexcept;
+        BitmapHeader(BitmapHeader&& other) noexcept = default;
+        BitmapHeader& operator=(BitmapHeader&& other) noexcept = default;
 
-        ~BitmapHeader();
+        ~BitmapHeader() = default;
 
         virtual void read() = 0;
         virtual void write() = 0;
