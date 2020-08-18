@@ -22,6 +22,12 @@ void BitmapHeader::write() {
 
 }
 
+void BitmapHeader::turn() {
 
+}
+
+void BitmapHeader::gray() {
+
+}
 
 }
