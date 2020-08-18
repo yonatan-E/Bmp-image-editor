@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace bitmap {
 
     /**
@@ -37,6 +39,12 @@ namespace bitmap {
           */
          virtual void gray() = 0;
 
+         /**
+          * @brief Method that returns the string of the object
+          * 
+          * @return std::string the string of the object
+          */
+         virtual std::string getString();
     };
 
 }
