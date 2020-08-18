@@ -13,6 +13,13 @@ namespace matrix {
         PMatrix _decorated;
 
         public:   
+
+            /**
+             * @brief The default constructor
+             * 
+             */
+            Matrix() = default;
+
             /**
              * @brief The first constructor, that creates matrix by height and width
              * 
