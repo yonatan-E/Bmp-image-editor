@@ -1,10 +1,12 @@
 #pragma once
+
+#include "BitAdjuster.hpp"
 #include <string>
 
 
 namespace bitmap {
 
-class BitmapHeader {
+class BitmapHeader : public BitAdjuster {
     // the file type, which is always 0x4D42
     uint16_t fileType = 0x4D42; 
     // file size in bytes
@@ -24,6 +26,13 @@ class BitmapHeader {
         BitmapHeader& operator=(BitmapHeader&& other) noexcept;
 
         ~BitmapHeader();
+
+        virtual void read() = 0;
+        virtual void write() = 0;
+
+        virtual void turn() = 0;
+        virtual void gray() = 0;
+
 
 };
 
