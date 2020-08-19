@@ -7,7 +7,7 @@ namespace bitmap {
         this->_data = data;
     }
 
-    unsigned int BitAdjuster::bytesToInteger(int index, int numBytes) {
+    unsigned int BitAdjuster::bytesToInteger(int index, int numBytes) const {
         if (numBytes == 1) {
             uint8_t* result = (uint8_t*)this->_data.substr(index, numBytes).data();
             return *result;
@@ -20,7 +20,7 @@ namespace bitmap {
         }
     }
 
-    std::string BitAdjuster::getData() {
+    const std::string& BitAdjuster::getData() const {
         return this->_data;
     }
 }
