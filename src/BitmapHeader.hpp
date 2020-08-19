@@ -31,11 +31,13 @@ class BitmapHeader : public BitAdjuster {
 
         ~BitmapHeader() = default;
 
-        virtual void read();
-        virtual void write();
+        virtual void read() override;
+        virtual void write() override;
 
-        virtual void turn();
-        virtual void gray();
+        virtual void turn() override;
+        virtual void gray() override;
+
+        virtual std::string getString() override;
 };
 
 }
