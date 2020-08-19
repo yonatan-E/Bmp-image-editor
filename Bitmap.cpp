@@ -10,7 +10,7 @@ namespace bitmap {
         read();
     }
 
-    Bitmap::Bitmap(const Bitmap& other) {
+    Bitmap::Bitmap(const Bitmap& other) : BitAdjuster(other.getData()) {
         this->_header = new BitmapHeader(other._header);
         this->_dibHeader = new BitmapDIBHeader(other._dibHeader);
         this->_bitmapArray = new BitmapArray(other._bitmapArray);
@@ -28,12 +28,13 @@ namespace bitmap {
 	    return *this;
     }
 
-    Bitmap::Bitmap(Bitmap&& other) noexcept {
+    Bitmap::Bitmap(Bitmap&& other) noexcept : BitAdjuster(other.getData()) {
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
         _colorPallete = std::exchange(other._colorPallete, nullptr);
     }
+
     Bitmap& Bitmap::operator=(Bitmap&& other) noexcept {
         if (this == &other) {
 		    return *this;
