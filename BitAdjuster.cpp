@@ -27,4 +27,8 @@ namespace bitmap {
     std::string&& BitAdjuster::getData() && {
         return std::move(this->_data);
     }
+
+    void BitAdjuster::setData(const std::string& data) {
+        this->_data = data;
+    }
 }

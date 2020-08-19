@@ -60,7 +60,13 @@ namespace bitmap {
           * 
           * @return std::string the string of the object
           */
-         virtual std::string&& getData() &&;         
+         virtual std::string&& getData() &&;     
+
+         /**
+          * @brief The data string setter
+          * 
+          */
+         virtual void setData(const std::string& data);    
 
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer
