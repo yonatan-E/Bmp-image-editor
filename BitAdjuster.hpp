@@ -9,6 +9,7 @@ namespace bitmap {
      *        the parts of the bmp file format.
      */
     class BitAdjuster {
+         
          // the data string
          std::string _data;
 
@@ -31,7 +32,11 @@ namespace bitmap {
          /**
           * @brief The constrtuctor, that creates an object with the given string
           * 
+<<<<<<< HEAD
           * @param data 
+=======
+          * @param data the given data string
+>>>>>>> bitmap_adjuster
           */
          BitAdjuster(const std::string& data);
 
@@ -49,11 +54,21 @@ namespace bitmap {
          virtual void gray() = 0;
 
          /**
-          * @brief Method that returns the string of the object
+          * @brief Method that returns the string of the object (lvalue)
           * 
           * @return std::string the string of the object
           */
+<<<<<<< HEAD
          virtual const std::string& getData() const;
+=======
+         virtual const std::string& getData() const&;
+
+         /**
+          * @brief The data string setter
+          * 
+          */
+         virtual void setData(const std::string& data);           
+>>>>>>> bitmap_adjuster
 
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer
