@@ -26,7 +26,9 @@ namespace bitmap {
           */
          virtual void write() = 0;
 
-    public: 
+    public:
+
+         BitAdjuster(const std::string& data);
 
          /**
           * @brief Method that changes the content of the current object according to the turn
