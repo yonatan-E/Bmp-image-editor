@@ -3,6 +3,10 @@
 #include <cstdint>
 
 namespace bitmap {
+    BitAdjuster::BitAdjuster(const std::string& data) {
+        this->_data = data;
+    }
+
     unsigned int BitAdjuster::bytesToInteger(int index, int numBytes) {
         if (numBytes == 1) {
             uint8_t* result = (uint8_t*)this->_data.substr(index, numBytes).data();
