@@ -10,7 +10,7 @@ namespace bitmap {
         read();
     }
 
-    Bitmap::Bitmap(const Bitmap& other) {
+    Bitmap::Bitmap(const Bitmap& other) : BitAdjuster(other.getData()) {
         this->_header = new BitmapHeader(other._header);
         this->_dibHeader = new BitmapDIBHeader(other._dibHeader);
         this->_bitmapArray = new BitmapArray(other._bitmapArray);
