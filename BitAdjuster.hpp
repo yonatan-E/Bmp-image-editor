@@ -9,6 +9,8 @@ namespace bitmap {
      *        the parts of the bmp file format.
      */
     class BitAdjuster {
+         // the data string
+         std::string _data;
 
     protected: 
          
