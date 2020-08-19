@@ -6,11 +6,11 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) : BitAdjuster(readFromFile(path)) {
+    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFromFile(path))) {
         read();
     }
 
-    Bitmap::Bitmap(const Bitmap& other) : BitAdjuster(other.getData()) {
+    Bitmap::Bitmap(const Bitmap& other) : BitAdjuster(other) {
         this->_header = new BitmapHeader(other._header);
         this->_dibHeader = new BitmapDIBHeader(other._dibHeader);
         this->_bitmapArray = new BitmapArray(other._bitmapArray);
@@ -28,7 +28,8 @@ namespace bitmap {
 	    return *this;
     }
 
-    Bitmap::Bitmap(Bitmap&& other) noexcept : BitAdjuster(std::move(other).getData()) {
+    Bitmap::Bitmap(Bitmap&& other) noexcept : BitAdjuster(std::move(other)) {
+        other.setData(nullptr);
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
@@ -42,6 +43,8 @@ namespace bitmap {
 
 	    reset();
         
+        this->setData(std::move(other.getData()));
+        other.setData(nullptr);
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
@@ -111,7 +114,7 @@ namespace bitmap {
     }
 
     void Bitmap::reset() noexcept {
-        delete getData;
+        delete getData();
         delete _header;
         delete _dibHeader;
         delete _bitmapArray;
