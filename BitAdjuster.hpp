@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-
+#include <cstdint>
 namespace bitmap {
 
     /**
@@ -9,6 +9,8 @@ namespace bitmap {
      *        the parts of the bmp file format.
      */
     class BitAdjuster {
+         // the data string
+         std::string _data;
 
     protected: 
          
@@ -44,7 +46,16 @@ namespace bitmap {
           * 
           * @return std::string the string of the object
           */
-         virtual std::string getString() = 0;
+         virtual std::string getData();
+
+         /**
+          * @brief Method that converts a specific part of the string to an unsigned integer
+          * 
+          * @param index the index where the specific part of the string starts 
+          * @param numBytes the size of the specific part, in bytes
+          * @return unsigned int the specific part, converted to int
+          */
+         virtual unsigned int bytesToInteger(int index, int numBytes);
     };
 
 }

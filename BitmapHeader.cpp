@@ -3,9 +3,7 @@
 
 namespace bitmap {
 
-BitmapHeader::BitmapHeader(const std::string& data) {
-    // updating the data string
-    this->_data = data;
+BitmapHeader::BitmapHeader(const std::string& data) : BitAdjuster(data) {
     // reading the data string into the current object
     this->read();
 }

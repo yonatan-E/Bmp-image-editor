@@ -17,9 +17,6 @@ class BitmapHeader : public BitAdjuster {
     // offset
     uint32_t _offset = 0;
 
-    // the data string
-    std::string _data;
-
     public:
         explicit BitmapHeader(const std::string& data);
 
@@ -36,8 +33,6 @@ class BitmapHeader : public BitAdjuster {
 
         virtual void turn() override;
         virtual void gray() override;
-
-        virtual std::string getString() override;
 };
 
 }
