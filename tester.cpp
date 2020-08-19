@@ -32,7 +32,7 @@ int main() {
   std::string result = readFileContent("lena-color.bmp");
   //  std::cout << result;
   //bitmap::BitmapHeader header(result.substr(0, 14));
-  int pr = *((uin32_t*)(result.substr(14, 4).data()));
+  int pr = *((uint32_t*)(result.substr(14, 4).data()));
   std::cout << pr << "\n";
   return 0;
 }
