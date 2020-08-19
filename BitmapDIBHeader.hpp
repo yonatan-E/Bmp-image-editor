@@ -1,12 +1,13 @@
 #pragma once
+
+#include "BitAdjuster.hpp"
 #include <string>
 
 
 namespace bitmap {
 
-    class BitmapDIBHeader{
+    class BitmapDIBHeader : public BitAdjuster {
 
-    std::string _data; //string data
     int _hsize = 40; // size of header
     int _bitmapWidth = 0; // width of bitmap
     int _bitmapHeight = 0; //height of bitmap
@@ -27,9 +28,11 @@ namespace bitmap {
 
         ~BitmapDIBHeader();
 
-    private:
-        void parseData(std::string data);
+        virtual void read() override;
+        virtual void write() override;
 
+        virtual void turn() override;
+        virtual void gray() override;
     };
 
 }
