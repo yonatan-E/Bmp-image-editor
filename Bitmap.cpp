@@ -1,4 +1,5 @@
-#include "Bitmap.h"
+#include "Bitmap.hpp"
+#include "BitAdjuster.hpp"
 #include <fstream>
 #include <iterator>
 #include <utility>
@@ -10,7 +11,6 @@ namespace bitmap {
     }
 
     Bitmap::Bitmap(const Bitmap& other) {
-        this->_path = other._path;
         this->_header = new BitmapHeader(other._header);
         this->_dibHeader = new BitmapDIBHeader(other._dibHeader);
         this->_bitmapArray = new BitmapArray(other._bitmapArray);
@@ -29,8 +29,6 @@ namespace bitmap {
     }
 
     Bitmap::Bitmap(Bitmap&& other) noexcept {
-
-        _path = std::exchange(other._path, nullptr);
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
@@ -42,8 +40,7 @@ namespace bitmap {
 	    }
 
 	    reset();
-
-        _path = std::exchange(other._path, nullptr);
+        
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
@@ -66,17 +63,6 @@ namespace bitmap {
      * 
      */
     void Bitmap::read(){
-        const std::string &rfpath = _path; 
-        std::ifstream in{rfpath, std::ios_base::binary };
-
-        if (!in) {
-            return; 
-            //ADD EXCEPTION
-        }
-
-        std::string content = std::string{std::istreambuf_iterator<char>{in},
-                                    std::istreambuf_iterator<char>{}};
-
         this->_header = new BitmapHeader(content.substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(content.substr(14,40));
         this->_bitmapArray = new BitmapArray(content.substr(this->_header.getOffset()));
@@ -90,8 +76,6 @@ namespace bitmap {
      * 
      */
     void Bitmap::write(){
-        const std::string &rfpath = _path; 
-        std::ifstream in{rfpath, std::ios_base::binary };
 
         //NEED TO IMPLEMENT
     }
@@ -126,12 +110,11 @@ namespace bitmap {
     }
 
     void Bitmap::reset() noexcept {
+        delete getData;
         delete _header;
         delete _dibHeader;
         delete _bitmapArray;
         delete _colorPallete;
-
-        _path = nullptr;
     }
     
 }
