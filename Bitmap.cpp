@@ -28,7 +28,7 @@ namespace bitmap {
 	    return *this;
     }
 
-    Bitmap::Bitmap(Bitmap&& other) noexcept : BitAdjuster(other.getData()) {
+    Bitmap::Bitmap(Bitmap&& other) noexcept : BitAdjuster(std::move(other).getData()) {
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
