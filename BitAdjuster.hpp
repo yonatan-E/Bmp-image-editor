@@ -49,11 +49,18 @@ namespace bitmap {
          virtual void gray() = 0;
 
          /**
-          * @brief Method that returns the string of the object
+          * @brief Method that returns the string of the object (lvalue)
           * 
           * @return std::string the string of the object
           */
-         virtual const std::string& getData() const;
+         virtual const std::string& getData() const&;
+
+         /**
+          * @brief Method that returns the string of the object (rvalue)
+          * 
+          * @return std::string the string of the object
+          */
+         virtual std::string&& getData() &&;         
 
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer

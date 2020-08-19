@@ -20,7 +20,11 @@ namespace bitmap {
         }
     }
 
-    const std::string& BitAdjuster::getData() const {
+    const std::string& BitAdjuster::getData() const& {
         return this->_data;
+    }
+
+    std::string&& BitAdjuster::getData() && {
+        return std::move(this->_data);
     }
 }
