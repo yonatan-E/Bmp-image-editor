@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <cstdint>
 namespace bitmap {
 
     /**
@@ -22,6 +23,15 @@ namespace bitmap {
           * 
           */
          virtual void write() = 0;
+
+         /**
+          * @brief Method that converts a specific part of the string to an unsigned integer
+          * 
+          * @param index the index where the specific part of the string starts 
+          * @param numBytes the size of the specific part, in bytes
+          * @return unsigned int the specific part, converted to int
+          */
+         virtual unsigned int bytesToInteger(int index, int numBytes);
 
     public: 
 
