@@ -12,6 +12,7 @@ BitmapHeader::BitmapHeader(const std::string& data) {
 }
 
 void BitmapHeader::read() {
+    this->_fileType = *((int*)(this->_data.substr(0, 2).data()));
     this->_fileSize = *((int*)(this->_data.substr(2, 4).data()));
     this->_reserved1 = *((int*)(this->_data.substr(6, 2).data()));
     this->_reserved2 = *((int*)(this->_data.substr(8, 2).data()));
@@ -28,6 +29,10 @@ void BitmapHeader::turn() {
 
 void BitmapHeader::gray() {
 
+}
+
+std::string BitmapHeader::getString() {
+    return this->_data;
 }
 
 }
