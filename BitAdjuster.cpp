@@ -15,4 +15,8 @@ namespace bitmap {
             return *result;
         }
     }
+
+    std::string BitAdjuster::getData() {
+        return this->_data;
+    }
 }
