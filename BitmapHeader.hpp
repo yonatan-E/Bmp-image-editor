@@ -3,7 +3,6 @@
 #include "BitAdjuster.hpp"
 #include <string>
 
-
 namespace bitmap {
 
 class BitmapHeader : public BitAdjuster {
