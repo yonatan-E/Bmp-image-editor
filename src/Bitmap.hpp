@@ -4,7 +4,7 @@
 
 namespace bitmap {
 
-class Bitmap: public BitAdjuster{
+class Bitmap: public BitAdjuster {
     
     // the header of the bitmap file
     BitmapHeader _header;
@@ -12,10 +12,8 @@ class Bitmap: public BitAdjuster{
     BitmapDIBHeader _dibHeader;
     // the bitmap array
     BitmapArray _bitmapArray;
-    //
+    // the colorpallete of the bitmap file
     ColorPallete _colorPallete;
-    // the path to the bitmap file
-    std::string _path;
 
     public:
         explicit Bitmap(std::string path);

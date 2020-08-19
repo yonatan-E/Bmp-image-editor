@@ -5,8 +5,7 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) {
-        this->_path = path;
+    Bitmap::Bitmap(std::string path) : BitAdjuster(readFromFile(path)) {
         read();
     }
 
