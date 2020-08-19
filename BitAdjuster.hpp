@@ -32,11 +32,7 @@ namespace bitmap {
          /**
           * @brief The constrtuctor, that creates an object with the given string
           * 
-<<<<<<< HEAD
-          * @param data 
-=======
           * @param data the given data string
->>>>>>> bitmap_adjuster
           */
          BitAdjuster(const std::string& data);
 
@@ -58,9 +54,6 @@ namespace bitmap {
           * 
           * @return std::string the string of the object
           */
-<<<<<<< HEAD
-         virtual const std::string& getData() const;
-=======
          virtual const std::string& getData() const&;
 
          /**
@@ -68,7 +61,6 @@ namespace bitmap {
           * 
           */
          virtual void setData(const std::string& data);           
->>>>>>> bitmap_adjuster
 
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer
