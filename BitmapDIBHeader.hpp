@@ -20,13 +20,13 @@ namespace bitmap {
     public:
         explicit BitmapDIBHeader(std::string data);
 
-        BitmapDIBHeader(const BitmapDIBHeader& other);
-        BitmapDIBHeader& operator=(const BitmapDIBHeader& other);
+        BitmapDIBHeader(const BitmapDIBHeader& other) = default;
+        BitmapDIBHeader& operator=(const BitmapDIBHeader& other) = default;
 
-        BitmapDIBHeader(BitmapDIBHeader&& other) noexcept;
-        BitmapDIBHeader& operator=(BitmapDIBHeader&& other) noexcept;
+        BitmapDIBHeader(BitmapDIBHeader&& other) noexcept = default;
+        BitmapDIBHeader& operator=(BitmapDIBHeader&& other) noexcept = default;
 
-        ~BitmapDIBHeader();
+        ~BitmapDIBHeader() = default;
 
         virtual void read() override;
         virtual void write() override;
