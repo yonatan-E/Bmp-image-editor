@@ -3,9 +3,8 @@
 #include <cstdint>
 
 namespace bitmap {
-    BitAdjuster::BitAdjuster(const std::string& data) {
-        this->_data = data;
-    }
+
+    BitAdjuster::BitAdjuster(const std::string& data) : _data(std::move(data)) {}
 
     unsigned int BitAdjuster::bytesToInteger(int index, int numBytes) const {
         if (numBytes == 1) {
@@ -24,7 +23,7 @@ namespace bitmap {
         return this->_data;
     }
 
-    std::string&& BitAdjuster::getData() && {
-        return std::move(this->_data);
+    void BitAdjuster::setData(const std::string& data) {
+        this->_data = std::move(data);
     }
 }
