@@ -8,14 +8,14 @@ namespace bitmap {
 
     class BitmapDIBHeader : public BitAdjuster {
 
-    int _hsize = 40; // size of header
-    int _bitmapWidth = 0; // width of bitmap
-    int _bitmapHeight = 0; //height of bitmap
-    int _con = 1; //constant(always 1)
-    int _bpp = 0; //bits per pixel (8 or 24)
-    int _cm = 0; //compression method (no compression, therfore 0)
-    int _bmsize = 0; //bitmap size;
-    int _numcolors = 0; //number of colors in color
+    uint32_t _hsize = 40; // size of header
+    uint32_t _bitmapWidth = 0; // width of bitmap
+    uint32_t _bitmapHeight = 0; //height of bitmap
+    uint16_t _con = 1; //constant(always 1)
+    uint16_t _bpp = 0; //bits per pixel (8 or 24)
+    uint32_t _cm = 0; //compression method (no compression, therfore 0)
+    uint32_t _bmsize = 0; //bitmap size;
+    uint32_t _numcolors = 0; //number of colors in color
 
     public:
         explicit BitmapDIBHeader(std::string data);
