@@ -114,7 +114,6 @@ namespace bitmap {
     }
 
     void Bitmap::reset() noexcept {
-        delete &getData();
         delete _header;
         delete _dibHeader;
         delete _bitmapArray;
