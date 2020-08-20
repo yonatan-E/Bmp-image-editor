@@ -91,6 +91,10 @@ namespace matrix {
         return *sum;
     }
 
+    const Matrix& Matrix::operator-(const Matrix& other) {
+
+    }
+
     const Matrix& Matrix::operator*(const Matrix& other) {
         Matrix* mult = new Matrix;
         ErrorCode error = matrix_multiplyMatrices(&mult->_decorated, this->_decorated, other._decorated);
@@ -101,10 +105,11 @@ namespace matrix {
     }
 
     const Matrix& Matrix::operator*(double scalar) {
-        ErrorCode error = matrix_multiplyWithScalar(this->_decorated, scalar);
+        Matrix* multByScalar = new Matrix(*this);
+        ErrorCode error = matrix_multiplyWithScalar(multByScalar->_decorated, scalar);
          if (!error_isSuccess(error)) {
             throw Exception(error);
         }
-        return *this;
+        return *multByScalar;
     }
 }

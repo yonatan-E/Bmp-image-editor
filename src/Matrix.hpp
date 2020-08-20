@@ -104,6 +104,14 @@ namespace matrix {
             const Matrix& operator+(const Matrix& other);
 
             /**
+             * @brief The substruction operator for matrices
+             * 
+             * @param other the matrix we substruct from the current marix
+             * @return const Matrix& the substruction of the current matrix and the other matrix
+             */
+            const Matrix& operator-(const Matrix& other);
+
+            /**
              * @brief The multiplying operator for matrices
              * 
              * @param other the matrix we multiply the current matrix with
