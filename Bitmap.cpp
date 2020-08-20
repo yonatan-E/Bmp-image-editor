@@ -61,19 +61,19 @@ namespace bitmap {
 	    }
     }
 
-    void Bitmap::read(){
-        this->_header = new BitmapHeader(content.substr(0,14));
-        this->_dibHeader = new BitmapDIBHeader(content.substr(14,40));
+    void Bitmap::read() {
+        this->_header = new BitmapHeader(getData().substr(0,14));
+        this->_dibHeader = new BitmapDIBHeader(getData().substr(14,40));
 
         if(this->_dibHeader.getBitsPerPixel() == 8){
-            this->_colorPallete = new ColorPallete(content.substr(54 , this->_header.getOffset() - 54)); 
+            this->_colorPallete = new ColorPallete(getData().substr(54 , this->_header.getOffset() - 54)); 
         }
         else{
-            //return nullptr in color pallete if the image is 24-bit
+            // return nullptr in color pallete if the image is 24-bit
             this->_colorPallete = nullptr; 
         }     
 
-         this->_bitmapArray = new BitmapArray(content.substr(this->_header.getOffset()), this->_dibHeader.getBitsPerPixel()
+         this->_bitmapArray = new BitmapArray(getData().substr(this->_header.getOffset()), this->_dibHeader.getBitsPerPixel()
                 ,this->_dibHeader.getHeight(), this->_dibHeader.getWidth(), this->_colorPallete);  
     }
 
