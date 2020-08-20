@@ -9,10 +9,11 @@ Bitmap::BitmapDIBHeader(const std::string& data) : BitAdjuster(data) {
 }
 
 void Bitmap::read() {
-    this->_fileSize = this->bytesToInteger(2, 4);
-    this->_reserved1 = this->bytesToInteger(6, 2);
-    this->_reserved2 = this->bytesToInteger(8, 2);
-    this->_offset = this->bytesToInteger(10, 4);
+    this->_bitmapWidth = this->bytesToInteger(18, 4);
+    this->_bitmapheight = this->bytesToInteger(22, 4);
+    this->_bpp = this->bytesToInteger(28, 2);
+    this->_bmsize = this->bytesToInteger(34, 4);
+    this->_numcolors = this->bytesToInteger(46, 4);
 }
 
 }
