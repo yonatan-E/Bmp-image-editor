@@ -2,11 +2,13 @@
 
 #include "BitAdjuster.hpp"
 #include <string>
+#include <vector>
 
 namespace bitmap {
 
 class ColorPallete : public BitAdjuster {
 
+    std::vector<int[4]> _colors; 
 
     public:
         explicit ColorPallete(const std::string& data);
