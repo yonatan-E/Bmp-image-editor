@@ -14,7 +14,7 @@ class BitmapArray : public BitAdjuster {
     Matrix pixels;
 
     public:
-        explicit BitmapArray(const std::string& data, uint32_t bpp, uint32_t height, uint32_t width, ColorPallete colors);
+        explicit BitmapArray(const std::string& data, const ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width);
 
         BitmapArray(const BitmapArray& other) = default;
         BitmapArray& operator=(const BitmapArray& other) = default;

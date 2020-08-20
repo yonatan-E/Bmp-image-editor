@@ -3,14 +3,8 @@
 
 namespace bitmap {
 
-BitmapArray::BitmapArray(const std::string& data, uint32_t bpp, uint32_t height, uint32_t width, ColorPallete colors) : BitAdjuster(data) {
-    
-    this->bitsPerPixel = bpp;
-    this->height = height;
-    this->width = width;
-    this->colors = colors;
-    this->pixels(height, width);
-    
+BitmapArray::BitmapArray(const std::string& data, const ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width) 
+        : BitAdjuster(std::move(data)), colors(colors), bitsPerPixel(bpp), height(height), width(width), pixels(height, width) {
     // reading the data string into the current object
     this->read();
 }
