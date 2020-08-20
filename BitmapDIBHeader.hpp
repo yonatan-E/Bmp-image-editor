@@ -14,8 +14,8 @@ namespace bitmap {
     int _con = 1; //constant(always 1)
     int _bpp = 0; //bits per pixel (8 or 24)
     int _cm = 0; //compression method (no compression, therfore 0)
-    int bmsize = 0; //bitmap size;
-    int numcolors = 0; //number of colors in color
+    int _bmsize = 0; //bitmap size;
+    int _numcolors = 0; //number of colors in color
 
     public:
         explicit BitmapDIBHeader(std::string data);
