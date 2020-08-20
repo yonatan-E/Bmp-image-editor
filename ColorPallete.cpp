@@ -9,10 +9,12 @@ ColorPallete::ColorPallete(const std::string& data) : BitAdjuster(std::move(data
 }
 
 void ColorPallete::read() {
-    this->_fileSize = this->bytesToInteger(2, 4);
-    this->_reserved1 = this->bytesToInteger(6, 2);
-    this->_reserved2 = this->bytesToInteger(8, 2);
-    this->_offset = this->bytesToInteger(10, 4);
+    uint32_t i = 0;
+    while(i <= this->getData().size()){
+        int color[3] = {bytesToInteger(i, 1), bytesToInteger(i + 1, 1), bytesToInteger(i + 2, 1)};
+        this->_colors.push_back(color);
+        i += 4;
+    }
 }
 
 }
