@@ -61,11 +61,6 @@ namespace bitmap {
 	    }
     }
 
-    /**
-     * @brief This method reads the .bmp file and cuts it to sections
-     * according to the 4 parts, and builds the 4 parts.
-     * 
-     */
     void Bitmap::read(){
         this->_header = new BitmapHeader(content.substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(content.substr(14,40));
@@ -74,20 +69,11 @@ namespace bitmap {
         //return nullptr in color pallete if the substr size is 0 or less.
     }
 
-    /**
-     * @brief This method writes the given 4 parts into
-     * one whole .bmp file.
-     * 
-     */
     void Bitmap::write(){
 
         //NEED TO IMPLEMENT
     }
 
-    /**
-     * @brief This method turns the bitmap 90 degrees.
-     * 
-     */
     void Bitmap::turn(){
         _header->turn();
         _dibHeader->turn();
@@ -98,11 +84,6 @@ namespace bitmap {
         write();
     }
 
-    /**
-     * @brief This method changes the .bmp image to 
-     * gray shade colors.
-     * 
-     */
     void Bitmap::gray(){
         _header->gray();
         _dibHeader->gray();
