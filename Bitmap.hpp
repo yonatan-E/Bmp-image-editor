@@ -92,8 +92,7 @@ class Bitmap: public BitAdjuster {
          * @param filePath the path to the file
          * @param content the content to write in the file
          */
-        void writeFileContent(const std::string& filePath, const std::string& content)
-
+        void writeFileContent(const std::string& filePath, const std::string& content);
 };
 
 }
