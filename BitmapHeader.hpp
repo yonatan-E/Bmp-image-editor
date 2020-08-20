@@ -32,6 +32,8 @@ class BitmapHeader : public BitAdjuster {
 
         void turn() override;
         void gray() override;
+
+        uint32_t getOffset();
 };
 
 }
