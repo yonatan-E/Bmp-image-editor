@@ -61,11 +61,6 @@ namespace bitmap {
 	    }
     }
 
-    /**
-     * @brief This method reads the .bmp file and cuts it to sections
-     * according to the 4 parts, and builds the 4 parts.
-     * 
-     */
     void Bitmap::read(){
         this->_header = new BitmapHeader(content.substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(content.substr(14,40));
@@ -80,20 +75,11 @@ namespace bitmap {
         }       
     }
 
-    /**
-     * @brief This method writes the given 4 parts into
-     * one whole .bmp file.
-     * 
-     */
     void Bitmap::write(){
 
         //NEED TO IMPLEMENT
     }
 
-    /**
-     * @brief This method turns the bitmap 90 degrees.
-     * 
-     */
     void Bitmap::turn(){
         _header->turn();
         _dibHeader->turn();
@@ -104,11 +90,6 @@ namespace bitmap {
         write();
     }
 
-    /**
-     * @brief This method changes the .bmp image to 
-     * gray shade colors.
-     * 
-     */
     void Bitmap::gray(){
         _header->gray();
         _dibHeader->gray();
@@ -120,11 +101,50 @@ namespace bitmap {
     }
 
     void Bitmap::reset() noexcept {
-        delete &getData();
         delete _header;
         delete _dibHeader;
         delete _bitmapArray;
         delete _colorPallete;
+    }
+
+    std::string readFileContent(const std::string& filePath) { 
+        // Opens input-only file (ifstream) in binary mode.
+        std::ifstream in(filePath, std::ios::binary);
+
+        // The file is in a bad state. The error can be retrieved
+        //	using the global `errno` in linux (#include <cerrno>).
+        if (!in) {
+        // Error here...
+        }
+
+        // Read the file to a vector. This is not the most effecient
+        //	method to read a file.
+        auto content = std::string{std::istreambuf_iterator<char>{in},
+                             std::istreambuf_iterator<char>{}};
+
+        // After reading the file, it should meet EOF (end of file). If
+        //  it did not, it means that an error occurred.
+        if (!in.eof()) {
+          // Unlikly to happen error here...
+        }
+
+        return content;
+    }
+
+    void writeFileContent(const std::string& filePath, const std::string& content) {
+        // Opens output-only file (ofstream) in binary mode, and truncates all
+        //    existing content from the file.
+        std::ofstream out(filePath, std::ios::binary | std::ios::trunc);
+
+        // The file is in a bad state.
+        if (!out) {
+          // Error here...
+        }
+  
+        out.write(content.data(), static_cast<std::streamsize>(content.length()));
+        if (!out) {
+          // Unlikly to happen error here...
+        }
     }
     
 }
