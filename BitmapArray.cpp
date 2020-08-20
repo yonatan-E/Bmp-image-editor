@@ -27,6 +27,8 @@ void BitmapArray::read() {
     }
 
     if(bitsPerPixel == 24){
+        this->colors(); //building new empty ColorPallete
+
         uint32_t index = 0;
         for(uint32_t i = 0; i <= height ; i++){
             for(uint32_t j = 0; j <= width ; j+=3){
