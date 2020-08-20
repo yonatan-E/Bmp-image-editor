@@ -92,7 +92,7 @@ namespace matrix {
     }
 
     const Matrix& Matrix::operator-(const Matrix& other) const {
-
+        return *this + other * (-1);
     }
 
     const Matrix& Matrix::operator*(const Matrix& other) const {
