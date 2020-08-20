@@ -48,7 +48,7 @@ namespace matrix {
         matrix_destroy(this->_decorated);
     }
 
-    double Matrix::operator()(uint32_t rowIndex, uint32_t colIndex) {
+    double Matrix::operator()(uint32_t rowIndex, uint32_t colIndex) const {
         double val;
         ErrorCode error = matrix_getValue(this->_decorated, rowIndex, colIndex, &val);
         if (!error_isSuccess(error)) {
@@ -64,7 +64,7 @@ namespace matrix {
         }
     }
 
-    uint32_t Matrix::getHeight() {
+    uint32_t Matrix::getHeight() const {
         uint32_t height;
         ErrorCode error = matrix_getHeight(this->_decorated, &height);
         if (!error_isSuccess(error)) {
@@ -73,7 +73,7 @@ namespace matrix {
         return height;
     }
 
-    uint32_t Matrix::getWidth() {
+    uint32_t Matrix::getWidth() const {
         uint32_t width;
         ErrorCode error = matrix_getHeight(this->_decorated, &width);
         if (!error_isSuccess(error)) {
@@ -82,7 +82,7 @@ namespace matrix {
         return width;
     }
 
-    const Matrix& Matrix::operator+(const Matrix& other) {
+    const Matrix& Matrix::operator+(const Matrix& other) const {
         Matrix* sum = new Matrix;
         ErrorCode error = matrix_add(&sum->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
@@ -91,11 +91,11 @@ namespace matrix {
         return *sum;
     }
 
-    const Matrix& Matrix::operator-(const Matrix& other) {
+    const Matrix& Matrix::operator-(const Matrix& other) const {
 
     }
 
-    const Matrix& Matrix::operator*(const Matrix& other) {
+    const Matrix& Matrix::operator*(const Matrix& other) const {
         Matrix* mult = new Matrix;
         ErrorCode error = matrix_multiplyMatrices(&mult->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
@@ -104,7 +104,7 @@ namespace matrix {
         return *mult;
     }
 
-    const Matrix& Matrix::operator*(double scalar) {
+    const Matrix& Matrix::operator*(double scalar) const {
         Matrix* multByScalar = new Matrix(*this);
         ErrorCode error = matrix_multiplyWithScalar(multByScalar->_decorated, scalar);
          if (!error_isSuccess(error)) {
