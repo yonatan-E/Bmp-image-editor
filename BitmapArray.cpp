@@ -14,7 +14,7 @@ void BitmapArray::read() {
     if (bitsPerPixel == 8) {
         for (uint32_t i = 0; i <= height ; i++) {
             for (uint32_t j = 0; j <= width ; j++) {
-                pixels.set(i, j, bytesToInteger(j + i*width, 1));
+                pixels.set(i, j, bytesToInteger(j + i * width, 1));
             }
             // padding
         }   
@@ -26,7 +26,7 @@ void BitmapArray::read() {
         uint32_t index = 0;
         for (uint32_t i = 0; i <= height ; i++) {
             for (uint32_t j = 0; j <= width ; j+=3) {
-                pixels.setAt(i, j, j + i * width);
+                pixels.setAt(i, j, index);
                 colors.add(bytesToInteger(j + i * width, 1), bytesToInteger(j + i * width + 1, 1), bytesToInteger(j + i * width + 2, 1));
                 index++;
             }
