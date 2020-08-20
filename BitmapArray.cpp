@@ -30,9 +30,8 @@ void BitmapArray::read() {
         uint32_t index = 0;
         for(uint32_t i = 0; i <= height ; i++){
             for(uint32_t j = 0; j <= width ; j+=3){
-                pixels.set(i, j, index);
-                uint8_t color[3] = {bytesToInteger(j + i*width, 1), bytesToInteger(j + i*width + 1, 1), bytesToInteger(j + i*width + 2, 1)};
-                colors.set(index, color);
+                pixels.set(i, j, j + i*width);
+                colors.add(bytesToInteger(j + i*width, 1), bytesToInteger(j + i*width + 1, 1), bytesToInteger(j + i*width + 2, 1));
                 index++;
             }
             //padding
