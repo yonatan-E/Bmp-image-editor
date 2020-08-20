@@ -70,8 +70,14 @@ namespace bitmap {
         this->_header = new BitmapHeader(content.substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(content.substr(14,40));
         this->_bitmapArray = new BitmapArray(content.substr(this->_header.getOffset()));
-        this->_colorPallete = new ColorPallete(content.substr(54 , this->_header.getOffset() - 54)); 
-        //return nullptr in color pallete if the substr size is 0 or less.
+
+        if(this->_header.getOffset() - 54 > 54){
+            this->_colorPallete = new ColorPallete(content.substr(54 , this->_header.getOffset() - 54)); 
+        }
+        else{
+            //return nullptr in color pallete if the substr size is 0 or less.
+            this->_colorPallete = nullptr; 
+        }       
     }
 
     /**
