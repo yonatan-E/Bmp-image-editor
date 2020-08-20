@@ -17,4 +17,9 @@ void ColorPallete::read() {
     }
 }
 
+    void ColorPallete::addColor(int b, int g, int r){
+        int color[3] = {b, g, r};
+        this->_colors.push_back(color);
+    }
+
 }

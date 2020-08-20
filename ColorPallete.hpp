@@ -26,6 +26,8 @@ class ColorPallete : public BitAdjuster {
 
         void turn() override;
         void gray() override;
+
+        void ColorPallete::addColor(int b, int g, int r);
 };
 
 }
