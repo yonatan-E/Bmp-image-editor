@@ -64,15 +64,17 @@ namespace bitmap {
     void Bitmap::read(){
         this->_header = new BitmapHeader(content.substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(content.substr(14,40));
-        this->_bitmapArray = new BitmapArray(content.substr(this->_header.getOffset()));
 
-        if(this->_header.getOffset() - 54 > 54){
+        if(this->_dibHeader.getBitsPerPixel() == 8){
             this->_colorPallete = new ColorPallete(content.substr(54 , this->_header.getOffset() - 54)); 
         }
         else{
-            //return nullptr in color pallete if the substr size is 0 or less.
+            //return nullptr in color pallete if the image is 24-bit
             this->_colorPallete = nullptr; 
-        }       
+        }     
+
+         this->_bitmapArray = new BitmapArray(content.substr(this->_header.getOffset()), this->_dibHeader.getBitsPerPixel()
+                ,this->_dibHeader.getHeight(), this->_dibHeader.getWidth(), this->_colorPallete);  
     }
 
     void Bitmap::write(){
