@@ -3,12 +3,12 @@
 
 namespace bitmap {
 
-Bitmap::BitmapDIBHeader(const std::string& data) : BitAdjuster(data) {
+BitmapDIBHeader::BitmapDIBHeader(const std::string& data) : BitAdjuster(data) {
     // reading the data string into the current object
     this->read();
 }
 
-void Bitmap::read() {
+void BitmapDIBHeader::read() {
     this->_bitmapWidth = this->bytesToInteger(18, 4);
     this->_bitmapheight = this->bytesToInteger(22, 4);
     this->_bpp = this->bytesToInteger(28, 2);
