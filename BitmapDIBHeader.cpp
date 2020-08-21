@@ -1,5 +1,6 @@
 #include "BitmapDIBHeader.hpp"
 #include <string>
+#include <cstdint>
 
 namespace bitmap {
 
@@ -17,9 +18,16 @@ void BitmapDIBHeader::read() {
 }
 
 void BitmapDIBHeader::write(){
-    this->setData(this->getData().substr(0,4) + integerToBytes(this->_bitmapWidth , 4) + integerToBytes(this->_bitmapHeight , 4)
-    + this->getData().substr(12, 2) + integerToBytes(this->_bpp , 2) + this->getData().substr(16, 4) + integerToBytes(this->_bmsize , 4)
-    + this->getData().substr(24, 8) + integerToBytes(this->_numcolors , 4) + this->getData().substr(36));
+    std::string newData = getData().substr(0,4) + integerToBytes(this->_bitmapWidth , 4) + integerToBytes(this->_bitmapHeight , 4)
+    + getData().substr(12, 2) + integerToBytes(this->_bpp , 2) + getData().substr(16, 4) + integerToBytes(this->_bmsize , 4)
+    + getData().substr(24, 8) + integerToBytes(this->_numcolors , 4) + getData().substr(36);
+    setData(newData);
+}
+
+void BitmapDIBHeader::turn() {
+    uint32_t temp = this->_bitmapHeight;
+    this->_bitmapHeight = this->_bitmapWidth;
+    this->_bitmapWidth = temp;
 }
 
 }
