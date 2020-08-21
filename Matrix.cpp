@@ -57,7 +57,7 @@ namespace matrix {
         return val;
     }
 
-    void Matrix::setAt(double val, uint32_t rowIndex, uint32_t colIndex) {
+    void Matrix::setAt(uint32_t rowIndex, uint32_t colIndex, double val) {
         ErrorCode error = matrix_setValue(this->_decorated, rowIndex, colIndex, val);
         if (!error_isSuccess(error)) {
             throw Exception(error);
@@ -112,4 +112,25 @@ namespace matrix {
         }
         return *multByScalar;
     }
+
+    const Matrix& Matrix::turn() {
+        // transpose the matrix
+        for (int r = 0; r < getHeight(); r++) {
+            for (int c = r; c < getWidth(); c++) {
+                double temp = (*this)(r, c);
+                setAt(r, c, (*this)(c, r));
+                setAt(c, r, temp);
+            }
+        }
+
+        // reverse the elements on row order
+        for (int r = 0; r < getHeight(); r++) {
+            for (int c = 0; c < getWidth() / 2; c++) {
+                double temp = (*this)(r, c);
+                setAt(r, c, (*this)(r, getWidth() - c - 1));
+                setAt(r, getWidth() - c - 1, temp);
+            }
+        }
+        return *this;
+    } 
 }

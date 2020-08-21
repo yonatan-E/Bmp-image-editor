@@ -79,7 +79,7 @@ namespace matrix {
              * @param rowIndex the row of the item we want to set
              * @param colIndex the column of the item we want to set
              */
-            void setAt(double val, uint32_t rowIndex, uint32_t colIndex);
+            void setAt(uint32_t rowIndex, uint32_t colIndex, double val);
 
             /**
              * @brief Getter to the matrix height
@@ -126,5 +126,13 @@ namespace matrix {
              * @return const Matrix& the matrix after multiplying by scalar
              */
             const Matrix& operator*(double scalar) const;
+
+            /**
+             * @brief Method that turns the matrix by clockwise.
+             *        The also method returns the matrix so we can active this method more times
+             * 
+             * @return const Matrix& the matrix after the transpose
+             */
+            const Matrix& turn();
     };
 }
