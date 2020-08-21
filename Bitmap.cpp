@@ -77,12 +77,19 @@ namespace bitmap {
                 ,this->_dibHeader.getHeight(), this->_dibHeader.getWidth(), this->_colorPallete);  
     }
 
-    void Bitmap::write(){
-        std::string result = this->_header.write() + this->_dibHeader.write() +
-        this->_colorPallete.write() + this->_bitmapArray.write();
+       void Bitmap::write(){
+
+        this->_header.write();
+        this->_dibHeader.write();
+        this->_colorPallete.write();
+        this->_bitmapArray.write();
+
+        std::string result = this->_header.getData() + this->_dibHeader.getData()+
+        this->_colorPallete.getData() + this->_bitmapArray.getData();
 
         writeFileContent(this->_path, result); 
     }
+
 
     void Bitmap::turn(){
         _header->turn();
