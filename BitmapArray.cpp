@@ -60,6 +60,11 @@ BitmapArray& BitmapArray::operator=(BitmapArray&& other) noexcept {
     return *this;
 }
 
+BitmapArray::~BitmapArray() {
+    delete _colors;
+    delete _pixels;
+}
+
 void BitmapArray::read() {
     if (_bitsPerPixel == 8) {
         for (uint32_t i = 0; i <= _height ; i++) {
