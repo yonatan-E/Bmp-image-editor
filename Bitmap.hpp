@@ -15,6 +15,8 @@ class Bitmap: public BitAdjuster {
     // the colorpallete of the bitmap file
     ColorPallete _colorPallete;
 
+    std::string _path;
+
     public:
 
         /**
