@@ -11,10 +11,10 @@ namespace bitmap {
     }
 
     Bitmap::Bitmap(const Bitmap& other) : BitAdjuster(other) {
-        this->_header = new BitmapHeader(other._header);
-        this->_dibHeader = new BitmapDIBHeader(other._dibHeader);
-        this->_bitmapArray = new BitmapArray(other._bitmapArray);
-        this->_colorPallete = new ColorPallete(other._colorPallete);
+        this->_header = new BitmapHeader(*(other._header));
+        this->_dibHeader = new BitmapDIBHeader(*(other._dibHeader));
+        this->_bitmapArray = new BitmapArray(*(other._bitmapArray));
+        this->_colorPallete = new ColorPallete(*(other._colorPallete));
     }
 
     Bitmap& Bitmap::operator=(const Bitmap& other) {
