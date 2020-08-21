@@ -21,13 +21,9 @@ void BitmapHeader::write() {
      + integerToBytes(this->_offset , 4));
 }
 
-void BitmapHeader::turn() {
+void BitmapHeader::turn() {}
 
-}
-
-void BitmapHeader::gray() {
-
-}
+void BitmapHeader::gray() {}
 
 uint32_t BitmapHeader::getOffset() {
     return this->_offset;
