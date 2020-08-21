@@ -16,4 +16,10 @@ void BitmapDIBHeader::read() {
     this->_numcolors = this->bytesToInteger(32, 4);
 }
 
+void BitmapDIBHeader::write(){
+    this->_data = this->_data.substr(0,4) + integerToBytes(this->_bitmapWidth , 4) + integerToBytes(this->_bitmapHeight , 4)
+    + this->_data.substr(12, 2) + integerToBytes(this->_bpp , 2) + this->_data.substr(16, 4) + integerToBytes(this->_bmsize , 4)
+    + this->_data.substr(24, 8) + integerToBytes(this->_numcolors , 4) + this->_data.substr(36);
+}
+
 }
