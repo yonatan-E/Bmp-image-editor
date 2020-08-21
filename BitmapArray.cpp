@@ -12,7 +12,24 @@ BitmapArray::BitmapArray(const std::string& data, const ColorPallete& colors, ui
     this->read();
 }
 
+BitmapArray::BitmapArray(const BitmapArray& other) 
+        : BitAdjuster(other), _bitsPerPixel(other._bitsPerPixel), _height(other._height), _width(other._width) {
+    _colors = new ColorPallete(*(other._colors));
+    _pixels = new Matrix(*(other._pixels));
+}
 
+BitmapArray& BitmapArray::operator=(const BitmapArray& other) {
+    if (this == &other) {
+		    return *this;
+	    }
+
+        // destroying the allocated fields
+        delete this->_colors;
+        delete this->_pixels;
+
+        *this = BitmapArray(other); 
+	    return *this;
+}
 
 void BitmapArray::read() {
     if (_bitsPerPixel == 8) {
