@@ -65,27 +65,27 @@ namespace bitmap {
         this->_header = new BitmapHeader(getData().substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(getData().substr(14,40));
 
-        if(this->_dibHeader.getBitsPerPixel() == 8){
-            this->_colorPallete = new ColorPallete(getData().substr(54 , this->_header.getOffset() - 54)); 
+        if(this->_dibHeader->getBitsPerPixel() == 8){
+            this->_colorPallete = new ColorPallete(getData().substr(54 , this->_header->getOffset() - 54)); 
         }
         else{
             // return nullptr in color pallete if the image is 24-bit
             this->_colorPallete = nullptr; 
         }     
 
-         this->_bitmapArray = new BitmapArray(getData().substr(this->_header.getOffset()), this->_dibHeader.getBitsPerPixel()
-                ,this->_dibHeader.getHeight(), this->_dibHeader.getWidth(), this->_colorPallete);  
+         this->_bitmapArray = new BitmapArray(getData().substr(this->_header->getOffset()), this->_dibHeader->getBitsPerPixel()
+                ,this->_dibHeader->getHeight(), this->_dibHeader->getWidth(), this->_colorPallete);  
     }
 
        void Bitmap::write(){
 
-        this->_header.write();
-        this->_dibHeader.write();
-        this->_colorPallete.write();
-        this->_bitmapArray.write();
+        this->_header->write();
+        this->_dibHeader->write();
+        this->_colorPallete->write();
+        this->_bitmapArray->write();
 
-        std::string result = this->_header.getData() + this->_dibHeader.getData()+
-        this->_colorPallete.getData() + this->_bitmapArray.getData();
+        std::string result = this->_header->getData() + this->_dibHeader->getData()+
+        this->_colorPallete->getData() + this->_bitmapArray->getData();
 
         writeFileContent(this->_path, result); 
     }
