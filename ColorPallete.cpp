@@ -33,4 +33,16 @@ void ColorPallete::write(){
     }
 }
 
+void ColorPallete::turn(){}
+
+void ColorPallete:: gray(){
+    for(int i = 0 ; i < this->_colors.size() ; i ++){
+        uint32_t newColor =  0.2126*_colors.at(i)[2] + 0.7152*_colors.at(i)[1] + 0.0722*_colors.at(i)[0];
+        _colors.at(i)[2] = newColor;
+        _colors.at(i)[1] = newColor;
+        _colors.at(i)[0] = newColor;
+
+    } 
+}
+
 }
