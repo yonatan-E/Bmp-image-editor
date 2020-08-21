@@ -18,7 +18,7 @@ namespace bitmap {
     uint32_t _numcolors = 0; //number of colors in color
 
     public:
-        explicit BitmapDIBHeader(std::string data);
+        explicit BitmapDIBHeader(const std::string& data);
 
         BitmapDIBHeader(const BitmapDIBHeader& other) = default;
         BitmapDIBHeader& operator=(const BitmapDIBHeader& other) = default;
