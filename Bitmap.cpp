@@ -102,12 +102,7 @@ namespace bitmap {
     }
 
     void Bitmap::gray() {
-        _header->gray();
-        _dibHeader->gray();
         _bitmapArray->gray();
-        if(_colorPallete != nullptr){
-            _colorPallete->gray();
-        }
         write();
     }
 
