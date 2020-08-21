@@ -20,6 +20,7 @@ void BitmapDIBHeader::write(){
     std::string newData = getData().substr(0,4) + integerToBytes(this->_bitmapWidth , 4) + integerToBytes(this->_bitmapHeight , 4)
     + getData().substr(12, 2) + integerToBytes(this->_bpp , 2) + getData().substr(16, 4) + integerToBytes(this->_bmsize , 4)
     + getData().substr(24, 8) + integerToBytes(this->_numcolors , 4) + getData().substr(36);
+    setData(newData);
 }
 
 }
