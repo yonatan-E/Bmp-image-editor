@@ -22,6 +22,10 @@ void ColorPallete::addColor(int b, int g, int r){
     this->_colors.push_back(color);
 }
 
+int* ColorPallete::getColor(uint32_t index){
+    return _colors.at(index);
+}
+
 void ColorPallete::write(){
     for(int i = 0; i < this->_colors.size() ; i += 4){
         this->setData(this->getData().substr(0, i) + integerToBytes(this->_colors.at(i)[0], 1) +  integerToBytes(this->_colors.at(i)[1], 1)
