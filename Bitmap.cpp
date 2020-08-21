@@ -11,6 +11,7 @@ namespace bitmap {
     }
 
     Bitmap::Bitmap(const Bitmap& other) : BitAdjuster(other) {
+        this->_path = other._path;
         this->_header = new BitmapHeader(*(other._header));
         this->_dibHeader = new BitmapDIBHeader(*(other._dibHeader));
         this->_bitmapArray = new BitmapArray(*(other._bitmapArray));
@@ -30,6 +31,7 @@ namespace bitmap {
 
     Bitmap::Bitmap(Bitmap&& other) noexcept : BitAdjuster(std::move(other)) {
         other.setData(nullptr);
+        _path = std::exchange(other._path, nullptr);
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
@@ -45,6 +47,7 @@ namespace bitmap {
         
         this->setData(std::move(other.getData()));
         other.setData(nullptr);
+        _path = std::exchange(other._path, nullptr);
         _header = std::exchange(other._header, nullptr);
         _dibHeader = std::exchange(other._dibHeader, nullptr);
         _bitmapArray = std::exchange(other._bitmapArray, nullptr);
@@ -95,7 +98,7 @@ namespace bitmap {
         _header->turn();
         _dibHeader->turn();
         _bitmapArray->turn();
-        if( _colorPallete != nullptr){
+        if(_colorPallete != nullptr) {
             _colorPallete->turn();
         }
         write();
