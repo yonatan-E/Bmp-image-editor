@@ -13,6 +13,8 @@ class ColorPallete : public BitAdjuster {
     public:
         explicit ColorPallete(const std::string& data);
 
+        explicit ColorPallete() = default;
+
         ColorPallete(const ColorPallete& other) = default;
         ColorPallete& operator=(const ColorPallete& other) = default;
 
