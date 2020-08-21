@@ -48,7 +48,7 @@ namespace matrix {
         matrix_destroy(this->_decorated);
     }
 
-    double Matrix::operator()(uint32_t rowIndex, uint32_t colIndex) {
+    double Matrix::operator()(uint32_t rowIndex, uint32_t colIndex) const {
         double val;
         ErrorCode error = matrix_getValue(this->_decorated, rowIndex, colIndex, &val);
         if (!error_isSuccess(error)) {
@@ -57,14 +57,14 @@ namespace matrix {
         return val;
     }
 
-    void Matrix::setAt(double val, uint32_t rowIndex, uint32_t colIndex) {
+    void Matrix::setAt(uint32_t rowIndex, uint32_t colIndex, double val) {
         ErrorCode error = matrix_setValue(this->_decorated, rowIndex, colIndex, val);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
     }
 
-    uint32_t Matrix::getHeight() {
+    uint32_t Matrix::getHeight() const {
         uint32_t height;
         ErrorCode error = matrix_getHeight(this->_decorated, &height);
         if (!error_isSuccess(error)) {
@@ -73,7 +73,7 @@ namespace matrix {
         return height;
     }
 
-    uint32_t Matrix::getWidth() {
+    uint32_t Matrix::getWidth() const {
         uint32_t width;
         ErrorCode error = matrix_getHeight(this->_decorated, &width);
         if (!error_isSuccess(error)) {
@@ -82,7 +82,7 @@ namespace matrix {
         return width;
     }
 
-    const Matrix& Matrix::operator+(const Matrix& other) {
+    const Matrix& Matrix::operator+(const Matrix& other) const {
         Matrix* sum = new Matrix;
         ErrorCode error = matrix_add(&sum->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
@@ -91,7 +91,11 @@ namespace matrix {
         return *sum;
     }
 
-    const Matrix& Matrix::operator*(const Matrix& other) {
+    const Matrix& Matrix::operator-(const Matrix& other) const {
+        return *this + other * (-1);
+    }
+
+    const Matrix& Matrix::operator*(const Matrix& other) const {
         Matrix* mult = new Matrix;
         ErrorCode error = matrix_multiplyMatrices(&mult->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
@@ -100,11 +104,33 @@ namespace matrix {
         return *mult;
     }
 
-    const Matrix& Matrix::operator*(double scalar) {
-        ErrorCode error = matrix_multiplyWithScalar(this->_decorated, scalar);
+    const Matrix& Matrix::operator*(double scalar) const {
+        Matrix* multByScalar = new Matrix(*this);
+        ErrorCode error = matrix_multiplyWithScalar(multByScalar->_decorated, scalar);
          if (!error_isSuccess(error)) {
             throw Exception(error);
         }
-        return *this;
+        return *multByScalar;
     }
+
+    const Matrix& Matrix::turn() {
+        // transpose the matrix
+        for (int r = 0; r < getHeight(); r++) {
+            for (int c = r; c < getWidth(); c++) {
+                double temp = (*this)(r, c);
+                setAt(r, c, (*this)(c, r));
+                setAt(c, r, temp);
+            }
+        }
+
+        // reverse the elements on row order
+        for (int r = 0; r < getHeight(); r++) {
+            for (int c = 0; c < getWidth() / 2; c++) {
+                double temp = (*this)(r, c);
+                setAt(r, c, (*this)(r, getWidth() - c - 1));
+                setAt(r, getWidth() - c - 1, temp);
+            }
+        }
+        return *this;
+    } 
 }
