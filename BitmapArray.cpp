@@ -1,6 +1,7 @@
 #include "BitmapArray.hpp"
-#include <string>
 #include "Matrix.hpp"
+#include <string>
+#include <utility>
 
 namespace bitmap {
 
@@ -29,6 +30,34 @@ BitmapArray& BitmapArray::operator=(const BitmapArray& other) {
 
         *this = BitmapArray(other); 
 	    return *this;
+}
+
+BitmapArray::BitmapArray(BitmapArray&& other) noexcept : BitAdjuster(std::move(other)) {
+    other.setData(nullptr);
+    _colors = exchange(other._colors, nullptr);
+    _pixels = exchange(other._pixels, nullptr);
+    _bitsPerPixel = exchange(other._bitsPerPixel, 0);
+    _height = exchange(other._height, 0);
+    _width = exchange(other._width, 0);
+}
+
+BitmapArray& BitmapArray::operator=(BitmapArray&& other) noexcept {
+    if (this == &other) {
+		    return *this;
+	}
+
+	// destroying the allocated fields
+    delete this->_colors;
+    delete this->_pixels;
+        
+    this->setData(std::move(other.getData()));
+    other.setData(nullptr);
+    _colors = exchange(other._colors, nullptr);
+    _pixels = exchange(other._pixels, nullptr);
+    _bitsPerPixel = exchange(other._bitsPerPixel, 0);
+    _height = exchange(other._height, 0);
+    _width = exchange(other._width, 0);
+    return *this;
 }
 
 void BitmapArray::read() {
