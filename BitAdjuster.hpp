@@ -65,21 +65,22 @@ namespace bitmap {
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer
           * 
+          * @tparam IntType the specific type of the integer
           * @param index the index where the specific part of the string starts 
-          * @param numBytes the size of the specific part, in bytes
-          * @return unsigned int the specific part, converted to int
+          * @return IntType the specific part, converted to the specific int type
           */
-         template <typename T> T bytesToInteger(int index) const;
+         template <typename IntType>
+         IntType bytesToInteger(int index) const final;
 
          /**
           * @brief Method that converts a integer into a byte sequence in a string.
           * 
-          * @param n the integer to convert
-          * @param numBytes the size of the byte sequence
-          * @return string the byte sequence represented by a string
+          * @tparam IntType the type of the integer 
+          * @param n the size of the byte sequence
+          * @return std::string the byte sequence represented by a string
           */
-         
-          template <typename T> std::string BitAdjuster::integerToBytes(unsigned int n) const;
+         template <typename IntType> 
+         std::string integerToBytes(unsigned int n) const final;
     };
 
 }
