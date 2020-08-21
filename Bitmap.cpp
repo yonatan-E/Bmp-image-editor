@@ -6,7 +6,7 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) : _path(path), BitAdjuster(std::move(readFromFile(path))) {
+    Bitmap::Bitmap(std::string path) : _path(std::move(path)), BitAdjuster(std::move(readFromFile(path))) {
         read();
     }
 
