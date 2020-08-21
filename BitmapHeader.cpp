@@ -10,10 +10,10 @@ BitmapHeader::BitmapHeader(const std::string& data) : BitAdjuster(std::move(data
 }
 
 void BitmapHeader::read() {
-    this->_fileSize = this->bytesToInteger(2, 4);
-    this->_reserved1 = this->bytesToInteger(6, 2);
-    this->_reserved2 = this->bytesToInteger(8, 2);
-    this->_offset = this->bytesToInteger(10, 4);
+    this->_fileSize = this->bytesToInteger<uint32_t>(2);
+    this->_reserved1 = this->bytesToInteger<uint16_t>(6);
+    this->_reserved2 = this->bytesToInteger<uint16_t>(8);
+    this->_offset = this->bytesToInteger<uint32_t>(10);
 }
 
 void BitmapHeader::write() {}
