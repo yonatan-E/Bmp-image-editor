@@ -1,6 +1,7 @@
 #include "BitmapArray.hpp"
-#include <string>
 #include "Matrix.hpp"
+#include <string>
+#include <utility>
 
 namespace bitmap {
 
@@ -12,7 +13,57 @@ BitmapArray::BitmapArray(const std::string& data, const ColorPallete& colors, ui
     this->read();
 }
 
+BitmapArray::BitmapArray(const BitmapArray& other) 
+        : BitAdjuster(other), _bitsPerPixel(other._bitsPerPixel), _height(other._height), _width(other._width) {
+    _colors = new ColorPallete(*(other._colors));
+    _pixels = new Matrix(*(other._pixels));
+}
 
+BitmapArray& BitmapArray::operator=(const BitmapArray& other) {
+    if (this == &other) {
+		    return *this;
+	    }
+
+        // destroying the allocated fields
+        delete this->_colors;
+        delete this->_pixels;
+
+        *this = BitmapArray(other); 
+	    return *this;
+}
+
+BitmapArray::BitmapArray(BitmapArray&& other) noexcept : BitAdjuster(std::move(other)) {
+    other.setData(nullptr);
+    _colors = exchange(other._colors, nullptr);
+    _pixels = exchange(other._pixels, nullptr);
+    _bitsPerPixel = exchange(other._bitsPerPixel, 0);
+    _height = exchange(other._height, 0);
+    _width = exchange(other._width, 0);
+}
+
+BitmapArray& BitmapArray::operator=(BitmapArray&& other) noexcept {
+    if (this == &other) {
+		    return *this;
+	}
+
+	// destroying the allocated fields
+    delete this->_colors;
+    delete this->_pixels;
+        
+    this->setData(std::move(other.getData()));
+    other.setData(nullptr);
+    _colors = exchange(other._colors, nullptr);
+    _pixels = exchange(other._pixels, nullptr);
+    _bitsPerPixel = exchange(other._bitsPerPixel, 0);
+    _height = exchange(other._height, 0);
+    _width = exchange(other._width, 0);
+    return *this;
+}
+
+BitmapArray::~BitmapArray() {
+    delete _colors;
+    delete _pixels;
+}
 
 void BitmapArray::read() {
     if (_bitsPerPixel == 8) {
