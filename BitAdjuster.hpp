@@ -70,6 +70,15 @@ namespace bitmap {
           * @return unsigned int the specific part, converted to int
           */
          virtual unsigned int bytesToInteger(int index, int numBytes) const;
+
+         /**
+          * @brief Method that converts a integer into a byte sequence in a string.
+          * 
+          * @param n the integer to convert
+          * @param numBytes the size of the byte sequence
+          * @return string the byte sequence represented by a string
+          */
+         virtual std::string integerToBytes(int n, int numBytes);
     };
 
 }
