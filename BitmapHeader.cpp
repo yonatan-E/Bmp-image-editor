@@ -17,8 +17,7 @@ void BitmapHeader::read() {
 }
 
 void BitmapHeader::write() {
-    this->setData(this->getData().substr(0,2) + integerToBytes(this->_fileSize , 4) + this->getData().substr(6, 10)
-     + integerToBytes(this->_offset , 4));
+    
 }
 
 void BitmapHeader::turn() {
