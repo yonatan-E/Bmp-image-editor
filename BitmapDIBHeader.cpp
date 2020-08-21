@@ -10,17 +10,17 @@ BitmapDIBHeader::BitmapDIBHeader(const std::string& data) : BitAdjuster(std::mov
 }
 
 void BitmapDIBHeader::read() {
-    this->_bitmapWidth = this->bytesToInteger(4, 4);
-    this->_bitmapHeight = this->bytesToInteger(8, 4);
-    this->_bpp = this->bytesToInteger(14, 2);
-    this->_bmsize = this->bytesToInteger(20, 4);
-    this->_numcolors = this->bytesToInteger(32, 4);
+    this->_bitmapWidth = bytesToInteger<uint32_t>(4);
+    this->_bitmapHeight = bytesToInteger<uint32_t>(8);
+    this->_bpp = bytesToInteger<uint16_t>(14);
+    this->_bmsize = bytesToInteger<uint32_t>(20);
+    this->_numcolors = bytesToInteger<uint32_t>(32);
 }
 
 void BitmapDIBHeader::write() {
-    std::string newData = getData().substr(0,4) + integerToBytes(this->_bitmapWidth , 4) + integerToBytes(this->_bitmapHeight , 4)
-    + getData().substr(12, 2) + integerToBytes(this->_bpp , 2) + getData().substr(16, 4) + integerToBytes(this->_bmsize , 4)
-    + getData().substr(24, 8) + integerToBytes(this->_numcolors , 4) + getData().substr(36);
+    std::string newData = getData().substr(0,4) + integerToBytes<uint32_t>(this->_bitmapWidth) + integerToBytes<uint32_t>(this->_bitmapHeight)
+    + getData().substr(12, 2) + integerToBytes<uint16_t>(this->_bpp) + getData().substr(16, 4) + integerToBytes<uint32_t>(this->_bmsize)
+    + getData().substr(24, 8) + integerToBytes<uint32_t>(this->_numcolors) + getData().substr(36);
     setData(newData);
 }
 
