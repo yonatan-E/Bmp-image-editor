@@ -54,13 +54,13 @@ namespace bitmap {
           * 
           * @return std::string the string of the object
           */
-         virtual const std::string& getData() const&;
+         virtual const std::string& getData() const final;
 
          /**
           * @brief The data string setter
           * 
           */
-         virtual void setData(const std::string& data);           
+         virtual void setData(const std::string& data) final;           
 
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer
@@ -69,7 +69,7 @@ namespace bitmap {
           * @param numBytes the size of the specific part, in bytes
           * @return unsigned int the specific part, converted to int
           */
-         virtual unsigned int bytesToInteger(int index, int numBytes) const;
+         virtual unsigned int bytesToInteger(int index, int numBytes) const final;
 
          /**
           * @brief Method that converts a integer into a byte sequence in a string.
@@ -78,7 +78,7 @@ namespace bitmap {
           * @param numBytes the size of the byte sequence
           * @return string the byte sequence represented by a string
           */
-         virtual std::string integerToBytes(int n, int numBytes);
+         virtual std::string integerToBytes(int n, int numBytes) const final;
     };
 
 }

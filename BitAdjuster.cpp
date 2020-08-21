@@ -20,7 +20,7 @@ namespace bitmap {
         }
     }
 
-    std::string integerToBytes(int n, int numBytes){
+    std::string BitAdjuster::integerToBytes(int n, int numBytes) const {
         std::string str = nullptr;
         char header[4];
         if(numBytes == 1){
@@ -43,7 +43,7 @@ namespace bitmap {
 
     }
 
-    const std::string& BitAdjuster::getData() const& {
+    const std::string& BitAdjuster::getData() const {
         return this->_data;
     }
 
