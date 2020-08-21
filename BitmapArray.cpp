@@ -119,4 +119,8 @@ void BitmapArray::turn() {
     _pixels->turn();
 }
 
+void BitmapArray::gray() {
+    _colors->gray();
+}
+
 }
