@@ -2,6 +2,7 @@
 #include "Matrix.hpp"
 #include <string>
 #include <utility>
+#include <cstdint>
 
 namespace bitmap {
 
@@ -21,15 +22,15 @@ BitmapArray::BitmapArray(const BitmapArray& other)
 
 BitmapArray& BitmapArray::operator=(const BitmapArray& other) {
     if (this == &other) {
-		    return *this;
-	    }
+		return *this;
+	}
 
-        // destroying the allocated fields
-        delete this->_colors;
-        delete this->_pixels;
+    // destroying the allocated fields
+    delete _colors;
+    delete _pixels;
 
-        *this = BitmapArray(other); 
-	    return *this;
+    *this = BitmapArray(other); 
+	return *this;
 }
 
 BitmapArray::BitmapArray(BitmapArray&& other) noexcept : BitAdjuster(std::move(other)) {
@@ -43,14 +44,14 @@ BitmapArray::BitmapArray(BitmapArray&& other) noexcept : BitAdjuster(std::move(o
 
 BitmapArray& BitmapArray::operator=(BitmapArray&& other) noexcept {
     if (this == &other) {
-		    return *this;
+		return *this;
 	}
 
 	// destroying the allocated fields
-    delete this->_colors;
-    delete this->_pixels;
+    delete _colors;
+    delete _pixels;
         
-    this->setData(std::move(other.getData()));
+    setData(std::move(other.getData()));
     other.setData(nullptr);
     _colors = exchange(other._colors, nullptr);
     _pixels = exchange(other._pixels, nullptr);
@@ -69,20 +70,22 @@ void BitmapArray::read() {
     if (_bitsPerPixel == 8) {
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
-                _pixels->setAt(i, j, bytesToInteger(j + i * _width, 1));
+                _pixels->setAt(i, j, bytesToInteger<uint8_t>(j + i * _width));
             }
             // padding
         }   
     }
 
     if (_bitsPerPixel == 24) {
-        _colors = new ColorPallete(); // building new empty ColorPallete
+        // building new empty ColorPallete
+        _colors = new ColorPallete(); 
 
         uint32_t index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j <= _width ; j+=3) {
                 _pixels->setAt(i, j, index);
-                _colors->add(bytesToInteger(j + i * _width, 1), bytesToInteger(j + i * _width + 1, 1), bytesToInteger(j + i * _width + 2, 1));
+                _colors->add(bytesToInteger<uint8_t>(j + i * _width), bytesToInteger<uint8_t>(j + i * _width + 1),
+                bytesToInteger<uint8_t>(j + i * _width + 2));
                 index++;
             }
             // padding
@@ -91,31 +94,31 @@ void BitmapArray::read() {
 }
 
 void BitmapArray::write() {
-
     if (_bitsPerPixel == 8) {
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
-                this->setData(this->getData().substr(0,j + i * _width) + IntegerToBytes(this->_pixels(i, j), 1)
-                 + this->getData().substr(j + i * _width + 1));
+                setData(getData().substr(0, j + i * _width) + IntegerToBytes<uint8_t>(_pixels(i, j))
+                + getData().substr(j + i * _width + 1));
             }
         }   
     }
+
     if (_bitsPerPixel == 24) {
         uint32_t index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j += 3) {
-                this->setData(this->getData().substr(0,j + i * _width) + IntegerToBytes(_colors->getColor(index)[0], 1) 
-                + IntegerToBytes(_colors->getColor(index)[1], 1) + IntegerToBytes(_colors->getColor(index)[2], 1)
-                 + this->getData().substr(j + i * _width + 3));
-                 index++;
+                setData(getData().substr(0, j + i * _width) + IntegerToBytes<uint8_t>(_colors->getColor(index)[0]) 
+                + IntegerToBytes<uint8_t>(_colors->getColor(index)[1]) + IntegerToBytes<uint8_t>(_colors->getColor(index)[2])
+                + getData().substr(j + i * _width + 3));
+                index++;
         }   
     }
 }
 
 void BitmapArray::turn() {
-    uint32_t temp = this->_height;
-    this->_height = this->_width;
-    this->_width = temp;
+    uint32_t temp = _height;
+    _height = _width;
+    _width = temp;
     _pixels->turn();
 }
 
