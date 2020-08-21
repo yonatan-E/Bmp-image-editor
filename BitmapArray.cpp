@@ -35,4 +35,9 @@ void BitmapArray::read() {
     }
 }
 
+void BitmapArray::turn() {
+    pixels.turn();
+    write();
+}
+
 }
