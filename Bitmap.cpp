@@ -6,7 +6,7 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFromFile(path))) {
+    Bitmap::Bitmap(std::string path) : _path(path), BitAdjuster(std::move(readFromFile(path))) {
         read();
     }
 
@@ -78,8 +78,25 @@ namespace bitmap {
     }
 
     void Bitmap::write(){
+        
+        int x = 50;
 
-        //NEED TO IMPLEMENT
+       
+
+        std::string result = this->_header.write() + this->_dibHeader.write() +
+         this->_colorPallete.write() + this->_bitmapArray.write();
+
+        writeFileContent(this->_path, result); 
+
+            //NEED TO IMPLEMENT
+    }
+
+    std::string integerToBytes(int n, int numBytes){
+        char header[4];
+        std::memcpy(header, &n, 4);
+        std::string str = static_cast<char*>(header);
+        str = str + (char)0 +  (char)0;
+
     }
 
     void Bitmap::turn(){
