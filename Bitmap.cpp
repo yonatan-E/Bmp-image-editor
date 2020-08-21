@@ -65,27 +65,27 @@ namespace bitmap {
         this->_header = new BitmapHeader(getData().substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(getData().substr(14,40));
 
-        if(this->_dibHeader.getBitsPerPixel() == 8){
-            this->_colorPallete = new ColorPallete(getData().substr(54 , this->_header.getOffset() - 54)); 
+        if (this->_dibHeader->getBitsPerPixel() == 8){
+            this->_colorPallete = new ColorPallete(getData().substr(54 , this->_header->getOffset() - 54)); 
         }
-        else{
+        else {
             // return nullptr in color pallete if the image is 24-bit
             this->_colorPallete = nullptr; 
-        }     
+        }
 
-         this->_bitmapArray = new BitmapArray(getData().substr(this->_header.getOffset()), this->_dibHeader.getBitsPerPixel()
-                ,this->_dibHeader.getHeight(), this->_dibHeader.getWidth(), this->_colorPallete);  
+         this->_bitmapArray = new BitmapArray(getData().substr(this->_header->getOffset()), this->_dibHeader->getBitsPerPixel()
+                ,this->_dibHeader->getHeight(), this->_dibHeader->getWidth(), this->_colorPallete);  
     }
 
        void Bitmap::write(){
 
-        this->_header.write();
-        this->_dibHeader.write();
-        this->_colorPallete.write();
-        this->_bitmapArray.write();
+        this->_header->write();
+        this->_dibHeader->write();
+        this->_colorPallete->write();
+        this->_bitmapArray->write();
 
-        std::string result = this->_header.getData() + this->_dibHeader.getData()+
-        this->_colorPallete.getData() + this->_bitmapArray.getData();
+        std::string result = this->_header->getData() + this->_dibHeader->getData()+
+        this->_colorPallete->getData() + this->_bitmapArray->getData();
 
         writeFileContent(this->_path, result); 
     }
@@ -96,17 +96,17 @@ namespace bitmap {
         _dibHeader->turn();
         _bitmapArray->turn();
         if( _colorPallete != nullptr){
-            _colorPallete -> turn();
+            _colorPallete->turn();
         }
         write();
     }
 
-    void Bitmap::gray(){
+    void Bitmap::gray() {
         _header->gray();
         _dibHeader->gray();
         _bitmapArray->gray();
-        if( _colorPallete != nullptr){
-            _colorPallete -> gray();
+        if(_colorPallete != nullptr){
+            _colorPallete->gray();
         }
         write();
     }
@@ -119,22 +119,15 @@ namespace bitmap {
     }
 
     std::string readFileContent(const std::string& filePath) { 
-        // Opens input-only file (ifstream) in binary mode.
         std::ifstream in(filePath, std::ios::binary);
 
-        // The file is in a bad state. The error can be retrieved
-        //	using the global `errno` in linux (#include <cerrno>).
         if (!in) {
         // Error here...
         }
 
-        // Read the file to a vector. This is not the most effecient
-        //	method to read a file.
         auto content = std::string{std::istreambuf_iterator<char>{in},
                              std::istreambuf_iterator<char>{}};
 
-        // After reading the file, it should meet EOF (end of file). If
-        //  it did not, it means that an error occurred.
         if (!in.eof()) {
           // Unlikly to happen error here...
         }
@@ -143,11 +136,8 @@ namespace bitmap {
     }
 
     void writeFileContent(const std::string& filePath, const std::string& content) {
-        // Opens output-only file (ofstream) in binary mode, and truncates all
-        //    existing content from the file.
         std::ofstream out(filePath, std::ios::binary | std::ios::trunc);
 
-        // The file is in a bad state.
         if (!out) {
           // Error here...
         }
