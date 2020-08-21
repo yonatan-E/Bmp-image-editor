@@ -7,22 +7,22 @@ namespace bitmap {
 
 class BitmapArray : public BitAdjuster {
 
-    uint32_t bitsPerPixel;
-    uint32_t height;
-    uint32_t width;
-    ColorPallete colors;
-    Matrix pixels;
+    uint32_t _bitsPerPixel;
+    uint32_t _height;
+    uint32_t _width;
+    ColorPallete* _colors;
+    Matrix* _pixels;
 
     public:
         explicit BitmapArray(const std::string& data, const ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width);
 
-        BitmapArray(const BitmapArray& other) = default;
-        BitmapArray& operator=(const BitmapArray& other) = default;
+        BitmapArray(const BitmapArray& other);
+        BitmapArray& operator=(const BitmapArray& other);
 
-        BitmapArray(BitmapArray&& other) noexcept = default;
-        BitmapArray& operator=(BitmapArray&& other) noexcept = default;
+        BitmapArray(BitmapArray&& other) noexcept;
+        BitmapArray& operator=(BitmapArray&& other) noexcept;
 
-        ~BitmapArray() = default;
+        ~BitmapArray();
 
         void read() override;
         void write() override;
