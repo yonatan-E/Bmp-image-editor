@@ -82,7 +82,7 @@ namespace matrix {
         return width;
     }
 
-    const Matrix& Matrix::operator+(const Matrix& other) const {
+    Matrix& Matrix::operator+(const Matrix& other) const {
         Matrix* sum = new Matrix;
         ErrorCode error = matrix_add(&sum->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
@@ -91,11 +91,11 @@ namespace matrix {
         return *sum;
     }
 
-    const Matrix& Matrix::operator-(const Matrix& other) const {
+    Matrix& Matrix::operator-(const Matrix& other) const {
         return *this + other * (-1);
     }
 
-    const Matrix& Matrix::operator*(const Matrix& other) const {
+    Matrix& Matrix::operator*(const Matrix& other) const {
         Matrix* mult = new Matrix;
         ErrorCode error = matrix_multiplyMatrices(&mult->_decorated, this->_decorated, other._decorated);
          if (!error_isSuccess(error)) {
@@ -104,7 +104,7 @@ namespace matrix {
         return *mult;
     }
 
-    const Matrix& Matrix::operator*(double scalar) const {
+    Matrix& Matrix::operator*(double scalar) const {
         Matrix* multByScalar = new Matrix(*this);
         ErrorCode error = matrix_multiplyWithScalar(multByScalar->_decorated, scalar);
          if (!error_isSuccess(error)) {
@@ -113,7 +113,7 @@ namespace matrix {
         return *multByScalar;
     }
 
-    const Matrix& Matrix::turn() {
+    Matrix& Matrix::turn() {
         // transpose the matrix
         for (int r = 0; r < getHeight(); r++) {
             for (int c = r; c < getWidth(); c++) {

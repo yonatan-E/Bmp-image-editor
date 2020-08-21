@@ -101,7 +101,7 @@ namespace matrix {
              * @param other the matrix we add to the current marix
              * @return const Matrix& the sum of the current matrix and the other matrix
              */
-            const Matrix& operator+(const Matrix& other) const;
+            Matrix& operator+(const Matrix& other) const;
 
             /**
              * @brief The substruction operator for matrices
@@ -109,7 +109,7 @@ namespace matrix {
              * @param other the matrix we substruct from the current marix
              * @return const Matrix& the substruction of the current matrix and the other matrix
              */
-            const Matrix& operator-(const Matrix& other) const;
+            Matrix& operator-(const Matrix& other) const;
 
             /**
              * @brief The multiplying operator for matrices
@@ -117,7 +117,7 @@ namespace matrix {
              * @param other the matrix we multiply the current matrix with
              * @return const Matrix& the multiplication of the current matrix and the other matrix
              */
-            const Matrix& operator*(const Matrix& other) const;
+            Matrix& operator*(const Matrix& other) const;
 
             /**
              * @brief The multiplying by scalar operator
@@ -125,7 +125,7 @@ namespace matrix {
              * @param scalar the scalar we multiply the matrix with
              * @return const Matrix& the matrix after multiplying by scalar
              */
-            const Matrix& operator*(double scalar) const;
+            Matrix& operator*(double scalar) const;
 
             /**
              * @brief Method that turns the matrix by clockwise.
@@ -133,6 +133,6 @@ namespace matrix {
              * 
              * @return const Matrix& the matrix after the transpose
              */
-            const Matrix& turn();
+            Matrix& turn();
     };
 }
