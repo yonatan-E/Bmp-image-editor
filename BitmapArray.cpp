@@ -1,13 +1,18 @@
 #include "BitmapArray.hpp"
 #include <string>
+#include "Matrix.hpp"
 
 namespace bitmap {
 
 BitmapArray::BitmapArray(const std::string& data, const ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width) 
-        : BitAdjuster(std::move(data)), _colors(colors), _bitsPerPixel(bpp), _height(height), _width(width), _pixels(height, width) {
+        : BitAdjuster(std::move(data)), _bitsPerPixel(bpp), _height(height), _width(width) {
+    _colors = &colors;
+    _pixels = new Matrix(height, width);
     // reading the data string into the current object
     this->read();
 }
+
+
 
 void BitmapArray::read() {
     if (_bitsPerPixel == 8) {
