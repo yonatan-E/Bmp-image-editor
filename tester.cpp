@@ -28,9 +28,9 @@ int main() {
     initMatrix(matrix1);
     initMatrix(matrix2);
 
-
     printMatrix(matrix1);
     printMatrix(matrix2);
+    printMatrix(matrix1.turn());
 
     // printing the sum
     printMatrix(matrix1 + matrix2);

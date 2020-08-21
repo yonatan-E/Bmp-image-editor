@@ -124,10 +124,6 @@ namespace matrix {
              * 
              * @param scalar the scalar we multiply the matrix with
              * @return const Matrix& the matrix after multiplying by scalar
-<<<<<<< HEAD:Matrix.hpp
-             */
-            const Matrix& operator*(double scalar);
-=======
              */
             const Matrix& operator*(double scalar) const;
 
@@ -138,6 +134,5 @@ namespace matrix {
              * @return const Matrix& the matrix after the transpose
              */
             const Matrix& turn();
->>>>>>> matrix:src/Matrix.hpp
     };
 }
