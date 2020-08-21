@@ -30,4 +30,6 @@ void BitmapDIBHeader::turn() {
     this->_bitmapWidth = temp;
 }
 
+void BitmapDIBHeader::gray(){}
+
 }
