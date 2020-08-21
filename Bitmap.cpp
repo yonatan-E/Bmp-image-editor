@@ -78,17 +78,11 @@ namespace bitmap {
     }
 
     void Bitmap::write(){
-        
-        int x = 50;
-
-       
 
         std::string result = this->_header.write() + this->_dibHeader.write() +
-         this->_colorPallete.write() + this->_bitmapArray.write();
+        this->_colorPallete.write() + this->_bitmapArray.write();
 
         writeFileContent(this->_path, result); 
-
-            //NEED TO IMPLEMENT
     }
 
     std::string integerToBytes(int n, int numBytes){
