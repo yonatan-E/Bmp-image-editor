@@ -99,7 +99,7 @@ namespace matrix {
              * @brief The adding operator for matrices
              * 
              * @param other the matrix we add to the current marix
-             * @return const Matrix& the sum of the current matrix and the other matrix
+             * @return Matrix& the sum of the current matrix and the other matrix
              */
             Matrix& operator+(const Matrix& other) const;
 
@@ -107,7 +107,7 @@ namespace matrix {
              * @brief The substruction operator for matrices
              * 
              * @param other the matrix we substruct from the current marix
-             * @return const Matrix& the substruction of the current matrix and the other matrix
+             * @return Matrix& the substruction of the current matrix and the other matrix
              */
             Matrix& operator-(const Matrix& other) const;
 
@@ -115,7 +115,7 @@ namespace matrix {
              * @brief The multiplying operator for matrices
              * 
              * @param other the matrix we multiply the current matrix with
-             * @return const Matrix& the multiplication of the current matrix and the other matrix
+             * @return Matrix& the multiplication of the current matrix and the other matrix
              */
             Matrix& operator*(const Matrix& other) const;
 
@@ -123,7 +123,7 @@ namespace matrix {
              * @brief The multiplying by scalar operator
              * 
              * @param scalar the scalar we multiply the matrix with
-             * @return const Matrix& the matrix after multiplying by scalar
+             * @return Matrix& the matrix after multiplying by scalar
              */
             Matrix& operator*(double scalar) const;
 
@@ -131,7 +131,7 @@ namespace matrix {
              * @brief Method that turns the matrix by clockwise.
              *        The also method returns the matrix so we can active this method more times
              * 
-             * @return const Matrix& the matrix after the transpose
+             * @return Matrix& the matrix after the transpose
              */
             Matrix& turn();
     };
