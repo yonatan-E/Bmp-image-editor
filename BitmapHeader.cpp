@@ -4,7 +4,7 @@
 
 namespace bitmap {
 
-BitmapHeader::BitmapHeader(const std::string& data) : BitAdjuster(data) {
+BitmapHeader::BitmapHeader(const std::string& data) : BitAdjuster(std::move(data)) {
     // reading the data string into the current object
     this->read();
 }
