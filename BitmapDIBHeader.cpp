@@ -10,16 +10,16 @@ BitmapDIBHeader::BitmapDIBHeader(const std::string& data) : BitAdjuster(data) {
 
 void BitmapDIBHeader::read() {
     this->_bitmapWidth = this->bytesToInteger(4, 4);
-    this->_bitmapheight = this->bytesToInteger(8, 4);
+    this->_bitmapHeight = this->bytesToInteger(8, 4);
     this->_bpp = this->bytesToInteger(14, 2);
     this->_bmsize = this->bytesToInteger(20, 4);
     this->_numcolors = this->bytesToInteger(32, 4);
 }
 
 void BitmapDIBHeader::write(){
-    this->_data = this->_data.substr(0,4) + integerToBytes(this->_bitmapWidth , 4) + integerToBytes(this->_bitmapHeight , 4)
-    + this->_data.substr(12, 2) + integerToBytes(this->_bpp , 2) + this->_data.substr(16, 4) + integerToBytes(this->_bmsize , 4)
-    + this->_data.substr(24, 8) + integerToBytes(this->_numcolors , 4) + this->_data.substr(36);
+    this->setData(this->getData().substr(0,4) + integerToBytes(this->_bitmapWidth , 4) + integerToBytes(this->_bitmapHeight , 4)
+    + this->getData().substr(12, 2) + integerToBytes(this->_bpp , 2) + this->getData().substr(16, 4) + integerToBytes(this->_bmsize , 4)
+    + this->getData().substr(24, 8) + integerToBytes(this->_numcolors , 4) + this->getData().substr(36));
 }
 
 }
