@@ -32,4 +32,8 @@
 *.app
 
 build/
+<<<<<<< HEAD
 .vscode/
+=======
+.vscode/
+>>>>>>> matrix

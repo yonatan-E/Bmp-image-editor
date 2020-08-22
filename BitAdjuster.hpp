@@ -34,7 +34,7 @@ namespace bitmap {
           * 
           * @param data the given data string
           */
-         BitAdjuster(const std::string& data);
+         BitAdjuster(std::string data);
 
          /**
           * @brief Method that changes the content of the current object according to the turn
@@ -60,7 +60,7 @@ namespace bitmap {
           * @brief The data string setter
           * 
           */
-         virtual void setData(const std::string& data) final;           
+         virtual void setData(std::string data) final;           
 
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer
