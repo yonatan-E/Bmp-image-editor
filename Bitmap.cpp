@@ -5,7 +5,9 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)) {
+    Bitmap::Bitmap(std::string path) 
+            : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)), 
+            _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)),  {
         read();
     }
 
@@ -13,7 +15,7 @@ namespace bitmap {
         this->_header = new BitmapHeader(getData().substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(getData().substr(14,40));
 
-        if (this->_dibHeader->getBitsPerPixel() == 8){
+        if (this->_dibHeader.getBitsPerPixel() == 8) {
             this->_colorPallete = new ColorPallete(getData().substr(54 , this->_header->getOffset() - 54)); 
         }
         else {
@@ -21,36 +23,35 @@ namespace bitmap {
             this->_colorPallete = nullptr; 
         }
 
-         this->_bitmapArray = new BitmapArray(getData().substr(this->_header->getOffset()), this->_colorPallete, this->_dibHeader->getBitsPerPixel()
-                ,this->_dibHeader->getHeight(), this->_dibHeader->getWidth());  
+        this->_bitmapArray = new BitmapArray(getData().substr(this->_header->getOffset()), this->_colorPallete,
+        this->_dibHeader->getBitsPerPixel(), this->_dibHeader->getHeight(), this->_dibHeader->getWidth());  
     }
 
        void Bitmap::write(){
+        
+        // activing write() for all of the parts of the bitmap
+        this->_header.write();
+        this->_dibHeader.write();
+        this->_colorPallete.write();
+        this->_bitmapArray.write();
+        
+        // setting the new data string to be the data string of the bitmap
+        setData(this->_header.getData() + this->_dibHeader.getData()+
+        this->_colorPallete.getData() + this->_bitmapArray.getData());
 
-        this->_header->write();
-        this->_dibHeader->write();
-        this->_colorPallete->write();
-        this->_bitmapArray->write();
-
-        std::string result = this->_header->getData() + this->_dibHeader->getData()+
-        this->_colorPallete->getData() + this->_bitmapArray->getData();
-
-        writeFileContent(this->_path, result); 
+        writeFileContent(this->_path, getData()); 
     }
 
 
     void Bitmap::turn(){
-        _header->turn();
-        _dibHeader->turn();
-        _bitmapArray->turn();
-        if(_colorPallete != nullptr) {
-            _colorPallete->turn();
-        }
+        _header.turn();
+        _dibHeader.turn();
+        _bitmapArray.turn();
         write();
     }
 
     void Bitmap::gray() {
-        _bitmapArray->gray();
+        _bitmapArray.gray();
         write();
     }
 

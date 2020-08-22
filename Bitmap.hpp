@@ -11,7 +11,6 @@
 namespace bitmap {
 
 class Bitmap: public BitAdjuster {
-    
     // the header of the bitmap file
     BitmapHeader _header;
     // the DIB header of the bitmap file
@@ -68,15 +67,15 @@ class Bitmap: public BitAdjuster {
          */
         ~Bitmap() = default;
 
-        void turn();
+        void turn() override;
 
-        void gray();
+        void gray() override;
 
     protected:
 
-        void read();
+        void read() override;
 
-        void write();
+        void write() override;
 
     private:
         
