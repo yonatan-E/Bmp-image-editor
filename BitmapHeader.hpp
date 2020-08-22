@@ -17,6 +17,7 @@ class BitmapHeader : public BitAdjuster {
 
     public:
         explicit BitmapHeader(std::string data);
+        BitmapHeader() = default;
 
         BitmapHeader(const BitmapHeader& other) = default;
         BitmapHeader& operator=(const BitmapHeader& other) = default;
