@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
-#include <cstdint>
+#include <cstring>
+#include <iostream>
+
 namespace bitmap {
 
     /**
@@ -69,8 +71,10 @@ namespace bitmap {
           * @param index the index where the specific part of the string starts 
           * @return IntType the specific part, converted to the specific int type
           */
-         template <typename IntType>
-         IntType bytesToInteger(int index) const final;
+         template <typename IntType> IntType bytesToInteger(int index) const {
+           IntType* result = (IntType*)(this->_data.substr(index, sizeof(IntType)).data());
+           return *result;
+         }
 
          /**
           * @brief Method that converts a integer into a byte sequence in a string.
@@ -79,8 +83,14 @@ namespace bitmap {
           * @param n the size of the byte sequence
           * @return std::string the byte sequence represented by a string
           */
-         template <typename IntType> 
-         std::string integerToBytes(unsigned int n) const final;
+          template <typename IntType> std::string integerToBytes(unsigned int n) const {
+               std::string str = nullptr;
+               char header[4];
+               std::memcpy(header, &n, sizeof(IntType));
+               str = static_cast<char*>(header);
+               return str;
+          }
+
     };
 
 }

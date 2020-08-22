@@ -1,15 +1,10 @@
 #include "BitmapHeader.hpp"
-
-int main(){
-
-    std::string str = readFileContent("lena.bmp");
-    bitmap::BitmapHeader bh = new bitmap::BitmapHeader(str.substr(0, 14));
-    
-    
-
-}
+#include <fstream>
+#include <iterator>
+#include <utility>
 
 std::string readFileContent(const std::string& filePath) { 
+
         std::ifstream in(filePath, std::ios::binary);
 
         if (!in) {
@@ -25,3 +20,16 @@ std::string readFileContent(const std::string& filePath) {
 
         return content;
     }
+
+int main(){
+
+    std::string str = readFileContent("lena.bmp");
+    bitmap::BitmapHeader* bh = new bitmap::BitmapHeader(str.substr(0, 14));
+    bh->print();
+    bh->turn();
+    bh->print();
+
+    
+
+}
+

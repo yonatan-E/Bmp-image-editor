@@ -1,6 +1,8 @@
 #include "BitmapHeader.hpp"
 #include <string>
 #include <cstdint>
+#include <cstring>
+#include <iostream>
 
 namespace bitmap {
 
@@ -24,6 +26,11 @@ void BitmapHeader::gray() {}
 
 uint32_t BitmapHeader::getOffset() {
     return this->_offset;
+}
+
+void BitmapHeader::print(){
+    std::cout << "file size:" << _fileSize << "\n";
+    std::cout << "offset:" << _offset;
 }
 
 }

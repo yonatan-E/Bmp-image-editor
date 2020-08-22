@@ -1,5 +1,4 @@
 #pragma once
-
 #include "BitAdjuster.hpp"
 #include <string>
 
@@ -34,6 +33,8 @@ class BitmapHeader : public BitAdjuster {
         void gray() override;
 
         uint32_t getOffset();
+
+        void print();
 };
 
 }

@@ -1,0 +1,1 @@
+cd "/home/ilan/aphw/ass2/APass2/" && g++ main.cpp BitmapHeader.cpp BitmapHeader.hpp BitAdjuster.cpp BitAdjuster.hpp -o main && "/home/ilan/aphw/ass2/APass2/"main
