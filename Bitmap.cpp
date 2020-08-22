@@ -18,7 +18,7 @@ namespace bitmap {
         this->_dibHeader.getBitsPerPixel(), this->_dibHeader.getHeight(), this->_dibHeader.getWidth());  
     }
 
-       void Bitmap::write(){
+    void Bitmap::write(){
         
         // activing write() for all of the parts of the bitmap
         _header.write();
@@ -32,7 +32,7 @@ namespace bitmap {
         writeFileContent(this->_path, getData()); 
     }
 
-    void Bitmap::turn(){
+    void Bitmap::turn() {
         _header.turn();
         _dibHeader.turn();
         _bitmapArray.turn();

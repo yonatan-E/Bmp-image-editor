@@ -93,5 +93,4 @@ namespace bitmap {
                return str;
           }
     };
-
 }
