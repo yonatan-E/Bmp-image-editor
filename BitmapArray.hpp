@@ -30,7 +30,7 @@ class BitmapArray : public BitAdjuster {
          * @param height the height of the bmp file
          * @param width the width of the bmp file
          */
-        explicit BitmapArray(std::string& data, ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width);
+        explicit BitmapArray(std::string data, ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width);
 
         /**
          * @brief The copy constructor

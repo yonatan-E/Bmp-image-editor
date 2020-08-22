@@ -11,7 +11,7 @@ class ColorPallete : public BitAdjuster {
     std::vector<int[3]> _colors; 
 
     public:
-        explicit ColorPallete(std::string& data);
+        explicit ColorPallete(std::string data);
 
         explicit ColorPallete() = default;
 
