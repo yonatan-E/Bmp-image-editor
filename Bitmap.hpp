@@ -1,24 +1,26 @@
 #pragma once
+
+#include "BitAdjuster.hpp"
+#include "BitmapHeader.hpp"
+#include "BitmapDIBHeader.hpp"
+#include "ColorPallete.hpp"
+#include "BitmapArray.hpp"
 #include <string>
 
 
 namespace bitmap {
 
 class Bitmap: public BitAdjuster {
+    
     // the header of the bitmap file
-    BitmapHeader* _header;
+    BitmapHeader _header;
     // the DIB header of the bitmap file
-    BitmapDIBHeader* _dibHeader;
+    BitmapDIBHeader _dibHeader;
     // the bitmap array
-<<<<<<< HEAD
-    BitmapArray* _bitmapArray;
-    // the colorpallete of the bitmap file
-    ColorPallete* _colorPallete;
-
-=======
     BitmapArray _bitmapArray;
+    // the colorpallete of the bitmap file
+    ColorPallete _colorPallete;
     // the path to the bmp file
->>>>>>> main_testing
     std::string _path;
 
     public:
@@ -35,7 +37,7 @@ class Bitmap: public BitAdjuster {
          * 
          * @param other the copied object
          */
-        Bitmap(const Bitmap& other);
+        Bitmap(const Bitmap& other) = default;
 
         /**
          * @brief The copy assignment operator
@@ -43,14 +45,14 @@ class Bitmap: public BitAdjuster {
          * @param other the copied object
          * @return Bitmap& the current object
          */
-        Bitmap& operator=(const Bitmap& other);
+        Bitmap& operator=(const Bitmap& other) = default;
  
         /**
          * @brief The move constructor
          * 
          * @param other the moved object
          */
-        Bitmap(Bitmap&& other) noexcept;
+        Bitmap(Bitmap&& other) noexcept = default;
 
         /**
          * @brief The move assignment operator
@@ -58,23 +60,23 @@ class Bitmap: public BitAdjuster {
          * @param other the moved object
          * @return Bitmap& the current object
          */
-        Bitmap& operator=(Bitmap&& other) noexcept;
+        Bitmap& operator=(Bitmap&& other) noexcept = default;
 
         /**
          * @brief Destroy the Bitmap object
          * 
          */
-        ~Bitmap();
+        ~Bitmap() = default;
 
-        void turn() override;
+        void turn();
 
-        void gray() override;
+        void gray();
 
     protected:
 
-        void read() override;
+        void read();
 
-        void write() override;
+        void write();
 
     private:
         
