@@ -12,8 +12,8 @@ namespace bitmap {
      */
     class BitAdjuster {
          
-         // the data string
-         std::string _data;
+          // the data string
+          std::string _data;
 
     protected: 
          
@@ -21,13 +21,13 @@ namespace bitmap {
           * @brief Method that reads the content of the string into the current object
           * 
           */
-         virtual void read() = 0;
+          virtual void read() = 0;
 
          /**
           * @brief Method that reads the content of the current object into the string
           * 
           */
-         virtual void write() = 0;
+          virtual void write() = 0;
 
     public:
 
@@ -36,33 +36,33 @@ namespace bitmap {
           * 
           * @param data the given data string
           */
-         BitAdjuster(std::string data);
+          BitAdjuster(std::string data);
 
          /**
           * @brief Method that changes the content of the current object according to the turn
           * 
           */
-         virtual void turn() = 0;
+          virtual void turn() = 0;
 
          /**
           * @brief Method that changes the content of the current object according to the
                    color changing to gray
           * 
           */
-         virtual void gray() = 0;
+          virtual void gray() = 0;
 
          /**
           * @brief Method that returns the string of the object (lvalue)
           * 
           * @return std::string the string of the object
           */
-         virtual const std::string& getData() const final;
+          virtual const std::string& getData() const final;
 
          /**
           * @brief The data string setter
           * 
           */
-         virtual void setData(std::string data) final;           
+          virtual void setData(std::string data) final;           
 
          /**
           * @brief Method that converts a specific part of the string to an unsigned integer
@@ -71,10 +71,11 @@ namespace bitmap {
           * @param index the index where the specific part of the string starts 
           * @return IntType the specific part, converted to the specific int type
           */
-         template <typename IntType> IntType bytesToInteger(int index) const {
-           IntType* result = (IntType*)(this->_data.substr(index, sizeof(IntType)).data());
-           return *result;
-         }
+          template <typename IntType>
+          IntType bytesToInteger(int index) const {
+               IntType* result = (IntType*)(this->_data.substr(index, sizeof(IntType)).data());
+               return *result;
+          }
 
          /**
           * @brief Method that converts a integer into a byte sequence in a string.
@@ -83,7 +84,8 @@ namespace bitmap {
           * @param n the size of the byte sequence
           * @return std::string the byte sequence represented by a string
           */
-          template <typename IntType> std::string integerToBytes(unsigned int n) const {
+          template <typename IntType> 
+          std::string integerToBytes(unsigned int n) const {
                std::string str = nullptr;
                char header[4];
                std::memcpy(header, &n, sizeof(IntType));
