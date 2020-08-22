@@ -5,17 +5,16 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) 
-            : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)) {
-            read();
+    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)) {
+        read();
     }
 
     void Bitmap::read() {
-        this->_header = BitmapHeader(getData().substr(0,14));
-        this->_dibHeader = BitmapDIBHeader(getData().substr(14,40));
+        _header = BitmapHeader(getData().substr(0,14));
+        _dibHeader = BitmapDIBHeader(getData().substr(14,40));
 
-        this->_bitmapArray = BitmapArray(getData().substr(this->_header.getOffset()), getData().substr(54 , this->_header.getOffset() - 54),
-        this->_dibHeader.getBitsPerPixel(), this->_dibHeader.getHeight(), this->_dibHeader.getWidth());  
+        _bitmapArray = BitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
+        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth());  
     }
 
     void Bitmap::write(){
@@ -29,7 +28,7 @@ namespace bitmap {
         setData(_header.getData() + _dibHeader.getData()
         + _bitmapArray.getColorPallete().getData() + _bitmapArray.getData());
 
-        writeFileContent(this->_path, getData()); 
+        writeFileContent(_path, getData()); 
     }
 
     void Bitmap::turn() {

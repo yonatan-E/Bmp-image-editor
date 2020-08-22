@@ -18,8 +18,6 @@ class Bitmap: public BitAdjuster {
     BitmapDIBHeader _dibHeader;
     // the bitmap array
     BitmapArray _bitmapArray;
-    // the colorpallete of the bitmap file
-    ColorPallete _colorPallete;
     // the path to the bmp file
     std::string _path;
 
@@ -68,15 +66,15 @@ class Bitmap: public BitAdjuster {
          */
         ~Bitmap() = default;
 
-        void turn();
+        virtual void turn() override;
 
-        void gray();
+        virtual void gray() override;
 
     protected:
 
-        void read();
+        virtual void read() override;
 
-        void write();
+        virtual void write() override;
 
     private:
         

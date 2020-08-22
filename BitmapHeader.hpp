@@ -27,11 +27,11 @@ class BitmapHeader : public BitAdjuster {
 
         ~BitmapHeader() = default;
 
-        void read() override;
-        void write() override;
+        virtual void read() override;
+        virtual void write() override;
 
-        void turn() override;
-        void gray() override;
+        virtual void turn() override;
+        virtual void gray() override;
 
         uint32_t getOffset();
 };
