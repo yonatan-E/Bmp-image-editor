@@ -4,7 +4,7 @@
 
 namespace bitmap {
 
-BitmapDIBHeader::BitmapDIBHeader(const std::string& data) : BitAdjuster(std::move(data)) {
+BitmapDIBHeader::BitmapDIBHeader(std::string data) : BitAdjuster(std::move(data)) {
     // reading the data string into the current object
     this->read();
 }
@@ -32,8 +32,11 @@ void BitmapDIBHeader::turn() {
 
 void BitmapDIBHeader::gray() {}
 
+<<<<<<< HEAD
 }
 
+=======
+>>>>>>> main_testing
 uint16_t BitmapDIBHeader::getBitsPerPixel() {
     return _bpp;
 }
@@ -46,3 +49,7 @@ uint32_t BitmapDIBHeader::getWidth() {
     return _bitmapWidth;
 }
 
+<<<<<<< HEAD
+=======
+}
+>>>>>>> main_testing

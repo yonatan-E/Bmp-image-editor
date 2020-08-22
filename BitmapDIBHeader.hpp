@@ -26,6 +26,7 @@ namespace bitmap {
     uint32_t _numcolors = 0; 
 
     public:
+<<<<<<< HEAD
 
         /**
          * @brief Construct a new Bitmap DIB Header object
@@ -35,6 +36,17 @@ namespace bitmap {
         explicit BitmapDIBHeader(const std::string& data);
 
         /**
+=======
+
+        /**
+         * @brief Construct a new Bitmap DIB Header object
+         * 
+         * @param data the data string
+         */
+        explicit BitmapDIBHeader(std::string data);
+
+        /**
+>>>>>>> main_testing
          * @brief The copy ctor
          * 
          * @param other the copied object
