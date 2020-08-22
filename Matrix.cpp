@@ -115,8 +115,8 @@ namespace matrix {
 
     Matrix& Matrix::turn() {
         // transpose the matrix
-        for (int r = 0; r < getHeight(); r++) {
-            for (int c = r; c < getWidth(); c++) {
+        for (uint32_t r = 0; r < getHeight(); r++) {
+            for (uint32_t c = r; c < getWidth(); c++) {
                 double temp = (*this)(r, c);
                 setAt(r, c, (*this)(c, r));
                 setAt(c, r, temp);
@@ -124,8 +124,8 @@ namespace matrix {
         }
 
         // reverse the elements on row order
-        for (int r = 0; r < getHeight(); r++) {
-            for (int c = 0; c < getWidth() / 2; c++) {
+        for (uint32_t r = 0; r < getHeight(); r++) {
+            for (uint32_t c = 0; c < getWidth() / 2; c++) {
                 double temp = (*this)(r, c);
                 setAt(r, c, (*this)(r, getWidth() - c - 1));
                 setAt(r, getWidth() - c - 1, temp);
