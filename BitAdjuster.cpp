@@ -16,7 +16,7 @@ namespace bitmap {
 
     template <typename IntType>
     IntType BitAdjuster::bytesToInteger(int index) const {
-        IntType* result = static_cast<IntType*>(this->_data.substr(index, sizeof()).data());
+        IntType* result = static_cast<IntType*>(this->_data.substr(index, sizeof(IntType)).data());
         return *result;
     }
 
