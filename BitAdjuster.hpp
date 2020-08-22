@@ -92,7 +92,6 @@ namespace bitmap {
                str = static_cast<char*>(header);
                return str;
           }
-
     };
 
 }
