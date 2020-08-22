@@ -5,16 +5,20 @@
 namespace bitmap {
 
 class Bitmap: public BitAdjuster {
-    
     // the header of the bitmap file
     BitmapHeader* _header;
     // the DIB header of the bitmap file
     BitmapDIBHeader* _dibHeader;
     // the bitmap array
+<<<<<<< HEAD
     BitmapArray* _bitmapArray;
     // the colorpallete of the bitmap file
     ColorPallete* _colorPallete;
 
+=======
+    BitmapArray _bitmapArray;
+    // the path to the bmp file
+>>>>>>> main_testing
     std::string _path;
 
     public:
@@ -62,15 +66,15 @@ class Bitmap: public BitAdjuster {
          */
         ~Bitmap();
 
-        void turn();
+        void turn() override;
 
-        void gray();
+        void gray() override;
 
     protected:
 
-        void read();
+        void read() override;
 
-        void write();
+        void write() override;
 
     private:
         
