@@ -5,6 +5,7 @@ int main(){
     std::string str = readFileContent("lena.bmp");
     bitmap::BitmapHeader bh = new bitmap::BitmapHeader(str.substr(0, 14));
     
+    
 
 }
 
