@@ -1,4 +1,10 @@
 #pragma once
+
+#include "BitAdjuster.hpp"
+#include "BitmapHeader.hpp"
+#include "BitmapDIBHeader.hpp"
+#include "ColorPallete.hpp"
+#include "BitmapArray.hpp"
 #include <string>
 
 

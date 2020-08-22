@@ -1,5 +1,4 @@
 #include "Bitmap.hpp"
-#include "BitAdjuster.hpp"
 #include <fstream>
 #include <iterator>
 #include <utility>
