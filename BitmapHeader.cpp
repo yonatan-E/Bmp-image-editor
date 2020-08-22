@@ -28,9 +28,4 @@ uint32_t BitmapHeader::getOffset() {
     return this->_offset;
 }
 
-void BitmapHeader::print(){
-    std::cout << "file size:" << _fileSize << "\n";
-    std::cout << "offset:" << _offset;
-}
-
 }
