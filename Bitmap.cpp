@@ -7,25 +7,15 @@ namespace bitmap {
 
     Bitmap::Bitmap(std::string path) 
             : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)) {
-        
-        read();
+            read();
     }
 
     void Bitmap::read() {
-        this->_header = new BitmapHeader(getData().substr(0,14));
-        this->_dibHeader = new BitmapDIBHeader(getData().substr(14,40));
+        this->_header = BitmapHeader(getData().substr(0,14));
+        this->_dibHeader = BitmapDIBHeader(getData().substr(14,40));
 
-        ColorPallete colors;
-        if (this->_dibHeader.getBitsPerPixel() == 8) {
-            colors = new ColorPallete(getData().substr(54 , this->_header->getOffset() - 54)); 
-        }
-        else {
-            // return nullptr in color pallete if the image is 24-bit
-            colors = nullptr;
-        }
-
-        this->_bitmapArray = new BitmapArray(getData().substr(this->_header->getOffset()), this->_colorPallete,
-        this->_dibHeader->getBitsPerPixel(), this->_dibHeader->getHeight(), this->_dibHeader->getWidth());  
+        this->_bitmapArray = BitmapArray(getData().substr(this->_header.getOffset()), getData().substr(54 , this->_header.getOffset() - 54),
+        this->_dibHeader.getBitsPerPixel(), this->_dibHeader.getHeight(), this->_dibHeader.getWidth());  
     }
 
        void Bitmap::write(){
@@ -41,7 +31,6 @@ namespace bitmap {
 
         writeFileContent(this->_path, getData()); 
     }
-
 
     void Bitmap::turn(){
         _header.turn();

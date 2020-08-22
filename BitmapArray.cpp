@@ -6,8 +6,8 @@
 
 namespace bitmap {
 
-BitmapArray::BitmapArray(std::string data, ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width) 
-        : BitAdjuster(std::move(data)), _colors(std::move(colors)), _pixels(height, width),
+BitmapArray::BitmapArray(std::string array_data, std::string color_data, uint32_t bpp, uint32_t height, uint32_t width) 
+        : BitAdjuster(std::move(array_data)), _colors(color_data), _pixels(height, width),
          _bitsPerPixel(bpp), _height(height), _width(width) {
     // reading the data string into the current object
     this->read();
@@ -24,7 +24,7 @@ void BitmapArray::read() {
     }
 
     if (_bitsPerPixel == 24) {
-        // building new empty ColorPallete
+        // building new ColorPallete
         _colors = ColorPallete(); 
 
         uint32_t index = 0;
