@@ -15,12 +15,13 @@ namespace bitmap {
         this->_header = new BitmapHeader(getData().substr(0,14));
         this->_dibHeader = new BitmapDIBHeader(getData().substr(14,40));
 
+        ColorPallete colors;
         if (this->_dibHeader.getBitsPerPixel() == 8) {
-            this->_colorPallete = new ColorPallete(getData().substr(54 , this->_header->getOffset() - 54)); 
+            colors = new ColorPallete(getData().substr(54 , this->_header->getOffset() - 54)); 
         }
         else {
             // return nullptr in color pallete if the image is 24-bit
-            this->_colorPallete = nullptr; 
+            colors = nullptr; 
         }
 
         this->_bitmapArray = new BitmapArray(getData().substr(this->_header->getOffset()), this->_colorPallete,
@@ -30,14 +31,13 @@ namespace bitmap {
        void Bitmap::write(){
         
         // activing write() for all of the parts of the bitmap
-        this->_header.write();
-        this->_dibHeader.write();
-        this->_colorPallete.write();
-        this->_bitmapArray.write();
+        _header.write();
+        _dibHeader.write();
+        _bitmapArray.write();
         
         // setting the new data string to be the data string of the bitmap
-        setData(this->_header.getData() + this->_dibHeader.getData()+
-        this->_colorPallete.getData() + this->_bitmapArray.getData());
+        setData(_header.getData() + _dibHeader.getData()
+        + _bitmapArray.getColorPallete().getData() + _bitmapArray.getData());
 
         writeFileContent(this->_path, getData()); 
     }

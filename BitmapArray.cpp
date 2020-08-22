@@ -41,6 +41,9 @@ void BitmapArray::read() {
 }
 
 void BitmapArray::write() {
+    // activing the write() function of the color pallete
+    _colors.write();
+
     if (_bitsPerPixel == 8) {
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {

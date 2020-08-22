@@ -17,8 +17,6 @@ class Bitmap: public BitAdjuster {
     BitmapDIBHeader _dibHeader;
     // the bitmap array
     BitmapArray _bitmapArray;
-    // the colorpallete of the bitmap file
-    ColorPallete _colorPallete;
     // the path to the bmp file
     std::string _path;
 
