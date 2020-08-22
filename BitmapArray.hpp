@@ -73,6 +73,13 @@ class BitmapArray : public BitAdjuster {
 
         void turn() override;
         void gray() override;
+
+        /**
+         * @brief Get the Color Pallete of the object
+         * 
+         * @return const ColorPallete& the color pallete
+         */
+        const ColorPallete& getColorPallete();
 };
 
 }

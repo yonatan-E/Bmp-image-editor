@@ -74,4 +74,8 @@ void BitmapArray::gray() {
     _colors.gray();
 }
 
+const ColorPallete& BitmapArray::getColorPallete() {
+    return _colors;
+}
+
 }

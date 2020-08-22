@@ -7,7 +7,7 @@ namespace bitmap {
 
     Bitmap::Bitmap(std::string path) 
             : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)), 
-            _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)),  {
+            _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)), _bitmapArray(getData().substr(this->_header->getOffset())) {
         read();
     }
 
