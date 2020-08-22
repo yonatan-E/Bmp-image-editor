@@ -32,4 +32,16 @@ void BitmapDIBHeader::turn() {
 
 void BitmapDIBHeader::gray() {}
 
+uint16_t BitmapDIBHeader::getBitsPerPixel() {
+    return _bpp;
+}
+
+uint32_t BitmapDIBHeader::getHeight() {
+    return _bitmapHeight; 
+}
+
+uint32_t BitmapDIBHeader::getWidth() {
+    return _bitmapWidth;
+}
+
 }
