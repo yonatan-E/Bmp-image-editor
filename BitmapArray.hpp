@@ -24,13 +24,19 @@ class BitmapArray : public BitAdjuster {
         /**
          * @brief Construct a new Bitmap Array object
          * 
-         * @param data the data string
-         * @param colors the color pallete (optional - can be nullptr)
+         * @param array_data the data string of the bitmap array
+         * @param color_data the data string of the color pallete
          * @param bpp the number of bits per pixel
          * @param height the height of the bmp file
          * @param width the width of the bmp file
          */
-        explicit BitmapArray(std::string data, ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width);
+        explicit BitmapArray(std::string array_data, std::string color_data, uint32_t bpp, uint32_t height, uint32_t width);
+
+        /**
+         * @brief Construct a new Bitmap Array object
+         * 
+         */
+        BitmapArray() = default;
 
         /**
          * @brief The copy constructor
@@ -73,6 +79,13 @@ class BitmapArray : public BitAdjuster {
 
         void turn() override;
         void gray() override;
+
+        /**
+         * @brief Get the Color Pallete of the object
+         * 
+         * @return const ColorPallete& the color pallete
+         */
+        const ColorPallete& getColorPallete();
 };
 
 }
