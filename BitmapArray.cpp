@@ -7,7 +7,7 @@
 namespace bitmap {
 
 BitmapArray::BitmapArray(std::string data, ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width) 
-        : BitAdjuster(data), _colors(std::move(colors)), _pixels(height, width),
+        : BitAdjuster(std::move(data)), _colors(std::move(colors)), _pixels(height, width),
          _bitsPerPixel(bpp), _height(height), _width(width) {
     // reading the data string into the current object
     this->read();

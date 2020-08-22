@@ -4,7 +4,7 @@
 
 namespace bitmap {
 
-BitmapDIBHeader::BitmapDIBHeader(const std::string& data) : BitAdjuster(std::move(data)) {
+BitmapDIBHeader::BitmapDIBHeader(std::string data) : BitAdjuster(std::move(data)) {
     // reading the data string into the current object
     this->read();
 }

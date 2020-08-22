@@ -32,7 +32,7 @@ namespace bitmap {
          * 
          * @param data the data string
          */
-        explicit BitmapDIBHeader(const std::string& data);
+        explicit BitmapDIBHeader(std::string data);
 
         /**
          * @brief The copy ctor
