@@ -6,8 +6,8 @@
 namespace bitmap {
 
     Bitmap::Bitmap(std::string path) 
-            : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)), 
-            _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)), _bitmapArray(getData().substr(this->_header->getOffset())) {
+            : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)) {
+        
         read();
     }
 
@@ -21,7 +21,7 @@ namespace bitmap {
         }
         else {
             // return nullptr in color pallete if the image is 24-bit
-            colors = nullptr; 
+            colors = nullptr;
         }
 
         this->_bitmapArray = new BitmapArray(getData().substr(this->_header->getOffset()), this->_colorPallete,

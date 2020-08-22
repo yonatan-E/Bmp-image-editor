@@ -33,6 +33,12 @@ class BitmapArray : public BitAdjuster {
         explicit BitmapArray(std::string data, ColorPallete& colors, uint32_t bpp, uint32_t height, uint32_t width);
 
         /**
+         * @brief Construct a new Bitmap Array object
+         * 
+         */
+        BitmapArray() = default;
+
+        /**
          * @brief The copy constructor
          * 
          * @param other the copied object
