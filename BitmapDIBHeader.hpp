@@ -46,6 +46,15 @@ namespace bitmap {
         explicit BitmapDIBHeader(std::string data);
 
         /**
+<<<<<<< HEAD
+>>>>>>> main_testing
+=======
+         * @brief Construct a new Bitmap DIB Header object
+         * 
+         */
+        BitmapDIBHeader() = default;
+
+        /**
 >>>>>>> main_testing
          * @brief The copy ctor
          * 
