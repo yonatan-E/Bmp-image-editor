@@ -3,7 +3,7 @@
 
 namespace bitmap {
 
-ColorPallete::ColorPallete(const std::string& data) : BitAdjuster(std::move(data)) {
+ColorPallete::ColorPallete(std::string& data) : BitAdjuster(data) {
     // reading the data string into the current object
     read();
 }

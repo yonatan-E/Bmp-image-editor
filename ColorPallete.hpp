@@ -7,11 +7,11 @@
 namespace bitmap {
 
 class ColorPallete : public BitAdjuster {
-
+    // a vector with all of the colors
     std::vector<int[3]> _colors; 
 
     public:
-        explicit ColorPallete(const std::string& data);
+        explicit ColorPallete(std::string& data);
 
         explicit ColorPallete() = default;
 
