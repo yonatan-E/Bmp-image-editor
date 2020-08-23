@@ -75,5 +75,5 @@ namespace bitmap {
           // Unlikly to happen error here...
         }
     }
-    
+
 }
