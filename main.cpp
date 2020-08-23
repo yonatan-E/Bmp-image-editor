@@ -11,6 +11,8 @@ std::string readFileContent(const std::string& filePath) {
     auto content = std::string{std::istreambuf_iterator<char>{in}, std::istreambuf_iterator<char>{}};
 
     if (!in.eof()) {}
+
+    return content;
 }
 
 int main() {
