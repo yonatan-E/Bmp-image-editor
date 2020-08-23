@@ -24,7 +24,7 @@ namespace bitmap {
           virtual void read() = 0;
 
          /**
-          * @brief Method that reads the content of the current object into the string
+          * @brief Method that writes the content of the object into the string
           * 
           */
           virtual void write() = 0;
@@ -87,7 +87,7 @@ namespace bitmap {
           template <typename IntType> 
           std::string integerToBytes(unsigned int n) const {
                std::string str = nullptr;
-               char header[4];
+               char header[4]; 
                std::memcpy(header, &n, sizeof(IntType));
                str = static_cast<char*>(header);
                return str;
