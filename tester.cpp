@@ -38,16 +38,24 @@ std::string readFileContent(const std::string& filePath) {
    
     
     int main(){
-        std::string str = readFileContent("lena.bmp");
+        std::string str = readFileContent("lena-color.bmp");
 
-        std::string strArray = str.substr(1078);
-        std::string strColor = str.substr(54, 1078 - 54);
+        std::string strArray = str.substr(54);
+        std::string strColor = str.substr(54, 0);
 
-        bitmap::BitmapArray* ba = new bitmap::BitmapArray(strArray, strColor, 8, 512, 512);
+        bitmap::BitmapArray* ba = new bitmap::BitmapArray(strArray, strColor, 24, 512, 512);
 
         ba->read();
 
         ba->printMatrix();
+
+        ba->turn();
+
+        ba->write();
+
+        bitmap::BitmapArray* ba2 = new bitmap::BitmapArray(ba->getData(), strColor, 24, 512, 512);
+
+        ba2->printMatrix();
 
         return 0;
 
