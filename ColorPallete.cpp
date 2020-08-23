@@ -11,7 +11,7 @@ ColorPallete::ColorPallete(std::string data) : BitAdjuster(std::move(data)) {
 
 void ColorPallete::read() {
     uint32_t i = 0;
-    while(i < getData().size()) {
+    while (i < getData().size()) {
         std::array<int, 3> color = {bytesToInteger<uint8_t>(i), bytesToInteger<uint8_t>(i + 1), bytesToInteger<uint8_t>(i + 2)};
         _colors.push_back(color);
         i += 4;
@@ -19,10 +19,12 @@ void ColorPallete::read() {
 }
 
 void ColorPallete::write() {
-    for (int i = 0; i < this->_colors.size(); i += 4) {
-        setData(getData().substr(0, i) + integerToBytes<uint8_t>(_colors.at(i)[0]) + integerToBytes<uint8_t>(_colors.at(i)[1])
-        + integerToBytes<uint8_t>(_colors.at(i)[2]) + getData().substr(i + 3));
+    std::string result = "";
+    for (int i = 0; i < _colors.size(); i++) {
+        result += integerToBytes<uint8_t>(_colors.at(i)[0]) + integerToBytes<uint8_t>(_colors.at(i)[1])
+        + integerToBytes<uint8_t>(_colors.at(i)[2]) + integerToBytes<uint8_t>(0x00);
     }
+    setData(result);
 }
 
 void ColorPallete::addColor(int b, int g, int r) {
