@@ -76,8 +76,6 @@ void BitmapArray::turn() {
     _height = _width;
     _width = temp;
     _pixels.turn();
-    _pixels.turn();
-    _pixels.turn();
 }
 
 void BitmapArray::gray() {
