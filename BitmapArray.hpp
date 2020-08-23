@@ -74,11 +74,30 @@ class BitmapArray : public BitAdjuster {
          */
         ~BitmapArray() = default;
 
-        void read() override;
-        void write() override;
+        /**
+         * @brief Method that reads the content of the string into the current object
+         * 
+         */
+        virtual void read() override;
 
-        void turn() override;
-        void gray() override;
+        /**
+         * @brief Method that writes the content of the object into the string
+         * 
+         */
+        virtual void write() override;
+
+        /**
+         * @brief Method that changes the content of the current object according to the turn
+         * 
+         */
+        virtual void turn() override;
+
+        /**
+         * @brief Method that changes the content of the current object according to the
+                  color changing to gray
+         * 
+         */
+        virtual void gray() override;
 
         /**
          * @brief Get the Color Pallete of the object

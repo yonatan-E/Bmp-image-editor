@@ -1,4 +1,5 @@
 #include "BitmapArray.hpp"
+#include "ColorPallete.hpp"
 #include "Matrix.hpp"
 #include "ColorPallete.hpp"
 #include <string>
@@ -16,11 +17,11 @@ BitmapArray::BitmapArray(std::string array_data, std::string color_data, uint32_
 
 void BitmapArray::read() {
     if (_bitsPerPixel == 8) {
-        // activing the read() function of the color pallete
-        _colors.read();
+        int index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
-                _pixels.setAt(i, j, bytesToInteger<uint8_t>(j + i * _width));
+                _pixels.setAt(i, j, bytesToInteger<uint8_t>(index));
+                index++;
             }
             // padding
         }   
@@ -32,8 +33,8 @@ void BitmapArray::read() {
 
         uint32_t index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
-            for (uint32_t j = 0; j <= _width ; j += 3) {
-                _pixels.setAt(i, j, index);
+            for (uint32_t j = 0; j <= 3*_width ; j += 3) {
+                _pixels.setAt(i, j/3, index);
                 _colors.addColor(bytesToInteger<uint8_t>(j + i * _width), bytesToInteger<uint8_t>(j + i * _width + 1),
                 bytesToInteger<uint8_t>(j + i * _width + 2));
                 index++;
@@ -49,7 +50,7 @@ void BitmapArray::write() {
         _colors.write();
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
-                setData(getData().substr(0, j + i * _width) + IntegerToBytes<uint8_t>(_pixels(i, j))
+                setData(getData().substr(0, j + i * _width) + integerToBytes<uint8_t>(_pixels(i, j))
                 + getData().substr(j + i * _width + 1));
             }
         }   
@@ -59,8 +60,8 @@ void BitmapArray::write() {
         uint32_t index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j += 3) {
-                setData(getData().substr(0, j + i * _width) + IntegerToBytes<uint8_t>(_colors.getColor(index)[0]) 
-                + IntegerToBytes<uint8_t>(_colors.getColor(index)[1]) + IntegerToBytes<uint8_t>(_colors.getColor(index)[2])
+                setData(getData().substr(0, j + i * _width) + integerToBytes<uint8_t>(_colors.getColor(index)[0]) 
+                + integerToBytes<uint8_t>(_colors.getColor(index)[1]) + integerToBytes<uint8_t>(_colors.getColor(index)[2])
                 + getData().substr(j + i * _width + 3));
                 index++;
             }   
@@ -84,3 +85,4 @@ const ColorPallete& BitmapArray::getColorPallete() {
 }
 
 }
+
