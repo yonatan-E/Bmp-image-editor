@@ -8,11 +8,8 @@
 namespace bitmap {
 
 class ColorPallete : public BitAdjuster {
-<<<<<<< HEAD
-=======
     // a vector with all of the colors
     std::vector<std::array<int, 3>> _colors; 
->>>>>>> bitmap_color_pallete
 
     public:
 
@@ -65,13 +62,6 @@ class ColorPallete : public BitAdjuster {
          */
         ~ColorPallete() = default;
 
-<<<<<<< HEAD
-        virtual void read() override;
-        virtual void write() override;
-
-        virtual void turn() override;
-        virtual void gray() override;
-=======
         /**
          * @brief Method that reads the content of the string into the current object
          * 
@@ -96,7 +86,6 @@ class ColorPallete : public BitAdjuster {
          * 
          */
         void gray() override;
->>>>>>> bitmap_color_pallete
 
         /**
          * @brief Method that adds the given color to the color pallete
@@ -107,11 +96,6 @@ class ColorPallete : public BitAdjuster {
          */
         void addColor(int b, int g, int r);
 
-<<<<<<< HEAD
-        std::array<int, 3> getColor(uint32_t index);
-        // a vector with all of the colors
-        std::vector<std::array<int, 3>> _colors; 
-=======
         /**
          * @brief Get the Color object
          * 
@@ -119,7 +103,6 @@ class ColorPallete : public BitAdjuster {
          * @return std::array<int, 3> the color in the given index
          */
         std::array<int, 3> getColor(uint32_t index);
->>>>>>> bitmap_color_pallete
 };
 
 }

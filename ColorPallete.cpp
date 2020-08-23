@@ -11,11 +11,7 @@ ColorPallete::ColorPallete(std::string data) : BitAdjuster(std::move(data)) {
 
 void ColorPallete::read() {
     uint32_t i = 0;
-<<<<<<< HEAD
-    while(i < getData().size()){
-=======
     while(i < getData().size()) {
->>>>>>> bitmap_color_pallete
         std::array<int, 3> color = {bytesToInteger<uint8_t>(i), bytesToInteger<uint8_t>(i + 1), bytesToInteger<uint8_t>(i + 2)};
         _colors.push_back(color);
         i += 4;
