@@ -3,6 +3,7 @@
 #include "BitAdjuster.hpp"
 #include <string>
 #include <vector>
+#include <array>
 
 namespace bitmap {
 
@@ -21,17 +22,17 @@ class ColorPallete : public BitAdjuster {
 
         ~ColorPallete() = default;
 
-        void read() override;
-        void write() override;
+        virtual void read() override;
+        virtual void write() override;
 
-        void turn() override;
-        void gray() override;
+        virtual void turn() override;
+        virtual void gray() override;
 
         void addColor(int b, int g, int r);
 
-        int* getColor(uint32_t index);
+        std::array<int, 3> getColor(uint32_t index);
         // a vector with all of the colors
-        std::vector<int[3]> _colors; 
+        std::vector<std::array<int, 3>> _colors; 
 };
 
 }
