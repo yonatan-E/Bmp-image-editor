@@ -1,1 +1,0 @@
-cd "/home/ilan/aphw/ass2/APass2/" && g++ tester.cpp BitAdjuster.cpp BitmapArray.cpp ColorPallete.cpp ErrorCode.c ErrorCode.cpp Matrix.c Matrix.cpp  -o tester && "/home/ilan/aphw/ass2/APass2/"tester
