@@ -11,6 +11,7 @@ namespace bitmap {
      *        the parts of the bmp file format.
      */
     class BitAdjuster {
+         
           // the data string
           std::string _data;
 
@@ -86,10 +87,11 @@ namespace bitmap {
           template <typename IntType> 
           std::string integerToBytes(unsigned int n) const {
                std::string str = nullptr;
-               char header[4];
+               char header[4]; 
                std::memcpy(header, &n, sizeof(IntType));
                str = static_cast<char*>(header);
                return str;
           }
     };
+
 }
