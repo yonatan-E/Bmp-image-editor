@@ -3,9 +3,8 @@
 
 
 int main(){
-    bitmap::Bitmap* bm = new bitmap::Bitmap("lena.bmp");
-    bm->read();
-    bm->turn();
+    bitmap::Bitmap* bm = new bitmap::Bitmap("lena-color.bmp");
     bm->write();
+
 
 }
