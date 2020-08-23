@@ -86,18 +86,11 @@ namespace bitmap {
           */
           template <typename IntType> 
           std::string integerToBytes(unsigned int n) const {
-<<<<<<< HEAD
-               std::string str = nullptr;
-               char header[4];
-               std::memcpy(header, &n, sizeof(IntType));
-               str = static_cast<char*>(header);
-=======
                const char* st = reinterpret_cast<const char*>(&n);
                std::string str = "";
                for (auto i = 0 ; i < sizeof(IntType) ; i++){
                     str += st[i];
                }
->>>>>>> bitmap_adjuster
                return str;
           }
     };
