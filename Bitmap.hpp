@@ -65,24 +65,33 @@ class Bitmap: public BitAdjuster {
          * 
          */
         ~Bitmap() = default;
-
-        virtual void turn() override;
-
-        virtual void gray() override;
-
-    protected:
-
-        virtual void read() override;
-
-        virtual void write() override;
-
-    private:
         
         /**
-         * @brief Reset the fields of the bitmap object
+         * @brief Method that reads the content of the string into the current object
          * 
          */
-        void reset() noexcept;
+        virtual void read() override;
+
+        /**
+         * @brief Method that writes the content of the object into the string
+         * 
+         */
+        virtual void write() override;
+
+        /**
+         * @brief Method that changes the content of the current object according to the turn
+         * 
+         */
+        virtual void turn() override;
+
+        /**
+         * @brief Method that changes the content of the current object according to the
+                  color changing to gray
+         * 
+         */
+        virtual void gray() override;
+
+    private:
         
         /**
          * @brief Read the content of a file

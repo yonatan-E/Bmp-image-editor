@@ -11,7 +11,6 @@ namespace bitmap {
      *        the parts of the bmp file format.
      */
     class BitAdjuster {
-         
           // the data string
           std::string _data;
 
@@ -24,7 +23,7 @@ namespace bitmap {
           virtual void read() = 0;
 
          /**
-          * @brief Method that reads the content of the current object into the string
+          * @brief Method that writes the content of the object into the string
           * 
           */
           virtual void write() = 0;
