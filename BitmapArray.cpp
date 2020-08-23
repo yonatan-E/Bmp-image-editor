@@ -10,13 +10,11 @@ namespace bitmap {
 
 BitmapArray::BitmapArray(std::string array_data, std::string color_data, uint32_t bpp, uint32_t height, uint32_t width) 
         : BitAdjuster(std::move(array_data)), _colors(color_data), _pixels(height, width),
-         _bitsPerPixel(bpp), _height(height), _width(width) {
-    // reading the data string into the current object
-    this->read();
-}
-
-void BitmapArray::read() {
+        _bitsPerPixel(bpp), _height(height), _width(width) {
+    // initializing the matrix and the collor pallete, according to the specific case:
+    // in case that pixel size is 8 bit 
     if (_bitsPerPixel == 8) {
+        // initializing the matrix
         int index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
@@ -27,14 +25,16 @@ void BitmapArray::read() {
         }   
     }
 
+    // in case that pixel size is 24 bit
     if (_bitsPerPixel == 24) {
         // building new ColorPallete
         _colors = ColorPallete(""); 
-
+        
+        // initializing the matrix and the color pallete
         uint32_t index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
-            for (uint32_t j = 0; j <= 3*_width ; j += 3) {
-                _pixels.setAt(i, j/3, index);
+            for (uint32_t j = 0; j <= 3 * _width ; j += 3) {
+                _pixels.setAt(i, j / 3, index);
                 _colors.addColor(bytesToInteger<uint8_t>(j + i * _width), bytesToInteger<uint8_t>(j + i * _width + 1),
                 bytesToInteger<uint8_t>(j + i * _width + 2));
                 index++;
@@ -45,8 +45,11 @@ void BitmapArray::read() {
 }
 
 void BitmapArray::write() {
+    // initializing the data string with a new data string,
+    // according to the specific case:
+    // in case that pixel size is 8 bit
     if (_bitsPerPixel == 8) {
-        // activing the write() function of the color pallete
+        // activing the write() function for the color pallete
         _colors.write();
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
@@ -56,6 +59,7 @@ void BitmapArray::write() {
         }   
     }
 
+    // in case that pixel size is 24 bit
     if (_bitsPerPixel == 24) {
         uint32_t index = 0;
         for (uint32_t i = 0; i < _height ; i++) {

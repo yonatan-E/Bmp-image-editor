@@ -5,17 +5,11 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)) {
-        read();
-    }
-
-    void Bitmap::read() {
-        _header = BitmapHeader(getData().substr(0,14));
-        _dibHeader = BitmapDIBHeader(getData().substr(14,40));
-
-        _bitmapArray = BitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
-        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth());  
-    }
+    Bitmap::Bitmap(std::string path) 
+        : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)),
+        _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)), 
+        _bitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
+        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth()) {}
 
     void Bitmap::write(){
         

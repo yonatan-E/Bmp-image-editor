@@ -4,18 +4,9 @@
 
 namespace bitmap {
 
-BitmapDIBHeader::BitmapDIBHeader(std::string data) : BitAdjuster(std::move(data)) {
-    // reading the data string into the current object
-    read();
-}
-
-void BitmapDIBHeader::read() {
-    _bitmapWidth = bytesToInteger<uint32_t>(4);
-    _bitmapHeight = bytesToInteger<uint32_t>(8);
-    _bpp = bytesToInteger<uint16_t>(14);
-    _bmsize = bytesToInteger<uint32_t>(20);
-    _numcolors = bytesToInteger<uint32_t>(32);
-}
+BitmapDIBHeader::BitmapDIBHeader(std::string data) 
+    : BitAdjuster(std::move(data)), _bitmapWidth(bytesToInteger<uint32_t>(4)), _bitmapHeight(bytesToInteger<uint32_t>(8)),
+    _bpp(bytesToInteger<uint16_t>(14)), _bmsize(bytesToInteger<uint32_t>(20)), _numcolors(bytesToInteger<uint32_t>(32)) {}
 
 void BitmapDIBHeader::write() {
     std::string newData = getData().substr(0,4) + integerToBytes<uint32_t>(_bitmapWidth) + integerToBytes<uint32_t>(_bitmapHeight)

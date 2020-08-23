@@ -78,12 +78,6 @@ namespace bitmap {
         ~BitmapDIBHeader() = default;
 
         /**
-         * @brief Method that reads the content of the string into the current object
-         * 
-         */
-        virtual void read() override;
-
-        /**
          * @brief Method that writes the content of the object into the string
          * 
          */

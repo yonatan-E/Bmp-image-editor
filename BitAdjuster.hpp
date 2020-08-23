@@ -16,12 +16,6 @@ namespace bitmap {
           std::string _data;
 
     protected: 
-         
-         /**
-          * @brief Method that reads the content of the string into the current object
-          * 
-          */
-          virtual void read() = 0;
 
          /**
           * @brief Method that writes the content of the object into the string

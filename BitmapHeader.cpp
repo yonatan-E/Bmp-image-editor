@@ -6,17 +6,9 @@
 
 namespace bitmap {
 
-BitmapHeader::BitmapHeader(std::string data) : BitAdjuster(std::move(data)) {
-    // reading the data string into the current object
-    read();
-}
-
-void BitmapHeader::read() {
-    _fileSize = bytesToInteger<uint32_t>(2);
-    _reserved1 = bytesToInteger<uint16_t>(6);
-    _reserved2 = bytesToInteger<uint16_t>(8);
-    _offset = bytesToInteger<uint32_t>(10);
-}
+BitmapHeader::BitmapHeader(std::string data) 
+    : BitAdjuster(std::move(data)), _fileSize(bytesToInteger<uint32_t>(2)), _reserved1(bytesToInteger<uint16_t>(6)),
+    _reserved2(bytesToInteger<uint16_t>(8)), _offset(bytesToInteger<uint32_t>(10)) {}
 
 void BitmapHeader::write() {}
 

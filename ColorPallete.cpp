@@ -5,11 +5,6 @@
 namespace bitmap {
 
 ColorPallete::ColorPallete(std::string data) : BitAdjuster(std::move(data)) {
-    // reading the data string into the current object
-    read();
-}
-
-void ColorPallete::read() {
     uint32_t i = 0;
     while (i < getData().size()) {
         std::array<int, 3> color = {bytesToInteger<uint8_t>(i), bytesToInteger<uint8_t>(i + 1), bytesToInteger<uint8_t>(i + 2)};
