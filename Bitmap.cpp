@@ -5,16 +5,19 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)) {
-        read();
+    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFileContent(path))), _path(std::move(path))
+    , _header(BitmapHeader(getData().substr(0,14))),  _dibHeader(BitmapDIBHeader(getData().substr(14,40)))
+    , _bitmapArray(BitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
+        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth())) {
+        //read();
     }
 
     void Bitmap::read() {
-        _header = BitmapHeader(getData().substr(0,14));
-        _dibHeader = BitmapDIBHeader(getData().substr(14,40));
+        // _header = BitmapHeader(getData().substr(0,14));
+        // _dibHeader = BitmapDIBHeader(getData().substr(14,40));
 
-        _bitmapArray = BitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
-        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth());  
+        // _bitmapArray = BitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
+        // _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth());  
     }
 
     void Bitmap::write(){
@@ -43,8 +46,8 @@ namespace bitmap {
         write();
     }
 
-    std::string readFileContent(const std::string& filePath) { 
-        std::ifstream in(filePath, std::ios::binary);
+    std::string Bitmap::readFileContent(const std::string& path) { 
+        std::ifstream in(path, std::ios::binary);
 
         if (!in) {
         // Error here...
@@ -60,7 +63,7 @@ namespace bitmap {
         return content;
     }
 
-    void writeFileContent(const std::string& filePath, const std::string& content) {
+    void Bitmap::writeFileContent(const std::string& filePath, const std::string& content) {
         std::ofstream out(filePath, std::ios::binary | std::ios::trunc);
 
         if (!out) {
