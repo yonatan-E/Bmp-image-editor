@@ -1,5 +1,6 @@
 #include "BitmapArray.hpp"
 #include "Matrix.hpp"
+#include "ColorPallete.hpp"
 #include <string>
 #include <utility>
 #include <cstdint>
@@ -15,6 +16,8 @@ BitmapArray::BitmapArray(std::string array_data, std::string color_data, uint32_
 
 void BitmapArray::read() {
     if (_bitsPerPixel == 8) {
+        // activing the read() function of the color pallete
+        _colors.read();
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
                 _pixels.setAt(i, j, bytesToInteger<uint8_t>(j + i * _width));
@@ -25,11 +28,11 @@ void BitmapArray::read() {
 
     if (_bitsPerPixel == 24) {
         // building new ColorPallete
-        _colors = ColorPallete(); 
+        _colors = ColorPallete(""); 
 
         uint32_t index = 0;
         for (uint32_t i = 0; i < _height ; i++) {
-            for (uint32_t j = 0; j <= _width ; j+=3) {
+            for (uint32_t j = 0; j <= _width ; j += 3) {
                 _pixels.setAt(i, j, index);
                 _colors.addColor(bytesToInteger<uint8_t>(j + i * _width), bytesToInteger<uint8_t>(j + i * _width + 1),
                 bytesToInteger<uint8_t>(j + i * _width + 2));
@@ -41,10 +44,9 @@ void BitmapArray::read() {
 }
 
 void BitmapArray::write() {
-    // activing the write() function of the color pallete
-    _colors.write();
-
     if (_bitsPerPixel == 8) {
+        // activing the write() function of the color pallete
+        _colors.write();
         for (uint32_t i = 0; i < _height ; i++) {
             for (uint32_t j = 0; j < _width ; j++) {
                 setData(getData().substr(0, j + i * _width) + IntegerToBytes<uint8_t>(_pixels(i, j))
