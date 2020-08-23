@@ -37,7 +37,8 @@ void BitmapArray::read() {
             for (uint32_t j = 0; j <= _width ; j ++) {
                 _pixels.setAt(i, j, index);
                 _colors.addColor(bytesToInteger<uint8_t>(j*3 + i * _width),bytesToInteger<uint8_t>(j*3 + i * _width + 1),
-                bytesToInteger<uint8_t>(j*3 + i * _width + 2));
+                 bytesToInteger<uint8_t>(j*3 + i * _width + 2));
+                 index++;
             }
             // padding
         }  
