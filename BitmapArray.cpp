@@ -84,19 +84,5 @@ const ColorPallete& BitmapArray::getColorPallete() {
     return _colors;
 }
 
-<<<<<<< HEAD
- void BitmapArray::printMatrix() {
-     for (uint32_t i = 0; i < _pixels.getHeight(); i++) {
-         for (uint32_t j = 0; j < _pixels.getWidth(); j++) {
-              std::cout << _pixels(i, j) << " ";
-        }
-        std::cout << '\n';
-    }
-    std::cout << '\n';
-
-}
-
-=======
->>>>>>> bitmap_array
 }
 

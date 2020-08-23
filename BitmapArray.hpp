@@ -105,8 +105,6 @@ class BitmapArray : public BitAdjuster {
          * @return const ColorPallete& the color pallete
          */
         const ColorPallete& getColorPallete();
-
-        void printMatrix();
 };
 
 }
