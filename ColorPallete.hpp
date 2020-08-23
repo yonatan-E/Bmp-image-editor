@@ -8,8 +8,7 @@
 namespace bitmap {
 
 class ColorPallete : public BitAdjuster {
-    // a vector with all of the colors
-    std::vector<std::array<int, 3>> _colors; 
+    
 
     public:
 
@@ -103,6 +102,8 @@ class ColorPallete : public BitAdjuster {
          * @return std::array<int, 3> the color in the given index
          */
         std::array<int, 3> getColor(uint32_t index);
+        // a vector with all of the colors
+    std::vector<std::array<int, 3>> _colors; 
 };
 
 }
