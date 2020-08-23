@@ -38,8 +38,6 @@ void BitmapArray::read() {
                 _pixels.setAt(i, j, index);
                 _colors.addColor(bytesToInteger<uint8_t>(j*3 + i * _width),bytesToInteger<uint8_t>(j*3 + i * _width + 1),
                 bytesToInteger<uint8_t>(j*3 + i * _width + 2));
-                //std::cout << _colors.getColor(index)[1] << ":" << (int) bytesToInteger<uint8_t>(j + i * _width + 1)<< " ";
-                index++;
             }
             // padding
         }  
@@ -69,7 +67,6 @@ void BitmapArray::write() {
             }   
         }
         setData(newData);
-        print();
     }
 }
 
