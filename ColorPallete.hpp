@@ -66,26 +66,26 @@ class ColorPallete : public BitAdjuster {
          * @brief Method that reads the content of the string into the current object
          * 
          */
-        void read() override;
+        virtual void read() override;
 
         /**
          * @brief Method that writes the content of the object into the string
          * 
          */
-        void write() override;
+        virtual void write() override;
 
         /**
          * @brief Method that changes the content of the current object according to the turn
          * 
          */
-        void turn() override;
+        virtual void turn() override;
 
         /**
          * @brief Method that changes the content of the current object according to the
                   color changing to gray
          * 
          */
-        void gray() override;
+        virtual void gray() override;
 
         /**
          * @brief Method that adds the given color to the color pallete
