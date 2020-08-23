@@ -3,12 +3,13 @@
 #include "BitAdjuster.hpp"
 #include <string>
 #include <vector>
+#include <array>
 
 namespace bitmap {
 
 class ColorPallete : public BitAdjuster {
     // a vector with all of the colors
-    std::vector<int[3]> _colors; 
+    std::vector<std::array<int, 3>> _colors; 
 
     public:
         explicit ColorPallete(std::string data);
@@ -31,7 +32,7 @@ class ColorPallete : public BitAdjuster {
 
         void addColor(int b, int g, int r);
 
-        int* getColor(uint32_t index);
+        std::array<int, 3> getColor(uint32_t index);
 };
 
 }

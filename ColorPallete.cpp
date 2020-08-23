@@ -1,5 +1,6 @@
 #include "ColorPallete.hpp"
 #include <string>
+#include <array>
 
 namespace bitmap {
 
@@ -10,26 +11,26 @@ ColorPallete::ColorPallete(std::string data) : BitAdjuster(std::move(data)) {
 
 void ColorPallete::read() {
     uint32_t i = 0;
-    while(i < getData().size()){
-        int color[3] = {bytesToInteger<uint8_t>(i), bytesToInteger<uint8_t>(i + 1), bytesToInteger<uint8_t>(i + 2)};
+    while(i < getData().size()) {
+        std::array<int, 3> color = {bytesToInteger<uint8_t>(i), bytesToInteger<uint8_t>(i + 1), bytesToInteger<uint8_t>(i + 2)};
         _colors.push_back(color);
         i += 4;
     }
 }
 
 void ColorPallete::write() {
-    for (int i = 0; i < this->_colors.size() ; i += 4) {
+    for (int i = 0; i < this->_colors.size(); i += 4) {
         setData(getData().substr(0, i) + integerToBytes<uint8_t>(_colors.at(i)[0]) + integerToBytes<uint8_t>(_colors.at(i)[1])
-         +  integerToBytes<uint8_t>(_colors.at(i)[2]) + getData().substr(i + 3));
+        + integerToBytes<uint8_t>(_colors.at(i)[2]) + getData().substr(i + 3));
     }
 }
 
 void ColorPallete::addColor(int b, int g, int r) {
-    int color[3] = {b, g, r};
+    std::array<int, 3> color = {b, g, r};
     _colors.push_back(color);
 }
 
-int* ColorPallete::getColor(uint32_t index) {
+std::array<int, 3> ColorPallete::getColor(uint32_t index) {
     return _colors.at(index);
 }
 
