@@ -75,7 +75,7 @@ void BitmapArray::turn() {
     uint32_t temp = _height;
     _height = _width;
     _width = temp;
-    _pixels.turn();
+    _pixels = std::move(_pixels.turn());
 }
 
 void BitmapArray::gray() {
