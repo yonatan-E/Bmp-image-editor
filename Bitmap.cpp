@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iterator>
 #include <utility>
+#include <stdexcept>
 
 namespace bitmap {
 
@@ -50,16 +51,11 @@ namespace bitmap {
 
         // checking if an error has occured
         if (!in) {
-
+            throw std::runtime_error("An error has occured while opening the file");
         }
 
         // reading the content from the file
         auto content = std::string{std::istreambuf_iterator<char>{in}, std::istreambuf_iterator<char>{}};
-
-        // checkin if an error has occured
-        if (!in.eof()) {
-        
-        }
 
         return content;
     }
@@ -70,7 +66,7 @@ namespace bitmap {
 
         // checking if an error has occured
         if (!out) {
-        
+            throw std::runtime_error("An error has occured while opening the file");
         }
 
         // writing the content to the file
@@ -78,7 +74,7 @@ namespace bitmap {
 
         // checking if an error has occured
         if (!out) {
-        
+            throw std::runtime_error("An error has occured while writing to the file");
         }
     }
 
