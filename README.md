@@ -11,11 +11,11 @@ The Matrix class also performs *the rule of 5*.
 There are classes which represent every part of the BMP file: Header, DIB Header, Color pallete, and Bitmap array.
 The class Bitmap is the main class, which represents the whole BMP file by containing objects of the BMP file parts.
 In the implementation, we used the *design pattern component* to make all the parts work together.
-All of those classes are inheriting from the abstract class BitAdjuster, and implementing at least the following methods:
-turn() - changes the current part of the BMP file, according to turning the image right by 90 degrees.
-gray() - changes the current part of the BMP file, according to changing the color of the image to gray.
-write() - writes the content of the object into a string (binary).
+All of those classes are inheriting from the abstract class BitAdjuster, and implementing at least the following methods:  
+turn() - changes the current part of the BMP file, according to turning the image right by 90 degrees.  
+gray() - changes the current part of the BMP file, according to changing the color of the image to gray.  
+write() - writes the content of the object into a string (binary).  
 So according to the *design pattern component*, calling each one of those methods in the class Bitmap actually calling
-those methods for the objects of the parts of the BMP file (the parts of the file are the "leaves"). 
+those methods for the objects of the parts of the BMP file (the parts of the file are the "leaves").  
 **In case that the format of the file will be different**, the change in the implementation will be as the following:
 Implementing a class for each part of the file (each part cannot be splitted to other parts), and each class should inherit from the abstract class and implement the abstract methods, which will be according to the file format.       Also need to implement a main class which will represent the whole file, and will contain objects of the parts of the file. The implementation of the abstract methods in the main class must call those methods for the objects of the parts of the file, according to the *design pattern component*. 
