@@ -22,17 +22,18 @@ class Bitmap: public BitAdjuster {
     BitmapDIBHeader _dibHeader;
     // the bitmap array
     BitmapArray _bitmapArray;
-    // the path to the bmp file
-    std::string _path;
+    // the path to the output file
+    std::string _outputPath;
 
     public:
 
         /**
          * @brief Construct a new Bitmap object
          * 
-         * @param path the path to the bitmap file
+         * @param inputPath the path to the input file
+         * @param outputPath the path to the output file
          */
-        explicit Bitmap(std::string path);
+        explicit Bitmap(const std::string& inputPath, const std::string& outputPath);
 
         /**
          * @brief The copy constructor

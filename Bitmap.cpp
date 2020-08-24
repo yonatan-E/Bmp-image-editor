@@ -5,13 +5,13 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) 
-        : BitAdjuster(std::move(readFromFile(path))), _path(std::move(path)),
+    Bitmap::Bitmap(const std::string& inputPath, const std::string& outputPath) 
+        : BitAdjuster(std::move(readFromFile(inputPath))), _outputPath(outputPath),
         _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)), 
         _bitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
         _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth()) {}
 
-    void Bitmap::write(){
+    void Bitmap::write() {
         
         // activing write() for all of the parts of the bitmap
         _header.write();
@@ -23,7 +23,7 @@ namespace bitmap {
         + _bitmapArray.getColorPallete().getData() + _bitmapArray.getData());
 
         // writing the new data string into the file
-        writeFileContent(_path, getData()); 
+        writeFileContent(_outputPath, getData()); 
     }
 
     void Bitmap::turn() {

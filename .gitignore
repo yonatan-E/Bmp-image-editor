@@ -31,9 +31,8 @@
 *.out
 *.app
 
+# the build files directory
 build/
-<<<<<<< HEAD
+
+# the vscode files directory
 .vscode/
-=======
-.vscode/
->>>>>>> matrix
