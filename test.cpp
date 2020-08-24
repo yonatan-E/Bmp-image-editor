@@ -3,6 +3,6 @@
 
 
 int main(){
-    bitmap::Bitmap bm("lena-color.bmp", "lena-color-copy.bmp");
+    bitmap::Bitmap bm("lena-color.bmp", "lena-color.bmp");
     bm.turn(); 
 }
