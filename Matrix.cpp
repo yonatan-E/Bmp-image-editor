@@ -116,9 +116,9 @@ namespace matrix {
     Matrix& Matrix::turn() {
         Matrix* turned = new Matrix(getWidth(), getHeight());
         uint32_t newColumn, newRow = 0;
-        for (auto oldColumn = 0; oldColumn < getWidth(); oldColumn++) {
+        for (uint32_t oldColumn = 0; oldColumn < getWidth(); oldColumn++) {
             newColumn = 0;
-            for (auto oldRow = 0; oldRow < getHeight(); oldRow++) {
+            for (uint32_t oldRow = 0; oldRow < getHeight(); oldRow++) {
                 turned->setAt(getWidth() - newRow - 1, newColumn, (*this)(oldRow, oldColumn));
                 newColumn++;
             }
