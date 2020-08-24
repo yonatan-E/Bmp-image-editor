@@ -28,19 +28,18 @@ void BitmapArray::read() {
     }
 
     if (_bitsPerPixel == 24) {
-        // building new ColorPallete
-        std::cout << "reading 24";
-        _colors = ColorPallete(""); 
-
-        uint32_t index = 0;
-        for (uint32_t i = 0; i < _height ; i++) {
-            for (uint32_t j = 0; j <= _width ; j ++) {
+        uint32_t index = 0, runner = 0; 
+        // iterating over the data string and initializing the color pallete and the matrix
+        for (uint32_t i = 0; i < _height; i++) {
+            for (uint32_t j = 0; j < _width; j++) {
+                // adding the current index to the exact place in the matrix
                 _pixels.setAt(i, j, index);
-                _colors.addColor(bytesToInteger<uint8_t>(j*3 + i * _width),bytesToInteger<uint8_t>(j*3 + i * _width + 1),
-                 bytesToInteger<uint8_t>(j*3 + i * _width + 2));
-                 index++;
+                // adding the color to the color pallete
+                _colors.addColor(bytesToInteger<uint8_t>(runner),bytesToInteger<uint8_t>(runner + 1),
+                bytesToInteger<uint8_t>(runner + 2));
+                runner += 3;
+                index++;
             }
-            // padding
         }  
     }
 }
@@ -58,16 +57,21 @@ void BitmapArray::write() {
     }
 
     if (_bitsPerPixel == 24) {
-        std::cout << "writing 24";
         std::string newData = "";
-        for (uint32_t i = 0; i < _height ; i++) {
-            for (uint32_t j = 0; j < _width ; j++) {
+        // iterating over the matrix and adding the colors of all of the pixels to the string
+        for (uint32_t i = 0; i < _height; i++) {
+            for (uint32_t j = 0; j < _width; j++) {
                 newData += integerToBytes<uint8_t>(_colors.getColor(_pixels(i, j))[0]) 
                 + integerToBytes<uint8_t>(_colors.getColor( _pixels(i, j))[1]) 
                 + integerToBytes<uint8_t>(_colors.getColor(_pixels(i, j))[2]);
+            }
+            // for padding
+            for (uint32_t k = 0; k < _width % 4; k++) {
+                newData += integerToBytes<uint8_t>(0x00); 
             }   
         }
-        setData(newData);
+        // setting the new data
+        setData(newData); 
     }
 }
 
@@ -84,15 +88,6 @@ void BitmapArray::gray() {
 
 const ColorPallete& BitmapArray::getColorPallete() {
     return _colors;
-}
-
-void BitmapArray::print(){
-    for(int i = 0 ; i<_width ; i++){
-         for(int j = 0 ; j< 3*_height ; j+=3){
-             std::cout << _pixels(i, j/3) << " : " << _colors.getColor(_pixels(i, j/3))[0] << "," << _colors.getColor(_pixels(i, j/3))[1] <<
-                "," << _colors.getColor(_pixels(i, j/3))[2] << "index: " << "   ";
-        }
-    }
 }
 
 }

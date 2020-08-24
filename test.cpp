@@ -3,8 +3,6 @@
 
 
 int main(){
-    bitmap::Bitmap bm("lena.bmp");
+    bitmap::Bitmap bm("blackbuck.bmp");
     bm.turn();
-
-
 }
