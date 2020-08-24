@@ -3,7 +3,7 @@
 
 
 int main(){
-    bitmap::Bitmap bm("lena-color.bmp");
+    bitmap::Bitmap bm("lena.bmp");
     bm.turn();
 
 
