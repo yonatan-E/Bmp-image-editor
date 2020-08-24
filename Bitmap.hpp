@@ -98,7 +98,7 @@ class Bitmap: public BitAdjuster {
          * @param path the path to the file
          * @return std::string the content of the file
          */
-        std::string readFromFile(const std::string& path);
+        std::string readFileContent(const std::string& path);
 
         /**
          * @brief write the content to a file

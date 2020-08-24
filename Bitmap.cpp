@@ -6,13 +6,12 @@
 namespace bitmap {
 
     Bitmap::Bitmap(const std::string& inputPath, const std::string& outputPath) 
-        : BitAdjuster(std::move(readFromFile(inputPath))), _outputPath(outputPath),
+        : BitAdjuster(std::move(readFileContent(inputPath))), _outputPath(outputPath),
         _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)), 
         _bitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
         _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth()) {}
 
     void Bitmap::write() {
-        
         // activing write() for all of the parts of the bitmap
         _header.write();
         _dibHeader.write();
@@ -46,32 +45,40 @@ namespace bitmap {
     }
 
     std::string readFileContent(const std::string& filePath) { 
+        // opening the file
         std::ifstream in(filePath, std::ios::binary);
 
+        // checking if an error has occured
         if (!in) {
-        // Error here...
+            throw "An error has occured while opening file!";
         }
 
-        auto content = std::string{std::istreambuf_iterator<char>{in},
-                             std::istreambuf_iterator<char>{}};
+        // reading the content from the file
+        auto content = std::string{std::istreambuf_iterator<char>{in}, std::istreambuf_iterator<char>{}};
 
+        // checkin if an error has occured
         if (!in.eof()) {
-          // Unlikly to happen error here...
+            throw "An error has occured while reading from file!";
         }
 
         return content;
     }
 
     void writeFileContent(const std::string& filePath, const std::string& content) {
+        // opening the file
         std::ofstream out(filePath, std::ios::binary | std::ios::trunc);
 
+        // checking if an error has occured
         if (!out) {
-          // Error here...
+            throw "An error has occured while opening file!";
         }
-  
+
+        // writing the content to the file
         out.write(content.data(), static_cast<std::streamsize>(content.length()));
+
+        // checking if an error has occured
         if (!out) {
-          // Unlikly to happen error here...
+            throw "An error has occured while writing to file!";
         }
     }
     
