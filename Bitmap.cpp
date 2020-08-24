@@ -50,7 +50,11 @@ namespace bitmap {
 
         // checking if an error has occured
         if (!in) {
+<<<<<<< HEAD
         //    throw "An error has occured while opening file!";
+=======
+
+>>>>>>> bitmap_main
         }
 
         // reading the content from the file
@@ -58,7 +62,11 @@ namespace bitmap {
 
         // checkin if an error has occured
         if (!in.eof()) {
+<<<<<<< HEAD
         //    throw "An error has occured while reading from file!";
+=======
+
+>>>>>>> bitmap_main
         }
 
         return content;
@@ -70,7 +78,11 @@ namespace bitmap {
 
         // checking if an error has occured
         if (!out) {
+<<<<<<< HEAD
         //    throw "An error has occured while opening file!";
+=======
+
+>>>>>>> bitmap_main
         }
 
         // writing the content to the file
@@ -78,7 +90,11 @@ namespace bitmap {
 
         // checking if an error has occured
         if (!out) {
+<<<<<<< HEAD
         //    throw "An error has occured while writing to file!";
+=======
+
+>>>>>>> bitmap_main
         }
     }
 
