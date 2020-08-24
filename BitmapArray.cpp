@@ -79,13 +79,17 @@ void BitmapArray::write() {
 }
 
 void BitmapArray::turn() {
+    // swapping between the height and the width of the bitmap array
     uint32_t temp = _height;
     _height = _width;
     _width = temp;
+
+    // turning the matrix
     _pixels.turn();
 }
 
 void BitmapArray::gray() {
+    // activing gray() for the color pallete
     _colors.gray();
 }
 

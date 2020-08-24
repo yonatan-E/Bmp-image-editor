@@ -7,6 +7,10 @@
 
 namespace bitmap {
 
+/**
+ * @brief This class represents the Bitmap Array of a BMP file.
+ * 
+ */
 class BitmapArray : public BitAdjuster {
     // the number of bits per pixel
     uint32_t _bitsPerPixel;
@@ -73,12 +77,6 @@ class BitmapArray : public BitAdjuster {
          * 
          */
         ~BitmapArray() = default;
-
-        /**
-         * @brief Method that reads the content of the string into the current object
-         * 
-         */
-        virtual void read() override;
 
         /**
          * @brief Method that writes the content of the object into the string

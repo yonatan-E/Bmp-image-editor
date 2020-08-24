@@ -22,18 +22,26 @@ namespace bitmap {
         setData(_header.getData() + _dibHeader.getData()
         + _bitmapArray.getColorPallete().getData() + _bitmapArray.getData());
 
+        // writing the new data string into the file
         writeFileContent(_path, getData()); 
     }
 
     void Bitmap::turn() {
+        // activing turn() for all of the parts of the bitmap
         _header.turn();
         _dibHeader.turn();
         _bitmapArray.turn();
+
+        // writing the changes into the data string
         write();
     }
 
     void Bitmap::gray() {
+        // activing gray() for bitmap array, because it is the only part
+        // which is affected by the color changing to gray
         _bitmapArray.gray();
+
+        // writing the changes into the data string
         write();
     }
 

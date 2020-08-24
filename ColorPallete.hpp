@@ -7,7 +7,12 @@
 
 namespace bitmap {
 
+/**
+ * @brief This class represents the Color Pallete of a BMP file.
+ * 
+ */
 class ColorPallete : public BitAdjuster {
+    
     // a vector with all of the colors
     std::vector<std::array<int, 3>> _colors; 
 

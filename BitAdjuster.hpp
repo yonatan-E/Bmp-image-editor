@@ -8,7 +8,7 @@ namespace bitmap {
 
     /**
      * @brief This class is a base class for all of the classes which define
-     *        the parts of the bmp file format.
+     *        the parts of the BMP file format.
      */
     class BitAdjuster {
          

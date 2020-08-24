@@ -10,6 +10,10 @@
 
 namespace bitmap {
 
+/**
+ * @brief This class represents a BMP file.
+ * 
+ */
 class Bitmap: public BitAdjuster {
     
     // the header of the bitmap file

@@ -4,7 +4,12 @@
 
 namespace bitmap {
 
+/**
+ * @brief This class represents the Header of a BMP file.
+ * 
+ */
 class BitmapHeader : public BitAdjuster {
+    
     // the file type, which is always 0x4D42
     uint16_t _fileType = 0x4D42; 
     // file size in bytes

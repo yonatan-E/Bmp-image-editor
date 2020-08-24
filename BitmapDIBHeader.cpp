@@ -12,10 +12,12 @@ void BitmapDIBHeader::write() {
     std::string newData = getData().substr(0,4) + integerToBytes<uint32_t>(_bitmapWidth) + integerToBytes<uint32_t>(_bitmapHeight)
     + getData().substr(12, 2) + integerToBytes<uint16_t>(_bpp) + getData().substr(16, 4) + integerToBytes<uint32_t>(_bmsize)
     + getData().substr(24, 8) + integerToBytes<uint32_t>(_numcolors) + getData().substr(36);
+    // setting the new data string
     setData(newData);
 }
 
 void BitmapDIBHeader::turn() {
+    // swapping between the height and the width of the bitmap array
     uint32_t temp = _bitmapHeight;
     _bitmapHeight = _bitmapWidth;
     _bitmapWidth = temp;
