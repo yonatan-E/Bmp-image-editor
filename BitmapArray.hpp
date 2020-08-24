@@ -12,16 +12,16 @@ namespace bitmap {
  * 
  */
 class BitmapArray : public BitAdjuster {
+    // the color pallate
+    ColorPallete _colors;
+    // the pixels matrix
+    matrix::Matrix _pixels;
     // the number of bits per pixel
     uint32_t _bitsPerPixel;
     // the height of the bitmap array
     uint32_t _height;
     // the width of the bitmap array
     uint32_t _width;
-    // the color pallate
-    ColorPallete _colors;
-    // the pixels matrix
-    matrix::Matrix _pixels;
 
     public:
 
