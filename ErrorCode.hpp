@@ -9,7 +9,9 @@ namespace matrix {
      * @brief This class defines an exception which is defined by an error code
      */
     class Exception : public std::runtime_error {
+        
         public:
+        
             /**
              * @brief The constructor, that creates a new exception by an error code
              * 
