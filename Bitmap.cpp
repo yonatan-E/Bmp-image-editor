@@ -6,10 +6,10 @@
 namespace bitmap {
 
     Bitmap::Bitmap(const std::string& inputPath, const std::string& outputPath) 
-        : BitAdjuster(std::move(readFileContent(inputPath))), _outputPath(outputPath),
+        : BitAdjuster(std::move(readFileContent(inputPath))),
         _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)), 
         _bitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
-        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth()) {}
+        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth()), _outputPath(outputPath) {}
 
     void Bitmap::write() {
         // activing write() for all of the parts of the bitmap
