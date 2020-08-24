@@ -44,13 +44,13 @@ namespace bitmap {
         write();
     }
 
-    std::string readFileContent(const std::string& filePath) { 
+    std::string Bitmap::readFileContent(const std::string& filePath) { 
         // opening the file
         std::ifstream in(filePath, std::ios::binary);
 
         // checking if an error has occured
         if (!in) {
-            throw "An error has occured while opening file!";
+
         }
 
         // reading the content from the file
@@ -58,19 +58,19 @@ namespace bitmap {
 
         // checkin if an error has occured
         if (!in.eof()) {
-            throw "An error has occured while reading from file!";
+
         }
 
         return content;
     }
 
-    void writeFileContent(const std::string& filePath, const std::string& content) {
+    void Bitmap::writeFileContent(const std::string& filePath, const std::string& content) {
         // opening the file
         std::ofstream out(filePath, std::ios::binary | std::ios::trunc);
 
         // checking if an error has occured
         if (!out) {
-            throw "An error has occured while opening file!";
+
         }
 
         // writing the content to the file
@@ -78,7 +78,7 @@ namespace bitmap {
 
         // checking if an error has occured
         if (!out) {
-            throw "An error has occured while writing to file!";
+
         }
     }
     
