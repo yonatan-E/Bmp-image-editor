@@ -9,6 +9,7 @@ namespace matrix {
      * @brief This class defines a matrix and its general behavior.
      */
     class Matrix {
+        
         // a pointer to struct matrix
         PMatrix _decorated;
 
