@@ -75,7 +75,7 @@ namespace matrix {
 
     uint32_t Matrix::getWidth() const {
         uint32_t width;
-        ErrorCode error = matrix_getHeight(this->_decorated, &width);
+        ErrorCode error = matrix_getWidth(this->_decorated, &width);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
@@ -114,23 +114,16 @@ namespace matrix {
     }
 
     Matrix& Matrix::turn() {
-        // transpose the matrix
-        for (uint32_t r = 0; r < getHeight(); r++) {
-            for (uint32_t c = r; c < getWidth(); c++) {
-                double temp = (*this)(r, c);
-                setAt(r, c, (*this)(c, r));
-                setAt(c, r, temp);
+        Matrix* turned = new Matrix(getWidth(), getHeight());
+        uint32_t newColumn, newRow = 0;
+        for (uint32_t oldColumn = 0; oldColumn < getWidth(); oldColumn++) {
+            newColumn = 0;
+            for (uint32_t oldRow = 0; oldRow < getHeight(); oldRow++) {
+                turned->setAt(getWidth() - newRow - 1, newColumn, (*this)(oldRow, oldColumn));
+                newColumn++;
             }
+            newRow++;
         }
-
-        // reverse the elements on row order
-        for (uint32_t r = 0; r < getHeight(); r++) {
-            for (uint32_t c = 0; c < getWidth() / 2; c++) {
-                double temp = (*this)(r, c);
-                setAt(r, c, (*this)(r, getWidth() - c - 1));
-                setAt(r, getWidth() - c - 1, temp);
-            }
-        }
-        return *this;
+        return *turned;
     } 
 }
