@@ -75,7 +75,7 @@ namespace matrix {
 
     uint32_t Matrix::getWidth() const {
         uint32_t width;
-        ErrorCode error = matrix_getHeight(this->_decorated, &width);
+        ErrorCode error = matrix_getWidth(this->_decorated, &width);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
