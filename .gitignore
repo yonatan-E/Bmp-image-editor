@@ -35,4 +35,8 @@
 build/
 
 # the vscode files directory
+<<<<<<< HEAD
 .vscode/
+=======
+.vscode/
+>>>>>>> bitmap_main
