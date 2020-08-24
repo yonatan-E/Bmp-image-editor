@@ -6,7 +6,11 @@
 
 namespace bitmap {
 
-    class BitmapDIBHeader : public BitAdjuster {
+/**
+ * @brief This class represents the DIB Header of a BMP file. 
+ * 
+ */
+class BitmapDIBHeader : public BitAdjuster {
 
     // size of header
     uint32_t _hsize = 40; 
@@ -35,7 +39,6 @@ namespace bitmap {
         explicit BitmapDIBHeader(std::string data);
 
         /**
-
          * @brief Construct a new Bitmap DIB Header object
          * 
          */
@@ -78,12 +81,6 @@ namespace bitmap {
         ~BitmapDIBHeader() = default;
 
         /**
-         * @brief Method that reads the content of the string into the current object
-         * 
-         */
-        virtual void read() override;
-
-        /**
          * @brief Method that writes the content of the object into the string
          * 
          */
@@ -122,6 +119,6 @@ namespace bitmap {
          * @return uint32_t the width 
          */
         uint32_t getWidth();
-    };
+};
 
 }

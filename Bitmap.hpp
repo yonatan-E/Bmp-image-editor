@@ -10,6 +10,10 @@
 
 namespace bitmap {
 
+/**
+ * @brief This class represents a BMP file.
+ * 
+ */
 class Bitmap: public BitAdjuster {
     
     // the header of the bitmap file
@@ -18,17 +22,18 @@ class Bitmap: public BitAdjuster {
     BitmapDIBHeader _dibHeader;
     // the bitmap array
     BitmapArray _bitmapArray;
-    // the path to the bmp file
-    std::string _path;
+    // the path to the output file
+    std::string _outputPath;
 
     public:
 
         /**
          * @brief Construct a new Bitmap object
          * 
-         * @param path the path to the bitmap file
+         * @param inputPath the path to the input file
+         * @param outputPath the path to the output file
          */
-        explicit Bitmap(std::string path);
+        explicit Bitmap(const std::string& inputPath, const std::string& outputPath);
 
         /**
          * @brief The copy constructor
@@ -65,12 +70,6 @@ class Bitmap: public BitAdjuster {
          * 
          */
         ~Bitmap() = default;
-        
-        /**
-         * @brief Method that reads the content of the string into the current object
-         * 
-         */
-        virtual void read() override;
 
         /**
          * @brief Method that writes the content of the object into the string

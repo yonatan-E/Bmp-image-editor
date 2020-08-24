@@ -5,22 +5,13 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(std::string path) : BitAdjuster(std::move(readFileContent(path))), _path(std::move(path))
-    , _header(BitmapHeader(getData().substr(0,14))),  _dibHeader(BitmapDIBHeader(getData().substr(14,40)))
-    , _bitmapArray(BitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
-        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth())) {
-        //read();
-    }
+    Bitmap::Bitmap(const std::string& inputPath, const std::string& outputPath) 
+        : BitAdjuster(std::move(readFromFile(inputPath))), _outputPath(outputPath),
+        _header(getData().substr(0,14)), _dibHeader(getData().substr(14,40)), 
+        _bitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
+        _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth()) {}
 
-    void Bitmap::read() {
-        // _header = BitmapHeader(getData().substr(0,14));
-        // _dibHeader = BitmapDIBHeader(getData().substr(14,40));
-
-        // _bitmapArray = BitmapArray(getData().substr(_header.getOffset()), getData().substr(54 , _header.getOffset() - 54),
-        // _dibHeader.getBitsPerPixel(), _dibHeader.getHeight(), _dibHeader.getWidth());  
-    }
-
-    void Bitmap::write(){
+    void Bitmap::write() {
         
         // activing write() for all of the parts of the bitmap
         _header.write();
@@ -31,18 +22,26 @@ namespace bitmap {
         setData(_header.getData() + _dibHeader.getData()
         + _bitmapArray.getColorPallete().getData() + _bitmapArray.getData());
 
-        writeFileContent(_path, getData()); 
+        // writing the new data string into the file
+        writeFileContent(_outputPath, getData()); 
     }
 
     void Bitmap::turn() {
+        // activing turn() for all of the parts of the bitmap
         _header.turn();
         _dibHeader.turn();
         _bitmapArray.turn();
+
+        // writing the changes into the data string
         write();
     }
 
     void Bitmap::gray() {
+        // activing gray() for bitmap array, because it is the only part
+        // which is affected by the color changing to gray
         _bitmapArray.gray();
+
+        // writing the changes into the data string
         write();
     }
 

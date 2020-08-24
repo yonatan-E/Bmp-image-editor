@@ -8,7 +8,7 @@ namespace bitmap {
 
     /**
      * @brief This class is a base class for all of the classes which define
-     *        the parts of the bmp file format.
+     *        the parts of the BMP file format.
      */
     class BitAdjuster {
          
@@ -16,12 +16,6 @@ namespace bitmap {
           std::string _data;
 
     protected: 
-         
-         /**
-          * @brief Method that reads the content of the string into the current object
-          * 
-          */
-          virtual void read() = 0;
 
          /**
           * @brief Method that writes the content of the object into the string
@@ -30,6 +24,12 @@ namespace bitmap {
           virtual void write() = 0;
 
     public:
+
+          /**
+           * @brief Construct a new Bit Adjuster object
+           * 
+           */
+          BitAdjuster() = default;
 
          /**
           * @brief The constrtuctor, that creates an object with the given string
