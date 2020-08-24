@@ -13,9 +13,14 @@ void printMatrix(matrix::Matrix matrix) {
 }
 
 void initMatrix(matrix::Matrix& matrix) {
-    for (uint32_t i = 0; i < matrix.getHeight(); i++) {
+    for (uint32_t i = 0; i < matrix.getHeight() / 2; i++) {
         for (uint32_t j = 0; j < matrix.getWidth(); j++) {
             matrix.setAt(i, j, i*j);
+        }
+    }
+    for (uint32_t i = matrix.getHeight() / 2; i < matrix.getHeight(); i++) {
+        for (uint32_t j = 0; j < matrix.getWidth(); j++) {
+            matrix.setAt(i, j, i+j);
         }
     }
 }
@@ -29,8 +34,8 @@ int main() {
     initMatrix(matrix2);
 
     printMatrix(matrix1);
-    printMatrix(matrix2);
-    printMatrix(matrix1.turn());
+    matrix1 = std::move(matrix1.turn());
+    printMatrix(matrix1);
 
     // printing the sum
     printMatrix(matrix1 + matrix2);
