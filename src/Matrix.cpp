@@ -106,8 +106,18 @@ namespace matrix {
         return sum;
     }
 
+    Matrix& Matrix::operator+=(const Matrix& other) {
+        *this = *this + other;
+        return *this;
+    }
+
     Matrix Matrix::operator-(const Matrix& other) const {
         return *this + other * (-1);
+    }
+
+    Matrix& Matrix::operator-=(const Matrix& other) {
+        *this = *this - other;
+        return *this;
     }
 
     Matrix Matrix::operator*(const Matrix& other) const {
@@ -117,6 +127,11 @@ namespace matrix {
             throw Exception(error);
         }
         return mult;
+    }
+
+    Matrix& Matrix::operator*=(const Matrix& other) {
+        *this = *this * other;
+        return *this;
     }
 
     Matrix Matrix::operator*(const double scalar) const {
@@ -130,6 +145,11 @@ namespace matrix {
 
     Matrix operator*(const double scalar, const Matrix& matrix) {
         return matrix * scalar;
+    }
+
+    Matrix& Matrix::operator*=(const double scalar) {
+        *this = *this * scalar;
+        return *this;
     }
 
     Matrix& Matrix::turn() {
