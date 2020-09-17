@@ -27,9 +27,9 @@ class Bitmap: public BitAdjuster {
         /**
          * @brief Construct a new Bitmap object
          * 
-         * @param inputPath the path to the input file
+         * @param data the data string
          */
-        Bitmap(const std::string& inputPath);
+        Bitmap(std::string data);
 
         /**
          * @brief Method that writes the content of the object into the string
@@ -49,23 +49,6 @@ class Bitmap: public BitAdjuster {
          * 
          */
         void gray() override;
-
-        /**
-         * @brief write the data string to an output file
-         * 
-         * @param outputPath the path to the output file
-         */
-        void writeToFile(const std::string& outputPath) const;
-
-    private:
-        
-        /**
-         * @brief Read the content of a file
-         * 
-         * @param path the path to the file
-         * @return std::string the content of the file
-         */
-        static std::string readFileContent(const std::string& path);
 };
 
 }

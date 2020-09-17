@@ -7,8 +7,8 @@
 
 namespace bitmap {
 
-    Bitmap::Bitmap(const std::string& inputPath) 
-        : BitAdjuster(std::move(readFileContent(inputPath))),
+    Bitmap::Bitmap(std::string data)
+        : BitAdjuster(std::move(data)),
         m_header(getData().substr(0,14)), m_dibHeader(getData().substr(14,40)), 
         m_bitmapArray(getData().substr(m_header.getOffset()), getData().substr(54 , m_header.getOffset() - 54),
         m_dibHeader.getBitsPerPixel(), m_dibHeader.getHeight(), m_dibHeader.getWidth()) {}
@@ -42,43 +42,4 @@ namespace bitmap {
         // writing the changes into the data string
         write();
     }
-
-	void Bitmap::writeToFile(const std::string& outputPath) const {
-		// opening the file
-		std::ofstream out(outputPath, std::ios::binary | std::ios::trunc);
-
-		// checking if an error has occured while opening the file
-		if (!out) {
-			throw std::runtime_error("An error has occured while opening the file");
-		}
-
-		// writing the data string to the file
-		out.write(getData().data(), static_cast<std::streamsize>(getData().length()));
-
-		// checking if an error has occured while writing to the file
-		if (!out) {
-			throw std::runtime_error("An error has occured while writing to the file");
-		}
-	}
-
-    std::string Bitmap::readFileContent(const std::string& filePath) { 
-        // opening the file
-        std::ifstream in(filePath, std::ios::binary);
-
-        // checking if an error has occured while opening the file
-        if (!in) {
-            throw std::runtime_error("An error has occured while opening the file");
-        }
-
-        // reading the content from the file
-        auto content = std::string{std::istreambuf_iterator<char>{in}, std::istreambuf_iterator<char>{}};
-
-        // checking if an error has occured while reading from the file
-        if (!in) {
-            throw std::runtime_error("An error has occured while reading from the file");
-        }
-
-        return content;
-    }
-
 }

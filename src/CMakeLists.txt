@@ -12,7 +12,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
 include_directories(${CMAKE_SOURCE_DIR})
 link_directories(${CMAKE_SOURCE_DIR}/bin)
 add_executable(ex2.out main.cpp bmp_tester.cpp BitAdjuster.cpp Bitmap.cpp BitmapHeader.cpp BitmapDIBHeader.cpp 
-ColorPallete.cpp BitmapArray.cpp Matrix.cpp ErrorCode.cpp)
+ColorPallete.cpp BitmapArray.cpp FileHandler.cpp Matrix.cpp ErrorCode.cpp)
 target_link_libraries(ex2.out matrix)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
