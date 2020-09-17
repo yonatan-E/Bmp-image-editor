@@ -3,7 +3,7 @@
 
 namespace bitmap {
 
-BitmapArray::BitmapArray(std::string array_data, std::string color_data, const uint32_t bpp, const uint32_t height, const uint32_t width) 
+BitmapArray::BitmapArray(const std::string& array_data, const std::string& color_data, const uint32_t bpp, const uint32_t height, const uint32_t width) 
         : BitAdjuster(std::move(array_data)), m_colors(std::move(color_data)), m_pixels(height, width),
         m_bitsPerPixel(bpp), m_height(height), m_width(width) {
     // initializing the matrix and the collor pallete, according to the specific case:
