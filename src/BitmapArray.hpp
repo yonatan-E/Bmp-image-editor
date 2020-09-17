@@ -36,7 +36,7 @@ class BitmapArray : public BitAdjuster {
          * @param height the height of the bmp file
          * @param width the width of the bmp file
          */
-        BitmapArray(std::string array_data, std::string color_data, const uint32_t bpp, const uint32_t height, const uint32_t width);
+        BitmapArray(const std::string& array_data, const std::string& color_data, const uint32_t bpp, const uint32_t height, const uint32_t width);
 
         /**
          * @brief Method that writes the content of the object into the string
@@ -63,6 +63,12 @@ class BitmapArray : public BitAdjuster {
          * @return const ColorPallete& the color pallete
          */
         const ColorPallete& getColorPallete() const;
+
+        private:
+
+            void setPixelsEightBit();
+
+            void setPixelsTwentyFourBit();
 };
 
 }

@@ -82,7 +82,7 @@ namespace bitmap {
           std::string integerToBytes(IntType n) const {
                const char* st = reinterpret_cast<const char*>(&n);
                std::string str = "";
-               for (long unsigned int i = 0; i < sizeof(IntType) ; i++) {
+               for (long unsigned int i = 0; i < sizeof(IntType) ; ++i) {
                     str += st[i];
                }
                return str;
