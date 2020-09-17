@@ -11,8 +11,8 @@ BitmapArray::BitmapArray(const std::string& array_data, const std::string& color
     if (m_bitsPerPixel == 8) {
         // iterating over the data string and itializing the matrix
         uint32_t index = 0;
-        for (uint32_t i = 0; i < m_height ; i++) {
-            for (uint32_t j = 0; j < m_width ; j++) {
+        for (uint32_t i = 0; i < m_height ; ++i) {
+            for (uint32_t j = 0; j < m_width ; ++j) {
                 m_pixels.setAt(i, j, bytesToInteger<uint8_t>(index));
                 index++;
             }
@@ -23,8 +23,8 @@ BitmapArray::BitmapArray(const std::string& array_data, const std::string& color
     if (m_bitsPerPixel == 24) {
         uint32_t index = 0, runner = 0; 
         // iterating over the data string and initializing the color pallete and the matrix
-        for (uint32_t i = 0; i < m_height; i++) {
-            for (uint32_t j = 0; j < m_width; j++) {
+        for (uint32_t i = 0; i < m_height; ++i) {
+            for (uint32_t j = 0; j < m_width; ++j) {
                 // adding the current index to the exact place in the matrix
                 m_pixels.setAt(i, j, index);
                 // adding the color to the color pallete
@@ -45,8 +45,8 @@ void BitmapArray::write() {
         // activing the write() function for the color pallete
         m_colors.write();
         // iterating over the matrix and adding the indexes of all of the pixels to the data string
-        for (uint32_t i = 0; i < m_height ; i++) {
-            for (uint32_t j = 0; j < m_width ; j++) {
+        for (uint32_t i = 0; i < m_height ; ++i) {
+            for (uint32_t j = 0; j < m_width ; ++j) {
                 setData(getData().substr(0, j + i * m_width) + integerToBytes<uint8_t>(m_pixels(i, j))
                 + getData().substr(j + i * m_width + 1));
             }
@@ -57,14 +57,14 @@ void BitmapArray::write() {
     if (m_bitsPerPixel == 24) {
         std::string newData = "";
         // iterating over the matrix and adding the colors of all of the pixels to the data string
-        for (uint32_t i = 0; i < m_height; i++) {
-            for (uint32_t j = 0; j < m_width; j++) {
+        for (uint32_t i = 0; i < m_height; ++i) {
+            for (uint32_t j = 0; j < m_width; ++j) {
                 newData += integerToBytes<uint8_t>(m_colors.getColor(m_pixels(i, j))[0]) 
                 + integerToBytes<uint8_t>(m_colors.getColor(m_pixels(i, j))[1]) 
                 + integerToBytes<uint8_t>(m_colors.getColor(m_pixels(i, j))[2]);
             }
             // for padding
-            for (uint32_t k = 0; k < m_width % 4; k++) {
+            for (uint32_t k = 0; k < m_width % 4; ++k) {
                 newData += integerToBytes<uint8_t>(0x00); 
             }   
         }
