@@ -9,7 +9,17 @@ BitmapArray::BitmapArray(const std::string& array_data, const std::string& color
     // initializing the matrix and the collor pallete, according to the specific case:
     // in case that pixel size is 8 bit 
     if (m_bitsPerPixel == 8) {
-        // iterating over the data string and itializing the matrix
+       setPixelsEightBit();
+    }
+
+    // in case that pixel size is 24 bit
+    if (m_bitsPerPixel == 24) {
+      setPixelsTwentyFourBit();
+    }
+}
+
+void BitmapArray::setPixelsEightBit(){
+     // iterating over the data string and itializing the matrix
         uint32_t index = 0;
         for (uint32_t i = 0; i < m_height ; ++i) {
             for (uint32_t j = 0; j < m_width ; ++j) {
@@ -17,11 +27,10 @@ BitmapArray::BitmapArray(const std::string& array_data, const std::string& color
                 index++;
             }
         }   
-    }
+}
 
-    // in case that pixel size is 24 bit
-    if (m_bitsPerPixel == 24) {
-        uint32_t index = 0, runner = 0; 
+void BitmapArray::setPixelsTwentyFourBit(){
+     uint32_t index = 0, runner = 0; 
         // iterating over the data string and initializing the color pallete and the matrix
         for (uint32_t i = 0; i < m_height; ++i) {
             for (uint32_t j = 0; j < m_width; ++j) {
@@ -33,8 +42,7 @@ BitmapArray::BitmapArray(const std::string& array_data, const std::string& color
                 runner += 3;
                 index++;
             }
-        }  
-    }
+        }   
 }
 
 void BitmapArray::write() {

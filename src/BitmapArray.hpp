@@ -63,6 +63,12 @@ class BitmapArray : public BitAdjuster {
          * @return const ColorPallete& the color pallete
          */
         const ColorPallete& getColorPallete() const;
+
+        private:
+
+            void setPixelsEightBit();
+
+            void setPixelsTwentyFourBit();
 };
 
 }
