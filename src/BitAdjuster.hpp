@@ -13,7 +13,7 @@ namespace bitmap {
     class BitAdjuster {
          
           // the data string
-          std::string _data;
+          std::string m_data;
 
     protected: 
 
@@ -24,12 +24,6 @@ namespace bitmap {
           virtual void write() = 0;
 
     public:
-
-          /**
-           * @brief Construct a new Bit Adjuster object
-           * 
-           */
-          BitAdjuster() = default;
 
          /**
           * @brief The constrtuctor, that creates an object with the given string
@@ -72,8 +66,8 @@ namespace bitmap {
           * @return IntType the specific part, converted to the specific int type
           */
           template <typename IntType>
-          IntType bytesToInteger(int index) const {
-               IntType* result = (IntType*)(this->_data.substr(index, sizeof(IntType)).data());
+          IntType bytesToInteger(uint32_t index) const {
+               IntType* result = (IntType*)(m_data.substr(index, sizeof(IntType)).data());
                return *result;
           }
 
@@ -85,7 +79,7 @@ namespace bitmap {
           * @return std::string the byte sequence represented by a string
           */
           template <typename IntType> 
-          std::string integerToBytes(unsigned int n) const {
+          std::string integerToBytes(IntType n) const {
                const char* st = reinterpret_cast<const char*>(&n);
                std::string str = "";
                for (long unsigned int i = 0; i < sizeof(IntType) ; i++) {

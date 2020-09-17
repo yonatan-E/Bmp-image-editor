@@ -7,8 +7,10 @@ set(CMAKE_CXX_STANDARD 17)
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 enable_testing()
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
+
 include_directories(${CMAKE_SOURCE_DIR})
-link_directories(${CMAKE_SOURCE_DIR})
+link_directories(${CMAKE_SOURCE_DIR}/bin)
 add_executable(ex2 main.cpp bmp_tester.cpp BitAdjuster.cpp Bitmap.cpp BitmapHeader.cpp BitmapDIBHeader.cpp 
 ColorPallete.cpp BitmapArray.cpp Matrix.cpp ErrorCode.cpp)
 target_link_libraries(ex2 matrix)

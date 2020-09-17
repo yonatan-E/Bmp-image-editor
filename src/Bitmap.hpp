@@ -7,7 +7,6 @@
 #include "BitmapArray.hpp"
 #include <string>
 
-
 namespace bitmap {
 
 /**
@@ -17,13 +16,11 @@ namespace bitmap {
 class Bitmap: public BitAdjuster {
     
     // the header of the bitmap file
-    BitmapHeader _header;
+    BitmapHeader m_header;
     // the DIB header of the bitmap file
-    BitmapDIBHeader _dibHeader;
+    BitmapDIBHeader m_dibHeader;
     // the bitmap array
-    BitmapArray _bitmapArray;
-    // the path to the output file
-    std::string _outputPath;
+    BitmapArray m_bitmapArray;
 
     public:
 
@@ -31,64 +28,34 @@ class Bitmap: public BitAdjuster {
          * @brief Construct a new Bitmap object
          * 
          * @param inputPath the path to the input file
-         * @param outputPath the path to the output file
          */
-        explicit Bitmap(const std::string& inputPath, const std::string& outputPath);
-
-        /**
-         * @brief The copy constructor
-         * 
-         * @param other the copied object
-         */
-        Bitmap(const Bitmap& other) = default;
-
-        /**
-         * @brief The copy assignment operator
-         * 
-         * @param other the copied object
-         * @return Bitmap& the current object
-         */
-        Bitmap& operator=(const Bitmap& other) = default;
- 
-        /**
-         * @brief The move constructor
-         * 
-         * @param other the moved object
-         */
-        Bitmap(Bitmap&& other) noexcept = default;
-
-        /**
-         * @brief The move assignment operator
-         * 
-         * @param other the moved object
-         * @return Bitmap& the current object
-         */
-        Bitmap& operator=(Bitmap&& other) noexcept = default;
-
-        /**
-         * @brief Destroy the Bitmap object
-         * 
-         */
-        ~Bitmap() = default;
+        Bitmap(const std::string& inputPath);
 
         /**
          * @brief Method that writes the content of the object into the string
          * 
          */
-        virtual void write() override;
+        void write() override;
 
         /**
          * @brief Method that changes the content of the current object according to the turn
          * 
          */
-        virtual void turn() override;
+        void turn() override;
 
         /**
          * @brief Method that changes the content of the current object according to the
                   color changing to gray
          * 
          */
-        virtual void gray() override;
+        void gray() override;
+
+        /**
+         * @brief write the data string to an output file
+         * 
+         * @param outputPath the path to the output file
+         */
+        void writeToFile(const std::string& outputPath) const;
 
     private:
         
@@ -98,15 +65,7 @@ class Bitmap: public BitAdjuster {
          * @param path the path to the file
          * @return std::string the content of the file
          */
-        std::string readFileContent(const std::string& path);
-
-        /**
-         * @brief write the content to a file
-         * 
-         * @param filePath the path to the file
-         * @param content the content to write in the file
-         */
-        void writeFileContent(const std::string& filePath, const std::string& content);
+        static std::string readFileContent(const std::string& path);
 };
 
 }
