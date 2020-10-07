@@ -2,6 +2,7 @@
 
 #include "BitAdjuster.hpp"
 #include <string>
+#include <cstdint>
 
 
 namespace bitmap {
@@ -13,21 +14,21 @@ namespace bitmap {
 class BitmapDIBHeader : public BitAdjuster {
 
     // size of header
-    uint32_t _hsize = 40; 
+    const uint32_t m_hsize = 40; 
     // width of bitmap
-    uint32_t _bitmapWidth = 0;
+    uint32_t m_bitmapWidth;
     // height of bitmap
-    uint32_t _bitmapHeight = 0; 
+    uint32_t m_bitmapHeight; 
     // constant(always 1)
-    uint16_t _con = 1; 
+    const uint16_t m_con = 1; 
     // bits per pixel (8 or 24)
-    uint16_t _bpp = 0; 
+    const uint16_t m_bpp; 
     // compression method (no compression, therfore 0)
-    uint32_t _cm = 0; 
+    const uint32_t m_cm = 0; 
     // bitmap size;
-    uint32_t _bmsize = 0; 
+    const uint32_t m_bmsize; 
     // number of colors in color
-    uint32_t _numcolors = 0; 
+    const uint32_t m_numcolors; 
 
     public:
 
@@ -36,89 +37,47 @@ class BitmapDIBHeader : public BitAdjuster {
          * 
          * @param data the data string
          */
-        explicit BitmapDIBHeader(std::string data);
-
-        /**
-         * @brief Construct a new Bitmap DIB Header object
-         * 
-         */
-        BitmapDIBHeader() = default;
-
-        /**
-         * @brief The copy ctor
-         * 
-         * @param other the copied object
-         */
-        BitmapDIBHeader(const BitmapDIBHeader& other) = default;
-
-        /**
-         * @brief The copy assignment operator
-         * 
-         * @param other the copied object
-         * @return BitmapDIBHeader& the current object
-         */
-        BitmapDIBHeader& operator=(const BitmapDIBHeader& other) = default;
-
-        /**
-         * @brief The move ctor
-         * 
-         * @param other the moved object
-         */
-        BitmapDIBHeader(BitmapDIBHeader&& other) noexcept = default;
-
-        /**
-         * @brief The move assignment operator
-         * 
-         * @param other the moved object
-         * @return BitmapDIBHeader& the current object
-         */
-        BitmapDIBHeader& operator=(BitmapDIBHeader&& other) noexcept = default;
-
-        /**
-         * @brief Destroy the Bitmap DIB Header object
-         * 
-         */
-        ~BitmapDIBHeader() = default;
+        BitmapDIBHeader(std::string data);
 
         /**
          * @brief Method that writes the content of the object into the string
          * 
          */
-        virtual void write() override;
+        void write() override;
 
         /**
          * @brief Method that changes the content of the current object according to the turn
          * 
          */
-        virtual void turn() override;
+        void turn() override;
 
         /**
          * @brief Method that changes the content of the current object according to the
                   color changing to gray
          * 
          */
-        virtual void gray() override;
+        void gray() override;
 
         /**
          * @brief Get the number of the bits per pixel
          * 
          * @return uint16_t the bits per pixel
          */
-        uint16_t getBitsPerPixel();
+        uint16_t getBitsPerPixel() const;
 
         /**
          * @brief Get the height of the bmp file
          * 
          * @return uint32_t the height 
          */
-        uint32_t getHeight();
+        uint32_t getHeight() const;
 
         /**
          * @brief Get the width of the bmp file
          * 
          * @return uint32_t the width 
          */
-        uint32_t getWidth();
+        uint32_t getWidth() const;
 };
 
 }

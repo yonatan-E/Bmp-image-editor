@@ -1,20 +1,18 @@
-#include "Matrix.h"
 #include "Matrix.hpp"
 #include "ErrorCode.hpp"
 #include <utility>
-#include <cstdint>
 
 namespace matrix {
     
-    Matrix::Matrix(uint32_t height, uint32_t width) {
-        ErrorCode error = matrix_create(&this->_decorated, height, width);
+    Matrix::Matrix(const uint32_t height, const uint32_t width) {
+        ErrorCode error = matrix_create(&m_delegated, height, width);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
     }
 
     Matrix::Matrix(const Matrix& other) {
-        ErrorCode error = matrix_copy(&this->_decorated, other._decorated);
+        ErrorCode error = matrix_copy(&m_delegated, other.m_delegated);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
@@ -31,7 +29,7 @@ namespace matrix {
     }
 
     Matrix::Matrix(Matrix&& other) noexcept {
-        this->_decorated = std::exchange(other._decorated, nullptr);
+        m_delegated = std::exchange(other.m_delegated, nullptr);
     }
 
     Matrix& Matrix::operator=(Matrix&& other) noexcept {
@@ -39,26 +37,26 @@ namespace matrix {
             return *this;
         }
 
-        matrix_destroy(this->_decorated);
-	    this->_decorated = std::exchange(other._decorated, nullptr);
+        matrix_destroy(m_delegated);
+	    m_delegated = std::exchange(other.m_delegated, nullptr);
 	    return *this;
     }   
 
     Matrix::~Matrix() {
-        matrix_destroy(this->_decorated);
+        matrix_destroy(m_delegated);
     }
 
-    double Matrix::operator()(uint32_t rowIndex, uint32_t colIndex) const {
+    double Matrix::operator()(const uint32_t rowIndex, const uint32_t colIndex) const {
         double val;
-        ErrorCode error = matrix_getValue(this->_decorated, rowIndex, colIndex, &val);
+        ErrorCode error = matrix_getValue(m_delegated, rowIndex, colIndex, &val);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
         return val;
     }
 
-    void Matrix::setAt(uint32_t rowIndex, uint32_t colIndex, double val) {
-        ErrorCode error = matrix_setValue(this->_decorated, rowIndex, colIndex, val);
+    void Matrix::setAt(const uint32_t rowIndex, const uint32_t colIndex, double val) {
+        ErrorCode error = matrix_setValue(m_delegated, rowIndex, colIndex, val);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
@@ -66,7 +64,7 @@ namespace matrix {
 
     uint32_t Matrix::getHeight() const {
         uint32_t height;
-        ErrorCode error = matrix_getHeight(this->_decorated, &height);
+        ErrorCode error = matrix_getHeight(m_delegated, &height);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
@@ -75,42 +73,83 @@ namespace matrix {
 
     uint32_t Matrix::getWidth() const {
         uint32_t width;
-        ErrorCode error = matrix_getWidth(this->_decorated, &width);
+        ErrorCode error = matrix_getWidth(m_delegated, &width);
         if (!error_isSuccess(error)) {
             throw Exception(error);
         }
         return width;
     }
 
-    Matrix& Matrix::operator+(const Matrix& other) const {
-        Matrix* sum = new Matrix;
-        ErrorCode error = matrix_add(&sum->_decorated, this->_decorated, other._decorated);
+    bool Matrix::operator==(const Matrix& other) const {
+        // if the matrices don't have the same sizes, they aren't equal
+        if (getHeight() != other.getHeight() || getWidth() != other.getWidth()) {
+            return false;
+        }
+
+        // comparing every element of the matrices
+        for (uint32_t i = 0; i < getHeight(); ++i) {
+            for (uint32_t j = 0; j < getWidth(); ++j) {
+                if ((*this)(i, j) != other(i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    Matrix Matrix::operator+(const Matrix& other) const {
+        Matrix sum(getHeight(), getWidth());
+        ErrorCode error = matrix_add(&sum.m_delegated, m_delegated, other.m_delegated);
          if (!error_isSuccess(error)) {
             throw Exception(error);
         }
-        return *sum;
+        return sum;
     }
 
-    Matrix& Matrix::operator-(const Matrix& other) const {
+    Matrix& Matrix::operator+=(const Matrix& other) {
+        *this = *this + other;
+        return *this;
+    }
+
+    Matrix Matrix::operator-(const Matrix& other) const {
         return *this + other * (-1);
     }
 
-    Matrix& Matrix::operator*(const Matrix& other) const {
-        Matrix* mult = new Matrix;
-        ErrorCode error = matrix_multiplyMatrices(&mult->_decorated, this->_decorated, other._decorated);
-         if (!error_isSuccess(error)) {
-            throw Exception(error);
-        }
-        return *mult;
+    Matrix& Matrix::operator-=(const Matrix& other) {
+        *this = *this - other;
+        return *this;
     }
 
-    Matrix& Matrix::operator*(double scalar) const {
-        Matrix* multByScalar = new Matrix(*this);
-        ErrorCode error = matrix_multiplyWithScalar(multByScalar->_decorated, scalar);
+    Matrix Matrix::operator*(const Matrix& other) const {
+        Matrix mult(getHeight(), other.getWidth());
+        ErrorCode error = matrix_multiplyMatrices(&mult.m_delegated, m_delegated, other.m_delegated);
          if (!error_isSuccess(error)) {
             throw Exception(error);
         }
-        return *multByScalar;
+        return mult;
+    }
+
+    Matrix& Matrix::operator*=(const Matrix& other) {
+        *this = *this * other;
+        return *this;
+    }
+
+    Matrix Matrix::operator*(const double scalar) const {
+        Matrix multByScalar(*this);
+        ErrorCode error = matrix_multiplyWithScalar(multByScalar.m_delegated, scalar);
+         if (!error_isSuccess(error)) {
+            throw Exception(error);
+        }
+        return multByScalar;
+    }
+
+    Matrix operator*(const double scalar, const Matrix& matrix) {
+        return matrix * scalar;
+    }
+
+    Matrix& Matrix::operator*=(const double scalar) {
+        *this = *this * scalar;
+        return *this;
     }
 
     Matrix& Matrix::turn() {
@@ -126,5 +165,21 @@ namespace matrix {
         }
         *this = std::move(turned);
         return *this;
-    } 
+    }
+
+    std::ostream& operator<<(std::ostream& stream, const Matrix& matrix) {
+        // writing the matrix with the stream
+        for (uint32_t i = 0; i < matrix.getHeight(); ++i) {
+            for (uint32_t j = 0; j < matrix.getWidth(); ++j) {
+                stream << matrix(i, j);
+                if (j != matrix.getWidth() - 1) {
+                    stream << ",";
+                }
+            }
+            if (i < matrix.getHeight() - 1) {
+                stream << '\n';
+            }
+        }
+        return stream;
+    }
 }

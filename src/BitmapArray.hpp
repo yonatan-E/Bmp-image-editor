@@ -4,6 +4,8 @@
 #include "ColorPallete.hpp"
 #include "Matrix.hpp"
 #include <string>
+#include <array>
+#include <cstdint>
 
 namespace bitmap {
 
@@ -13,15 +15,15 @@ namespace bitmap {
  */
 class BitmapArray : public BitAdjuster {
     // the color pallate
-    ColorPallete _colors;
+    ColorPallete m_colors;
     // the pixels matrix
-    matrix::Matrix _pixels;
+    matrix::Matrix m_pixels;
     // the number of bits per pixel
-    uint32_t _bitsPerPixel;
+    const uint32_t m_bitsPerPixel;
     // the height of the bitmap array
-    uint32_t _height;
+    uint32_t m_height;
     // the width of the bitmap array
-    uint32_t _width;
+    uint32_t m_width;
 
     public:
 
@@ -34,75 +36,39 @@ class BitmapArray : public BitAdjuster {
          * @param height the height of the bmp file
          * @param width the width of the bmp file
          */
-        explicit BitmapArray(std::string array_data, std::string color_data, uint32_t bpp, uint32_t height, uint32_t width);
-
-        /**
-         * @brief Construct a new Bitmap Array object
-         * 
-         */
-        BitmapArray() = default;
-
-        /**
-         * @brief The copy constructor
-         * 
-         * @param other the copied object
-         */
-        BitmapArray(const BitmapArray& other) = default;
-        
-        /**
-         * @brief The copy assignment operator
-         * 
-         * @param other the copied object
-         * @return BitmapArray& the current object
-         */
-        BitmapArray& operator=(const BitmapArray& other) = default;
-
-        /**
-         * @brief The move constructor
-         * 
-         * @param other the moved object
-         */
-        BitmapArray(BitmapArray&& other) noexcept = default;
-
-        /**
-         * @brief The move assignment operator
-         * 
-         * @param other the moved object
-         * @return BitmapArray& the current object
-         */
-        BitmapArray& operator=(BitmapArray&& other) noexcept = default;
-
-        /**
-         * @brief Destroy the Bitmap Array object
-         * 
-         */
-        ~BitmapArray() = default;
+        BitmapArray(std::string array_data, std::string color_data, const uint32_t bpp, const uint32_t height, const uint32_t width);
 
         /**
          * @brief Method that writes the content of the object into the string
          * 
          */
-        virtual void write() override;
+        void write() override;
 
         /**
          * @brief Method that changes the content of the current object according to the turn
          * 
          */
-        virtual void turn() override;
+        void turn() override;
 
         /**
          * @brief Method that changes the content of the current object according to the
                   color changing to gray
          * 
          */
-        virtual void gray() override;
+        void gray() override;
 
         /**
          * @brief Get the Color Pallete of the object
          * 
          * @return const ColorPallete& the color pallete
          */
-        const ColorPallete& getColorPallete();
+        const ColorPallete& getColorPallete() const;
+
+        private:
+
+            void setPixelsEightBit();
+
+            void setPixelsTwentyFourBit();
 };
 
 }

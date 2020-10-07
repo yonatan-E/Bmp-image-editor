@@ -14,7 +14,7 @@ namespace bitmap {
 class ColorPallete : public BitAdjuster {
     
     // a vector with all of the colors
-    std::vector<std::array<int, 3>> _colors; 
+    std::vector<std::array<int, 3>> m_colors; 
 
     public:
 
@@ -23,68 +23,26 @@ class ColorPallete : public BitAdjuster {
          * 
          * @param data the given data string
          */
-        explicit ColorPallete(std::string data);
-
-        /**
-         * @brief Construct a new Color Pallete object
-         * 
-         */
-        ColorPallete() = default;
-
-        /**
-         * @brief The copy ctor
-         * 
-         * @param other the copied object
-         */
-        ColorPallete(const ColorPallete& other) = default;
-
-        /**
-         * @brief The copy assignment operator
-         * 
-         * @param other the copied object
-         * @return ColorPallete& the current object
-         */
-        ColorPallete& operator=(const ColorPallete& other) = default;
-
-        /**
-         * @brief The move ctor
-         * 
-         * @param other the moved object
-         */
-        ColorPallete(ColorPallete&& other) noexcept = default;
-
-        /**
-         * @brief The move assignment operator
-         * 
-         * @param other the moved object
-         * @return ColorPallete& the current object
-         */
-        ColorPallete& operator=(ColorPallete&& other) noexcept = default;
-
-        /**
-         * @brief Destroy the Color Pallete object
-         * 
-         */
-        ~ColorPallete() = default;
+        ColorPallete(std::string data);
 
         /**
          * @brief Method that writes the content of the object into the string
          * 
          */
-        virtual void write() override;
+        void write() override;
 
         /**
          * @brief Method that changes the content of the current object according to the turn
          * 
          */
-        virtual void turn() override;
+        void turn() override;
 
         /**
          * @brief Method that changes the content of the current object according to the
                   color changing to gray
          * 
          */
-        virtual void gray() override;
+        void gray() override;
 
         /**
          * @brief Method that adds the given color to the color pallete
@@ -101,7 +59,7 @@ class ColorPallete : public BitAdjuster {
          * @param index the given index
          * @return std::array<int, 3> the color in the given index
          */
-        std::array<int, 3> getColor(uint32_t index);
+        std::array<int, 3> getColor(uint32_t index) const;
 };
 
 }
