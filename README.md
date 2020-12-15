@@ -1,4 +1,4 @@
-About the project
+Bmp image editor
 --------------------------------------------------------------------------------------------------------------------------
 This project is about dealing with image files in format BMP, using matrices.
 
